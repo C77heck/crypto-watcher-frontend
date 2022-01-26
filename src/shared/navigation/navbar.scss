@@ -1,0 +1,11 @@
+.nav-bar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    &--ul {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+}

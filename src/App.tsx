@@ -3,20 +3,18 @@ import './App.scss';
 import {
   BrowserRouter as Router,
   Route,
-  Redirect,
-  Switch
+  Routes,
 } from 'react-router-dom';
 import { Spinner } from './shared/components/spinner';
+import { Home } from './screens/homeScreen/home';
 
 function App() {
   const routes = (
     <Router>
-      <Switch>
-        <Route path='/' exact>
-          <h2>suck it bitch</h2>
+      <Routes>
+        <Route path='/' element={<Home />}>
         </Route>
-        <Redirect to='/' />
-      </Switch>
+      </Routes>
     </Router>
   );
 

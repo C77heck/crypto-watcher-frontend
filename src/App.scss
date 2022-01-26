@@ -1,38 +1,34 @@
-.App {
-  text-align: center;
+@import "./shared/navigation/navbar.scss";
+
+:root {
+    --text-color: white;
+    --text-color-light: white;
+    --text-color-dark: white;
+
+    --color-primary-1: red;
+    --color-primary-2: red;
+    --color-primary-3: red;
+    --color-primary-4: red;
+
+    --color-secondary-1: red;
+    --color-secondary-2: red;
+    --color-secondary-3: red;
+    --color-secondary-4: red;
+
+    --color-dark-1: black;
+    --color-dark-2: black;
+    --color-dark-3: black;
+    --color-dark-4: black;
+
+    --color-light: red;
+    --color-shadow: red;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+    box-sizing: border-box;
+    outline: none;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+::selection {
+    background-color: var(--color-secondary-2);
+    color: var(--color-dark-3);
 }
