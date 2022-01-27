@@ -1,28 +1,40 @@
 @import "./shared/navigation/navbar.scss";
 
 :root {
-    --text-color: white;
-    --text-color-light: white;
-    --text-color-dark: white;
+    --text-color: rgb(60, 64, 70);
+    --text-color-light: rgb(140, 143, 150);
+    --text-color-dark: rgb(32, 33, 36);
 
-    --color-primary-1: red;
-    --color-primary-2: red;
-    --color-primary-3: red;
-    --color-primary-4: red;
+    --color-primary-1: hsl(143, 67%, 54%);
+    --color-primary-2: hsl(143, 57%, 44%);
+    --color-primary-3: hsl(143, 47%, 34%);
+    --color-primary-4: hsl(143, 37%, 24%);
 
-    --color-secondary-1: red;
-    --color-secondary-2: red;
-    --color-secondary-3: red;
-    --color-secondary-4: red;
+    --color-secondary-1: hsl(61, 92%, 63%);
+    --color-secondary-2: hsl(61, 82%, 53%);
+    --color-secondary-3: hsl(61, 72%, 43%);
+    --color-secondary-4: hsl(61, 62%, 33%);
 
-    --color-dark-1: black;
-    --color-dark-2: black;
-    --color-dark-3: black;
-    --color-dark-4: black;
+    --color-dark-1: hsl(0, 0%, 0%);
+    --color-dark-2: hsl(0, 1%, 14%);
+    --color-dark-3: hsl(0, 1%, 31%);
+    --color-dark-4: hsl(0, 1%, 48%);
 
-    --color-light: red;
-    --color-shadow: red;
+    --color-light: rgb(226, 238, 237);
+    --color-shadow: rgb(79, 88, 112);
 }
+
+// @MEDIA
+$desktop-lg: 112.5em; // 1800
+$desktop: 100em; // 1600
+$desktop-sm: 90em; // 1440
+$tablet-land: 75em; // 1200
+$tablet-lg: 68.75em; // 1100
+$tablet: 56.25em; // 900
+$tablet-sm: 48.5em; //776
+$mobile: 37.5em; // 600
+$mobile-sm: 31.25em; // 500
+$mobile-extra-sm: 24em; // 360
 
 * {
     box-sizing: border-box;
@@ -31,4 +43,28 @@
 ::selection {
     background-color: var(--color-secondary-2);
     color: var(--color-dark-3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%
+
+    @media only screen and (max-width: 37.5em) {
+        font-size: 50%;
+    }
+
+    @media screen and (max-width: 68.75em) {
+        font-size: 58%;
+    }
 }

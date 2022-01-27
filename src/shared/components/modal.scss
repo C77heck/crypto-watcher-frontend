@@ -1,4 +1,3 @@
-
 .modal {
     background-color: ghostwhite;
     transition: all 240ms;
@@ -56,3 +55,4 @@
     .#{z- + $i} {
         z-index: $i !important;
     }
+}
