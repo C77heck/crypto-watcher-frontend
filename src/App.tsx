@@ -23,7 +23,6 @@ function App() {
       <React.Suspense
         fallback={<div><Spinner overlay /></div>}
       >
-        <Spinner overlay />
         {routes}
       </React.Suspense>
     </main>
