@@ -39,20 +39,3 @@
     top: 0.5rem;
 }
 
-@for $i from 1 through 100 {
-    .#{left- + $i} {
-        left: $i * 1% !important;
-    }
-    .#{col- + $i} {
-        width: $i * 1% !important;
-    }
-    .#{border-radius- + $i} {
-        border-radius: $i + px !important;
-    }
-}
-
-@for $i from 1 through 1000 {
-    .#{z- + $i} {
-        z-index: $i !important;
-    }
-}
