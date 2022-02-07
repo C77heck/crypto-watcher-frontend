@@ -2,11 +2,10 @@ import { Component } from "react";
 
 export class Input extends Component<any, any> {
     public state = { value: '', errors: [] };
-    public values: any[] = [];
 
     public componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
         if (prevState.value !== this.state.value) {
-            console.log(this.values);
+            this.getData();
         }
     }
 
@@ -25,7 +24,7 @@ export class Input extends Component<any, any> {
     }
 
     public render() {
-        const hasError = true; // !!this.state.errors.length;
+        const hasError = !!this.state.errors.length;
         return <div className={'display-flex flex-column'}>
             <div
                 className={`input-wrapper ${this.props.classNames} error-${hasError ? 'show' : 'hide'}`}

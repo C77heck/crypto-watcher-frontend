@@ -9,6 +9,7 @@
     height: 2.5rem;
     outline: none;
     border: none;
+    background-color: transparent;
   }
 }
 
@@ -16,6 +17,5 @@
   color: var(--color-error);
   background-color: var(--color-error-see-through);
   border-color: var(--color-error);
-  z-index: 10;
 }
 
