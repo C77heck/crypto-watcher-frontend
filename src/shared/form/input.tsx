@@ -1,6 +1,21 @@
 import { Component } from "react";
 
-export class Input extends Component<any, any> {
+interface InputProps {
+    type?: string;
+    name: string;
+    id?: string | undefined;
+    readOnly?: boolean;
+    required?: boolean;
+    placeholder?: string;
+    autoComplete?: string | undefined
+    disabled?: boolean | undefined;
+    classNames?: string | undefined;
+    validator?: (value: string | number | undefined) => void;
+    getData: (value: any, errors: any[]) => void;
+    errorMessage?: string;
+}
+
+export class Input extends Component<InputProps, any> {
     public state = { value: '', errors: [] };
 
     public componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
@@ -19,7 +34,7 @@ export class Input extends Component<any, any> {
 
     public getData() {
         if (this.props.getData) {
-            this.props.getData(this.state.value, this.state.errors);
+            this.props.getData({ name: this.props.name, value: this.state.value }, this.state.errors);
         }
     }
 
