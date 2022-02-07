@@ -30,6 +30,10 @@ export const NewCryptoForm = (props: any) => {
         },
     };
 
+    const submit = (e: any) => {
+        console.log({ e, form });
+    };
+
     return <form onSubmit={() => console.log('attempt at submitting.')}>
         <Input
             {...config.first}
@@ -61,5 +65,6 @@ export const NewCryptoForm = (props: any) => {
             getData={(data: any, error: any) => console.log(data, error)}
             errorMessage={'whaaat?'}
         />
+
     </form>;
 };
