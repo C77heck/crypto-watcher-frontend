@@ -1,21 +1,22 @@
 import { Component } from "react";
 
-interface InputProps {
+export interface FieldProps {
     type?: string;
     name: string;
     id?: string | undefined;
     readOnly?: boolean;
     required?: boolean;
     placeholder?: string;
-    autoComplete?: string | undefined
+    autoComplete?: string | undefined;
     disabled?: boolean | undefined;
     classNames?: string | undefined;
-    validator?: (value: string | number | undefined) => void;
+    validator?: any[]; // TODO -> we will need a validator interface here.
     getData: (value: any, errors: any[]) => void;
     errorMessage?: string;
+    label?: string;
 }
 
-export class Input extends Component<InputProps, any> {
+export class Input extends Component<FieldProps, any> {
     public state = { value: '', errors: [] };
 
     public componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
@@ -25,7 +26,9 @@ export class Input extends Component<InputProps, any> {
     }
 
     public validate(value: string) {
-        return !!this.props.validator ? this.props.validator(value) : true;
+        return !!this.props.validator && !!this.props.validator.length
+            ? this.props.validator.map((validator: any) => validator(value))
+            : true;
     }
 
     public handleChange({ target: { value } }: React.ChangeEvent<HTMLInputElement>) {
@@ -41,6 +44,8 @@ export class Input extends Component<InputProps, any> {
     public render() {
         const hasError = !!this.state.errors.length;
         return <div className={'display-flex flex-column'}>
+            {this.props.label && <label className={'input-label'} htmlFor={this.props.name}>{this.props.label}</label>}
+
             <div
                 className={`input-wrapper ${this.props.classNames} error-${hasError ? 'show' : 'hide'}`}
             >

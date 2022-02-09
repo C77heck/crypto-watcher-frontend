@@ -4,7 +4,7 @@
 import { HttpError } from './http-error';
 
 export class Repository {
-    private baseUrl = process.env.BASE_URL;
+    private baseUrl = process.env.REACT_APP_BASE_URL;
     private headers: string[][] = [];
 
     public setHeader(header: string, value: string) {
@@ -29,13 +29,14 @@ export class Repository {
         options.method = 'POST';
         options.headers = this.headers;
         options.body = JSON.stringify(options.body, null);
+        console.log('heey', process.env);
         try {
+
             const request = new Request(`${this.baseUrl}${url}`, options);
             const repsonse = await fetch(request);
 
             return repsonse.body || {};
         } catch (error: any) {
-
             return new HttpError(error.message, error.code);
         }
     }

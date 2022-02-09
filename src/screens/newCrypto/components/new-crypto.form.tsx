@@ -1,72 +1,56 @@
-import { useState } from 'react';
-import { Button } from '../../../shared/components/button';
-import { Input } from '../../../shared/form/input';
-import { onlyStringsValidator } from '../../../shared/form/validators/only-strings-validator';
+import { Field } from '../../../shared/form/field';
+import { Form } from '../../../shared/form/form';
+import { FormStructure } from '../../../shared/form/form.structure';
+import { Repository } from '../../../shared/libs/repository';
 
 export const NewCryptoForm = (props: any) => {
-    const [form, setForm] = useState({});
-    const getData = (data: any, isValid: any) => {
-        console.log(data);
-        setForm({ ...form, [data?.name]: { value: data?.value, isValid: isValid } });
-
-    };
-    const config = {
-        first: {
+    const request = new Repository();
+    const formData = new FormStructure({
+        'crypto-name': new Field({
             name: 'crypto-name',
-            getData: (data: any, isValid: any) => getData(data, isValid)
-        },
-        second: {
+            label: 'Crypto name',
+            value: null,
+            validators: [],
+        }),
+        'purchased-amount': new Field({
             name: 'purchased-amount',
-            getData: (data: any, isValid: any) => getData(data, isValid)
-        },
-        third: {
+            label: 'Purchased Amount',
+            value: null,
+            validators: [],
+        }),
+        'threshold-1': new Field({
             name: 'threshold-1',
-            getData: (data: any, isValid: any) => getData(data, isValid)
-        },
-        fourth: {
+            label: 'Threshold 1',
+            value: null,
+            validators: [],
+        }),
+        'threshold-2': new Field({
             name: 'threshold-2',
-            getData: (data: any, isValid: any) => getData(data, isValid)
-        },
-        fifth: {
+            label: 'Threshold 2',
+            value: null,
+            validators: [],
+        }),
+        'threshold-3': new Field({
             name: 'threshold-3',
-            getData: (data: any, isValid: any) => getData(data, isValid)
-        },
+            label: 'Threshold 3',
+            value: null,
+            validators: [],
+        }),
+    });
+
+    const submit = async (data: any) => {
+        console.log({ success: true, data });
+        try {
+            const response = await request.post('/add_new_purchase', { body: data, headers: [] });
+            console.log(response);
+        } catch (e) {
+            console.log(e);
+        }
     };
 
-    const submit = (e: any) => {
-        e.preventDefault();
-        console.log({ e, form });
-    };
-
-    return <form onSubmit={(e) => submit(e)}>
-        <Input
-            {...config.first}
-            validator={(data: any) => onlyStringsValidator(data)}
-            errorMessage={'whaaat?'}
-        />
-        <Input
-            {...config.second}
-            validator={(data: any) => onlyStringsValidator(data)}
-            errorMessage={'whaaat?'}
-        />
-        <Input
-            {...config.third}
-            validator={(data: any) => onlyStringsValidator(data)}
-            errorMessage={'whaaat?'}
-        />
-        <Input
-            {...config.fourth}
-            validator={(data: any) => onlyStringsValidator(data)}
-            errorMessage={'whaaat?'}
-        />
-        <Input
-            {...config.fifth}
-            validator={(data: any) => onlyStringsValidator(data)}
-            errorMessage={'whaaat?'}
-        />
-        <Button
-            title={'Go'}
-            type={'submit'}
-        />
-    </form>;
+    return <Form
+        onSubmit={(data: any) => submit(data)}
+        form={formData}
+        submitButton={{ className: 'mt-20', title: 'Go', type: 'submit' }}
+    />;
 };

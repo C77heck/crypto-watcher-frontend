@@ -3,31 +3,32 @@
 @import "./shared/components/backdrop.scss";
 @import "./shared/form/input.scss";
 @import "./shared/components/button";
+@import "./shared/sass/helpers";
 
 :root {
-  --text-color: rgb(60, 64, 70);
-  --text-color-light: rgb(140, 143, 150);
-  --text-color-dark: rgb(32, 33, 36);
+    --text-color: rgb(60, 64, 70);
+    --text-color-light: rgb(140, 143, 150);
+    --text-color-dark: rgb(32, 33, 36);
 
   --color-primary-1: #c4af62;
-  --color-primary-3: #C4B88D;
-  --color-primary-2: #e6d8a5;
+    --color-primary-3: #C4B88D;
+    --color-primary-2: #e6d8a5;
 
-  --color-secondary-1: hsl(61, 92%, 63%);
-  --color-secondary-2: hsl(61, 82%, 53%);
-  --color-secondary-3: hsl(61, 72%, 43%);
-  --color-secondary-4: hsl(61, 62%, 33%);
+    --color-secondary-1: hsl(61, 92%, 63%);
+    --color-secondary-2: hsl(61, 82%, 53%);
+    --color-secondary-3: hsl(61, 72%, 43%);
+    --color-secondary-4: hsl(61, 62%, 33%);
 
-  --color-dark-1: hsl(0, 0%, 0%);
-  --color-dark-2: hsl(0, 1%, 14%);
-  --color-dark-3: hsl(0, 1%, 31%);
-  --color-dark-4: hsl(0, 1%, 48%);
+    --color-dark-1: hsl(0, 0%, 0%);
+    --color-dark-2: hsl(240, 1%, 14%);
+    --color-dark-3: hsl(0, 1%, 31%);
+    --color-dark-4: hsl(0, 1%, 48%);
 
-  --color-error: hsl(0, 83%, 56%);
-  --color-error-see-through: hsla(0, 83%, 56%, 0.34);
+    --color-error: hsl(0, 83%, 56%);
+    --color-error-see-through: hsla(0, 83%, 56%, 0.34);
 
-  --color-light: rgb(226, 238, 237);
-  --color-shadow: rgb(79, 88, 112);
+    --color-light: rgb(226, 238, 237);
+    --color-shadow: rgb(79, 88, 112);
 }
 
 // @MEDIA
@@ -43,35 +44,35 @@ $mobile-sm: 31.25em; // 500
 $mobile-extra-sm: 24em; // 360
 
 * {
-  box-sizing: border-box;
-  outline: none;
+    box-sizing: border-box;
+    outline: none;
 }
 
 ::selection {
-  background-color: var(--color-secondary-2);
-  color: var(--color-dark-3);
+    background-color: var(--color-secondary-2);
+    color: var(--color-dark-3);
 }
 
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 *,
 *::after,
 *::before {
-  box-sizing: inherit;
+    box-sizing: inherit;
 }
 
 html {
-  box-sizing: border-box;
-  font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%
+    box-sizing: border-box;
+    font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%
 
-  @media only screen and (max-width: 37.5em) {
-    font-size: 50%;
-  }
+    @media only screen and (max-width: 37.5em) {
+        font-size: 50%;
+    }
 
-  @media screen and (max-width: 68.75em) {
-    font-size: 58%;
-  }
+    @media screen and (max-width: 68.75em) {
+        font-size: 58%;
+    }
 }

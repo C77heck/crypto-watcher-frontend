@@ -1,21 +1,27 @@
 .input-wrapper {
-  padding: 0.5rem;
-  border: 1px solid var(--color-dark-2);
-  border-radius: 4px;
-  display: inline-block;
+    padding: 0.5rem;
+    border: 1px solid var(--color-dark-2);
+    border-radius: 4px;
+    display: inline-block;
 
-  & input {
-    width: 100%;
-    height: 2.5rem;
-    outline: none;
-    border: none;
-    background-color: transparent;
-  }
+    & input {
+        width: 100%;
+        height: 2.5rem;
+        outline: none;
+        border: none;
+        background-color: transparent;
+    }
 }
 
 .error-show {
-  color: var(--color-error);
-  background-color: var(--color-error-see-through);
-  border-color: var(--color-error);
+    color: var(--color-error);
+    background-color: var(--color-error-see-through);
+    border-color: var(--color-error);
 }
 
+.input-label {
+    margin: 0.7rem 0;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--color-dark-2);
+}

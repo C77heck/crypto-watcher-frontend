@@ -1,12 +1,13 @@
-import { Input } from "../../shared/form/input";
-import { onlyStringsValidator } from "../../shared/form/validators/only-strings-validator";
 import { Header } from "../components/header";
+import { NewCryptoForm } from './components/new-crypto.form';
 
 export const NewCryptoScreen = (props: any) => {
 
     return <div>
         <Header/>
-
+        <div className={'max-width-vw-80 position-center'}>
+            <NewCryptoForm/>
+        </div>
     </div>;
 };
 
