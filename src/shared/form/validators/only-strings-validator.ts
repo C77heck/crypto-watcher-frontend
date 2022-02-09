@@ -7,5 +7,5 @@ export const onlyStringsValidator = (value: any): ValidatorInterface => {
 
     const hasOnlyStrings = /\D/;
 
-    return { hasError: hasOnlyStrings.test(value), errorMessage: '' };
+    return { hasError: !hasOnlyStrings.test(value), errorMessage: '' };
 };

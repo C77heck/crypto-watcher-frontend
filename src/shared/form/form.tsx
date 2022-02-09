@@ -14,12 +14,14 @@ const getIsFormValid = (form: any) => {
 
     for (const prop in form) {
         if (form.hasOwnProperty(prop)) {
-            isValidArr.push(form[prop]?.isValid);
+            if (!form[prop]?.isValid) {
+                return false;
+            }
+            isValidArr.push(`${form[prop]?.isValid}`);
         }
     }
-    console.log(isValidArr.filter(isValid => !isValid), isValidArr);
 
-    return !!isValidArr.filter(isValid => !isValid).length;
+    return !isValidArr.includes('false');
 };
 
 export const Form = (props: FormProps) => {
@@ -28,7 +30,7 @@ export const Form = (props: FormProps) => {
 
     useEffect(() => {
         // TODO -> Our disabling logic is not working.
-        console.log(getIsFormValid(form));
+        console.log(isFormValid, form, getIsFormValid(form));
         setIsFormValid(getIsFormValid(form));
     }, [getIsFormValid, form]);
 
@@ -52,7 +54,7 @@ export const Form = (props: FormProps) => {
         })}
 
         {props.submitButton && <Button
-            disabled={isFormValid}
+            disabled={!isFormValid}
             {...props.submitButton}
         />}
     </form>;

@@ -45,7 +45,7 @@ export class Input extends Component<FieldProps, any> {
 
     public getData() {
         if (this.props.getData) {
-            this.props.getData({ name: this.props.name, value: this.state.value }, this.state.hasError);
+            this.props.getData({ name: this.props.name, value: this.state.value }, !this.state.hasError);
         }
     }
 
