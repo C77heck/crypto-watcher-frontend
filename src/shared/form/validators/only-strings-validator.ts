@@ -1,9 +1,11 @@
-export const onlyStringsValidator = (value: any) => {
+import { ValidatorInterface } from './validator-interface';
+
+export const onlyStringsValidator = (value: any): ValidatorInterface => {
     if (!value) {
-        return true;
+        return { hasError: true, errorMessage: '' };
     }
 
     const hasOnlyStrings = /\D/;
-    
-    return hasOnlyStrings.test(value);
+
+    return { hasError: hasOnlyStrings.test(value), errorMessage: '' };
 };

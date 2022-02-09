@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { ValidatorInterface } from './validators/validator-interface';
 
 export interface FieldProps {
     type?: string;
@@ -11,13 +12,13 @@ export interface FieldProps {
     disabled?: boolean | undefined;
     classNames?: string | undefined;
     validators?: any[]; // TODO -> we will need a validator interface here.
-    getData: (value: any, errors: any[]) => void;
+    getData: (value: any, hasError: boolean) => void;
     errorMessage?: string;
     label?: string;
 }
 
 export class Input extends Component<FieldProps, any> {
-    public state = { value: '', errors: [] };
+    public state = { value: '', hasError: false, errorMessage: '' };
 
     public componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
         if (prevState.value !== this.state.value) {
@@ -25,12 +26,16 @@ export class Input extends Component<FieldProps, any> {
         }
     }
 
-    public validate(value: string): { hasError: boolean, errorMessage: string }[] {
-        return !!this.props.validators && !!this.props.validators.length
+    public validate(value: string): ValidatorInterface {
+        const hasErrors = !!this.props.validators && !!this.props.validators.length
             ? this.props.validators.map((validator: any) => validator(value))
-            : [{ hasError: false, errorMessage: '' }];
+            : [];
 
-        // we need to return either true or false if its false we should return the error messgage too.
+        if (!hasErrors.length) {
+            return { hasError: false, errorMessage: '' };
+        }
+
+        return hasErrors[0];
     }
 
     public handleChange({ target: { value } }: React.ChangeEvent<HTMLInputElement>) {
@@ -40,12 +45,12 @@ export class Input extends Component<FieldProps, any> {
 
     public getData() {
         if (this.props.getData) {
-            this.props.getData({ name: this.props.name, value: this.state.value }, this.state.errors);
+            this.props.getData({ name: this.props.name, value: this.state.value }, this.state.hasError);
         }
     }
 
     public render() {
-        const hasError = !!this.state.errors.length;
+        const hasError = this.state.hasError;
         return <div className={'display-flex flex-column'}>
             {this.props.label && <label className={`input-label error-${hasError ? 'show' : 'hide'}--label`} htmlFor={this.props.name}>{this.props.label}</label>}
 

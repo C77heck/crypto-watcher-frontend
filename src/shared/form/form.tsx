@@ -32,7 +32,7 @@ export const Form = (props: FormProps) => {
         setIsFormValid(getIsFormValid(form));
     }, [getIsFormValid, form]);
 
-    const getData = (data: any, isValid: any) => {
+    const getData = (data: any, isValid: boolean) => {
         setForm({ ...form, [data?.name]: { value: data?.value, isValid: isValid } });
     };
     const submit = (e: any) => {
