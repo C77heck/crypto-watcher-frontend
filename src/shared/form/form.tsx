@@ -11,7 +11,6 @@ interface FormProps {
 
 const getIsFormValid = (form: any) => {
     const isValidArr = [];
-
     for (const prop in form) {
         if (form.hasOwnProperty(prop)) {
             if (!form[prop]?.isValid) {
@@ -29,8 +28,6 @@ export const Form = (props: FormProps) => {
     const [isFormValid, setIsFormValid] = useState(false);
 
     useEffect(() => {
-        // TODO -> Our disabling logic is not working.
-        console.log(isFormValid, form, getIsFormValid(form));
         setIsFormValid(getIsFormValid(form));
     }, [getIsFormValid, form]);
 
