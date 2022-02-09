@@ -10,7 +10,7 @@ export class Field implements FieldProps {
     public autoComplete;
     public disabled;
     public classNames;
-    public validator;
+    public validators;
     public getData;
     public errorMessage;
     public label;
@@ -25,7 +25,7 @@ export class Field implements FieldProps {
         this.autoComplete = attributes?.autoComplete || 'false';
         this.disabled = attributes?.disabled || false;
         this.classNames = attributes?.classNames || '';
-        this.validator = attributes?.validator || [];
+        this.validators = attributes?.validators || [];
         this.getData = attributes?.getData;
         this.errorMessage = attributes?.errorMessage || '';
         this.label = attributes?.label || '';

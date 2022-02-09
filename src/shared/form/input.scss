@@ -14,13 +14,25 @@
 }
 
 .error-show {
+    &--div {
+        color: var(--color-error);
+        background-color: var(--color-error-see-through);
+        border-color: var(--color-error);
+    }
+
+    &--label {
+        color: var(--color-error) !important;
+    }
+}
+
+.error-show {
     color: var(--color-error);
     background-color: var(--color-error-see-through);
     border-color: var(--color-error);
 }
 
 .input-label {
-    margin: 0.7rem 0;
+    margin: 0.4rem 0;
     font-size: 1.4rem;
     font-weight: bold;
     color: var(--color-dark-2);

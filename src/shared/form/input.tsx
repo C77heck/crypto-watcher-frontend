@@ -10,7 +10,7 @@ export interface FieldProps {
     autoComplete?: string | undefined;
     disabled?: boolean | undefined;
     classNames?: string | undefined;
-    validator?: any[]; // TODO -> we will need a validator interface here.
+    validators?: any[]; // TODO -> we will need a validator interface here.
     getData: (value: any, errors: any[]) => void;
     errorMessage?: string;
     label?: string;
@@ -25,14 +25,17 @@ export class Input extends Component<FieldProps, any> {
         }
     }
 
-    public validate(value: string) {
-        return !!this.props.validator && !!this.props.validator.length
-            ? this.props.validator.map((validator: any) => validator(value))
-            : true;
+    public validate(value: string): { hasError: boolean, errorMessage: string }[] {
+        return !!this.props.validators && !!this.props.validators.length
+            ? this.props.validators.map((validator: any) => validator(value))
+            : [{ hasError: false, errorMessage: '' }];
+
+        // we need to return either true or false if its false we should return the error messgage too.
     }
 
     public handleChange({ target: { value } }: React.ChangeEvent<HTMLInputElement>) {
-        this.setState({ value, errors: this.validate(value) });
+        const { hasError, errorMessage } = this.validate(value);
+        this.setState({ value, hasError, errorMessage });
     }
 
     public getData() {
@@ -44,10 +47,10 @@ export class Input extends Component<FieldProps, any> {
     public render() {
         const hasError = !!this.state.errors.length;
         return <div className={'display-flex flex-column'}>
-            {this.props.label && <label className={'input-label'} htmlFor={this.props.name}>{this.props.label}</label>}
+            {this.props.label && <label className={`input-label error-${hasError ? 'show' : 'hide'}--label`} htmlFor={this.props.name}>{this.props.label}</label>}
 
             <div
-                className={`input-wrapper ${this.props.classNames} error-${hasError ? 'show' : 'hide'}`}
+                className={`input-wrapper ${this.props.classNames} error-${hasError ? 'show' : 'hide'}--div`}
             >
                 <input
                     className={'input'}

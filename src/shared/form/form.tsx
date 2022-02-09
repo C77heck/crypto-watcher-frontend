@@ -17,6 +17,7 @@ const getIsFormValid = (form: any) => {
             isValidArr.push(form[prop]?.isValid);
         }
     }
+    console.log(isValidArr.filter(isValid => !isValid), isValidArr);
 
     return !!isValidArr.filter(isValid => !isValid).length;
 };
