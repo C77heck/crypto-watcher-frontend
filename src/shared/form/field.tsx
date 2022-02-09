@@ -9,7 +9,7 @@ export class Field implements FieldProps {
     public placeholder;
     public autoComplete;
     public disabled;
-    public classNames;
+    public className;
     public validators;
     public getData;
     public errorMessage;
@@ -24,7 +24,7 @@ export class Field implements FieldProps {
         this.placeholder = attributes?.placeholder || '';
         this.autoComplete = attributes?.autoComplete || 'false';
         this.disabled = attributes?.disabled || false;
-        this.classNames = attributes?.classNames || '';
+        this.className = attributes?.className || '';
         this.validators = attributes?.validators || [];
         this.getData = attributes?.getData;
         this.errorMessage = attributes?.errorMessage || '';

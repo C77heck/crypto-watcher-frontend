@@ -7,6 +7,7 @@ interface FormProps {
     onSubmit: (form: any) => void;
     form: any;
     submitButton?: ButtonProps;
+    className?: string;
 }
 
 const getIsFormValid = (form: any) => {
@@ -41,7 +42,10 @@ export const Form = (props: FormProps) => {
 
     const inputFields = objectToArray(props.form.fields);
 
-    return <form onSubmit={(e) => submit(e)}>
+    return <form
+        onSubmit={(e) => submit(e)}
+        className={props.className}
+    >
         {inputFields.map((field, index) => {
             return <Input
                 {...field}

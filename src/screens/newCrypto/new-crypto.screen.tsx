@@ -5,7 +5,7 @@ export const NewCryptoScreen = (props: any) => {
 
     return <div>
         <Header/>
-        <div className={'max-width-vw-80 position-center'}>
+        <div className={'position-center min-height-vh-78'}>
             <NewCryptoForm/>
         </div>
     </div>;

@@ -20,6 +20,11 @@
       transition: all 250ms;
       color: hsl(0, 0, 96);
 
+      & a {
+        text-decoration: none;
+        color: inherit;
+      }
+
       &:hover {
         opacity: 0.7;
       }
