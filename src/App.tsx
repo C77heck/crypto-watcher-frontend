@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom';
 import './App.scss';
-import { NewCryptoForm } from './screens/newCrypto/components/new-crypto.form';
+import { BaseLayout } from './screens/components/base.layout';
 import { NewCryptoScreen } from './screens/newCrypto/new-crypto.screen';
 import { Spinner } from './shared/components/spinner';
 
@@ -9,7 +9,7 @@ function App() {
     const routes = (
         <Router>
             <Routes>
-                <Route path="/" element={<NewCryptoScreen/>}>
+                <Route path="/" element={<BaseLayout><NewCryptoScreen/></BaseLayout>}>
                 </Route>
             </Routes>
         </Router>

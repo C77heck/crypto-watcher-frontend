@@ -1,18 +1,19 @@
 export interface ButtonProps {
-    type?: string;
+    type?: "button" | "submit" | "reset" | undefined;
     className?: string;
+    buttonStyle?: string;
     name?: string;
     id?: string;
-    disabled?: string;
+    disabled?: boolean;
     onClick?: () => void;
     title: string;
     children?: any;
 }
 
-export const Button = (props: any) => {
+export const Button = (props: ButtonProps) => {
     return <button
         type={props.type || 'button'}
-        className={`${getButtonType(props.className)} ${props.className}`}
+        className={`${getButtonType(props.buttonStyle || '')} ${props.className} position-center`}
         name={props.name}
         id={props.id}
         disabled={props.disabled}
@@ -28,6 +29,8 @@ const getButtonType = (type: string) => {
             return 'button button--base';
         case 'submit':
             return 'button button--submit';
+        case 'login':
+            return 'button button--login';
         default:
             return 'button';
     }
