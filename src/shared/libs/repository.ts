@@ -29,7 +29,6 @@ export class Repository {
         options.method = 'POST';
         options.headers = this.headers;
         options.body = JSON.stringify(options.body, null);
-        console.log('heey', process.env);
         try {
 
             const request = new Request(`${this.baseUrl}${url}`, options);

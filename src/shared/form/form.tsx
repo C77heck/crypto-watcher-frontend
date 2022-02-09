@@ -26,6 +26,8 @@ export const Form = (props: FormProps) => {
     const [isFormValid, setIsFormValid] = useState(false);
 
     useEffect(() => {
+        // TODO -> Our disabling logic is not working.
+        console.log(getIsFormValid(form));
         setIsFormValid(getIsFormValid(form));
     }, [getIsFormValid, form]);
 
@@ -49,7 +51,7 @@ export const Form = (props: FormProps) => {
         })}
 
         {props.submitButton && <Button
-            disabled={!isFormValid}
+            disabled={isFormValid}
             {...props.submitButton}
         />}
     </form>;

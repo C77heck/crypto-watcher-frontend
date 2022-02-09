@@ -39,7 +39,6 @@ export const NewCryptoForm = (props: any) => {
     });
 
     const submit = async (data: any) => {
-        console.log({ success: true, data });
         try {
             const response = await request.post('/add_new_purchase', { body: data, headers: [] });
             console.log(response);
