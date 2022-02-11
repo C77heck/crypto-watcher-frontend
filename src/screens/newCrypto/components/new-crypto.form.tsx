@@ -4,7 +4,7 @@ import { FormStructure } from '../../../shared/form/form.structure';
 import { onlyStringsValidator } from '../../../shared/form/validators/only-strings-validator';
 import { Repository } from '../../../shared/libs/repository';
 
-export const NewCryptoForm = () => {
+export const NewCryptoForm = (props: any) => {
     const request = new Repository();
     const formData = new FormStructure({
         'crypto-name': new Field({
@@ -12,6 +12,7 @@ export const NewCryptoForm = () => {
             label: 'Crypto name',
             value: null,
             validators: [onlyStringsValidator],
+            options: props.options || [],
             className: 'col-100 col-md-22'
         }),
         'purchased-amount': new Field({

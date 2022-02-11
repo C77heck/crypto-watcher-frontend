@@ -15,6 +15,8 @@ export interface FieldProps {
     getData: (value: any, hasError: boolean) => void;
     errorMessage?: string;
     label?: string;
+    options?: string[];
+    element?: 'text' | 'dropdown' | 'searchable' | 'searchable-dropdown' | 'textarea';
 }
 
 export class Input extends Component<FieldProps, any> {
@@ -49,6 +51,52 @@ export class Input extends Component<FieldProps, any> {
         }
     }
 
+    public textInput() {
+        return <input
+            className={'input'}
+            onChange={(e) => this.handleChange(e)}
+            value={this.state.value}
+            type={this.props.type || 'text'}
+            name={this.props.name}
+            id={this.props.id}
+            readOnly={this.props.readOnly}
+            required={this.props.required}
+            placeholder={this.props.placeholder}
+            autoComplete={this.props.autoComplete}
+            disabled={this.props.disabled}
+        />;
+    }
+
+    public searchableDropdown(){
+        return <input
+            className={'input'}
+            onChange={(e) => this.handleChange(e)}
+            value={this.state.value}
+            type={this.props.type || 'text'}
+            name={this.props.name}
+            id={this.props.id}
+            readOnly={this.props.readOnly}
+            required={this.props.required}
+            placeholder={this.props.placeholder}
+            autoComplete={this.props.autoComplete}
+            disabled={this.props.disabled}
+        />;    }
+
+    public manageInputType(element: string) {
+        switch (element) {
+            case 'dropdown':
+                return this.textInput(); // will need the dropdown
+            case 'searchable':
+                return this.textInput();  // will need the searchable
+            case 'searchable-dropdown':
+                return this.textInput();
+            case 'textarea':
+                return this.textInput();  // will need the textarea
+            default:
+                return this.textInput();
+        }
+    }
+
     public render() {
         const hasError = this.state.hasError;
         return <div className={`display-flex flex-column ${this.props.className}`}>
@@ -57,19 +105,7 @@ export class Input extends Component<FieldProps, any> {
             <div
                 className={`input-wrapper error-${hasError ? 'show' : 'hide'}--div`}
             >
-                <input
-                    className={'input'}
-                    onChange={(e) => this.handleChange(e)}
-                    value={this.state.value}
-                    type={this.props.type || 'text'}
-                    name={this.props.name}
-                    id={this.props.id}
-                    readOnly={this.props.readOnly}
-                    required={this.props.required}
-                    placeholder={this.props.placeholder}
-                    autoComplete={this.props.autoComplete}
-                    disabled={this.props.disabled}
-                />
+                {this.manageInputType(this.props.element || 'text')}
             </div>
             {!!hasError && <small className={'error-show'}>{this.props.errorMessage}</small>}
         </div>;
