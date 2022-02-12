@@ -8,6 +8,7 @@ import { Repository } from '../../../shared/libs/repository';
 export const NewCryptoForm = (props: any) => {
     const request = new Repository();
     const { INPUTS: { SEARCHABLE_DROPDOWN } } = CONSTANTS;
+    console.log(props.options);
     const formData = new FormStructure({
         name: new Field({
             name: 'name',

@@ -15,6 +15,7 @@ export class Field implements FieldProps {
     public errorMessage;
     public label;
     public element;
+    public options;
 
     public constructor(attributes: any) {
         this.type = attributes?.type || 'text';
@@ -31,5 +32,6 @@ export class Field implements FieldProps {
         this.errorMessage = attributes?.errorMessage || '';
         this.label = attributes?.label || '';
         this.element = attributes?.element || 'text';
+        this.options = attributes?.options || [];
     }
 }

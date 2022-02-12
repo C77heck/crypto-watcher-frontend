@@ -21,7 +21,7 @@ export interface FieldProps {
 }
 
 export class Input extends Component<FieldProps, any> {
-    public state = { value: '', hasError: false, errorMessage: '' };
+    public state = { value: '', hasError: false, errorMessage: '', searchedOptions: [] };
 
     public componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
         if (prevState.value !== this.state.value) {
@@ -99,12 +99,33 @@ export class Input extends Component<FieldProps, any> {
                 autoComplete={this.props.autoComplete}
                 disabled={this.props.disabled}
             />
-            <div className={'dropdown'}>
+            <div
+                className={`input-dropdown ${this.manageOptions()}`}
+            >
                 <ul>
-                    {(this.props.options || []).map(option => <li>{option}</li>)}
+                    {(this.props.options || []).map(option => this.renderOption(option))}
                 </ul>
             </div>
         </Fragment>;
+    }
+
+    public renderOption(option: string) {
+        return <li
+            onClick={() => this.setState({ value: option })}
+        >
+            {option}
+        </li>;
+    }
+
+    public manageOptions() {
+        const hasValue = !!this.state.value;
+        const hasOptions = !!this.props.options?.length;
+        // TODO will need to move it to state and search through it.
+
+        if (hasValue && hasOptions) {
+            return 'dropdown--show';
+        }
+        return 'dropdown--hide';
     }
 
     public manageInputType(element: string) {
