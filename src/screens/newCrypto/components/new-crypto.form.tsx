@@ -1,3 +1,4 @@
+import { CONSTANTS } from '../../../shared/constants';
 import { Field } from '../../../shared/form/field';
 import { Form } from '../../../shared/form/form';
 import { FormStructure } from '../../../shared/form/form.structure';
@@ -6,18 +7,27 @@ import { Repository } from '../../../shared/libs/repository';
 
 export const NewCryptoForm = (props: any) => {
     const request = new Repository();
+    const { INPUTS: { SEARCHABLE_DROPDOWN } } = CONSTANTS;
     const formData = new FormStructure({
-        'crypto-name': new Field({
-            name: 'crypto-name',
+        name: new Field({
+            name: 'name',
             label: 'Crypto name',
             value: null,
             validators: [onlyStringsValidator],
+            element: SEARCHABLE_DROPDOWN,
             options: props.options || [],
             className: 'col-100 col-md-22'
         }),
-        'purchased-amount': new Field({
-            name: 'purchased-amount',
+        amount: new Field({
+            name: 'amount',
             label: 'Purchased Amount',
+            value: null,
+            validators: [],
+            className: 'col-100 col-md-22'
+        }),
+        price: new Field({
+            name: 'price',
+            label: 'Price (money spent)',
             value: null,
             validators: [],
             className: 'col-100 col-md-22'
@@ -47,7 +57,19 @@ export const NewCryptoForm = (props: any) => {
 
     const submit = async (data: any) => {
         try {
-            const response = await request.post('/add_new_purchase', { body: data, headers: [] });
+            console.log({ data });
+            const body: any = {
+                name: data?.name?.value || '',
+                symbol: data?.symbol?.value || '', // will be a automatically populated input. disabled
+                price: data?.price?.value || 0,
+                amount: data?.amount?.value || 0,
+                thresholds: {
+                    'threshold-1': data?.['threshold-1']?.value || 0,
+                    'threshold-2': data?.['threshold-2']?.value || 0,
+                    'threshold-3': data?.['threshold-3']?.value || 0,
+                }
+            };
+            const response = await request.post('/add_new_purchase', { body, headers: [] });
             console.log(response);
         } catch (e) {
             console.log(e);

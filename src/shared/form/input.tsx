@@ -1,4 +1,5 @@
-import { Component } from "react";
+import { Component, Fragment } from "react";
+import { CONSTANTS } from '../constants';
 import { ValidatorInterface } from './validators/validator-interface';
 
 export interface FieldProps {
@@ -16,7 +17,7 @@ export interface FieldProps {
     errorMessage?: string;
     label?: string;
     options?: string[];
-    element?: 'text' | 'dropdown' | 'searchable' | 'searchable-dropdown' | 'textarea';
+    element?: 'text' | 'dropdown' | 'searchable' | 'searchable_dropdown' | 'textarea';
 }
 
 export class Input extends Component<FieldProps, any> {
@@ -67,7 +68,7 @@ export class Input extends Component<FieldProps, any> {
         />;
     }
 
-    public searchableDropdown(){
+    public searchableInput() {
         return <input
             className={'input'}
             onChange={(e) => this.handleChange(e)}
@@ -80,17 +81,43 @@ export class Input extends Component<FieldProps, any> {
             placeholder={this.props.placeholder}
             autoComplete={this.props.autoComplete}
             disabled={this.props.disabled}
-        />;    }
+        />;
+    }
+
+    public searchableDropdown() {
+        return <Fragment>
+            <input
+                className={'input'}
+                onChange={(e) => this.handleChange(e)}
+                value={this.state.value}
+                type={this.props.type || 'text'}
+                name={this.props.name}
+                id={this.props.id}
+                readOnly={this.props.readOnly}
+                required={this.props.required}
+                placeholder={this.props.placeholder}
+                autoComplete={this.props.autoComplete}
+                disabled={this.props.disabled}
+            />
+            <div className={'dropdown'}>
+                <ul>
+                    {(this.props.options || []).map(option => <li>{option}</li>)}
+                </ul>
+            </div>
+        </Fragment>;
+    }
 
     public manageInputType(element: string) {
+        const { INPUTS: { TEXTAREA, SEARCHABLE, SEARCHABLE_DROPDOWN, DROPDOWN } } = CONSTANTS;
+
         switch (element) {
-            case 'dropdown':
+            case DROPDOWN:
                 return this.textInput(); // will need the dropdown
-            case 'searchable':
-                return this.textInput();  // will need the searchable
-            case 'searchable-dropdown':
-                return this.textInput();
-            case 'textarea':
+            case SEARCHABLE:
+                return this.searchableInput();  // will need the searchable
+            case SEARCHABLE_DROPDOWN:
+                return this.searchableDropdown();
+            case TEXTAREA:
                 return this.textInput();  // will need the textarea
             default:
                 return this.textInput();

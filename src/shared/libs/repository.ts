@@ -4,8 +4,8 @@
 import { HttpError } from './http-error';
 
 export class Repository {
-    private baseUrl = process.env.REACT_APP_BASE_URL;
-    private headers: string[][] = [];
+    public baseUrl = process.env.REACT_APP_BASE_URL;
+    public headers: string[][] = [];
 
     public setHeader(header: string, value: string) {
         this.headers.push([header, value]);
@@ -18,9 +18,8 @@ export class Repository {
             const request = new Request(`${this.baseUrl}${url}`, options);
             const repsonse = await fetch(request);
 
-            return repsonse.body || {};
+            return repsonse.json();
         } catch (error: any) {
-
             return new HttpError(error.message, error.code);
         }
     }

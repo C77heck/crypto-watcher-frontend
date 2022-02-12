@@ -8,8 +8,9 @@ export const NewCryptoScreen = () => {
 
     useEffect(() => {
         (async () => {
-            const { payload } = await fetch(`${process.env.REACT_APP_BASE_URL}/all_cryptos`, {});
-            setOptions(payload.data);
+            const { payload } = await fetch(`/get_select_assets`, {});
+            console.log(payload?.assets || []);
+            setOptions(payload?.assets || ['something', 'another thing']);
         })();
     }, []);
 
