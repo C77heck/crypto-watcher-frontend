@@ -4,13 +4,14 @@ import { Header } from "../components/header";
 import { NewCryptoForm } from './components/new-crypto.form';
 
 export const NewCryptoScreen = () => {
-    const [options, setOptions] = useState([]);
+    const [options, setOptions] = useState(['']);
 
     useEffect(() => {
         (async () => {
             const { payload } = await fetch(`/get_select_assets`, {});
             console.log(payload?.assets || []);
-            setOptions(payload?.assets || ['something', 'another thing']);
+            //  setOptions(payload?.assets || ['something', 'another thing']);
+            setOptions(['something', 'another thing']);
         })();
     }, []);
 

@@ -41,7 +41,7 @@ export const Form = (props: FormProps) => {
     };
 
     const inputFields = objectToArray(props.form.fields);
-    console.log(inputFields);
+
     return <form
         onSubmit={(e) => submit(e)}
         className={props.className}

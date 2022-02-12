@@ -57,7 +57,6 @@ export const NewCryptoForm = (props: any) => {
 
     const submit = async (data: any) => {
         try {
-            console.log({ data });
             const body: any = {
                 name: data?.name?.value || '',
                 symbol: data?.symbol?.value || '', // will be a automatically populated input. disabled
