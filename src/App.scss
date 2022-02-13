@@ -1,9 +1,11 @@
 @import "./shared/navigation/navbar.scss";
 @import "./shared/components/spinner.scss";
 @import "./shared/components/backdrop.scss";
+@import "./shared/components/modal.scss";
 @import "./shared/form/input.scss";
 @import "./shared/components/button";
 @import "./shared/sass/helpers";
+@import "./screens/components/header";
 
 :root {
   --text-color: rgb(60, 64, 70);

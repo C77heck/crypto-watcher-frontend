@@ -8,7 +8,6 @@ import { Repository } from '../../../shared/libs/repository';
 export const NewCryptoForm = (props: any) => {
     const request = new Repository();
     const { INPUTS: { SEARCHABLE_DROPDOWN } } = CONSTANTS;
-    console.log(props.options);
     const formData = new FormStructure({
         name: new Field({
             name: 'name',
@@ -24,35 +23,40 @@ export const NewCryptoForm = (props: any) => {
             label: 'Purchased Amount',
             value: null,
             validators: [],
-            className: 'col-100 col-md-22'
+            className: 'col-100 col-md-22',
+            isNumberOnly: true,
         }),
         price: new Field({
             name: 'price',
             label: 'Price (money spent)',
             value: null,
             validators: [],
-            className: 'col-100 col-md-22'
+            className: 'col-100 col-md-22',
+            isNumberOnly: true,
         }),
         'threshold-1': new Field({
             name: 'threshold-1',
             label: 'Threshold 1',
             value: null,
             validators: [],
-            className: 'col-100 col-md-22'
+            className: 'col-100 col-md-22',
+            isNumberOnly: true,
         }),
         'threshold-2': new Field({
             name: 'threshold-2',
             label: 'Threshold 2',
             value: null,
             validators: [],
-            className: 'col-100 col-md-22'
+            className: 'col-100 col-md-22',
+            isNumberOnly: true,
         }),
         'threshold-3': new Field({
             name: 'threshold-3',
             label: 'Threshold 3',
             value: null,
             validators: [],
-            className: 'col-100 col-md-22'
+            className: 'col-100 col-md-22',
+            isNumberOnly: true,
         }),
     });
 
@@ -79,7 +83,7 @@ export const NewCryptoForm = (props: any) => {
     return <Form
         onSubmit={(data: any) => submit(data)}
         form={formData}
-        submitButton={{ className: 'mt-20', title: 'Go', type: 'submit' }}
+        submitButton={{ className: 'mt-20 col-100 col-md-22', title: 'Go', type: 'submit' }}
         className={'row flex-column position-center'}
     />;
 };

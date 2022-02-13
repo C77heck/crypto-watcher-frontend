@@ -1,6 +1,7 @@
-import React, { Component, Fragment } from "react";
-import { generateUniqueID } from 'web-vitals/dist/modules/lib/generateUniqueID';
+import React, { Component } from "react";
 import { CONSTANTS } from '../constants';
+import { SearchableDropdown } from './searchable-dropdown';
+import { TextInput } from './text-input';
 import { ValidatorInterface } from './validators/validator-interface';
 
 export interface FieldProps {
@@ -19,54 +20,22 @@ export interface FieldProps {
     label?: string;
     options?: string[];
     element?: 'text' | 'dropdown' | 'searchable' | 'searchable_dropdown' | 'textarea';
+    isNumberOnly?: boolean;
 }
 
 export class Input extends Component<FieldProps, any> {
-    public state = { value: '', hasError: false, errorMessage: '', searchedOptions: [], isInFocus: false };
+    public state = { value: '', hasError: false, errorMessage: '' };
     public prodRef: any;
 
     constructor(props: any) {
         super(props);
         this.prodRef = React.createRef();
-        this.handleClickOutside = this.handleClickOutside.bind(this);
-    }
-
-    public componentDidMount() {
-        this.assignClickHandler();
-    }
-
-    public componentWillUnmount() {
-        this.removeClickHandler();
-    }
-
-    public assignClickHandler() {
-        document.addEventListener('mousedown', this.handleClickOutside);
-    }
-
-    public removeClickHandler() {
-        document.removeEventListener('mousedown', this.handleClickOutside);
-    }
-
-    public handleClickOutside(event: any) {
-        if (!this.prodRef.current.contains(event.target)) {
-            this.setState({ isInFocus: false });
-        }
     }
 
     public componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
         if (prevState.value !== this.state.value) {
             this.getData();
-            if (this.props.element === CONSTANTS.INPUTS.SEARCHABLE_DROPDOWN) {
-                this.manageSearch();
-            }
         }
-    }
-
-    public manageSearch() {
-        const regex = new RegExp(this.state.value, 'i');
-        this.setState({
-            searchedOptions: this.props.options?.filter(option => regex.test(option))
-        });
     }
 
     public validate(value: string): ValidatorInterface {
@@ -83,7 +52,16 @@ export class Input extends Component<FieldProps, any> {
 
     public handleChange({ target: { value } }: React.ChangeEvent<HTMLInputElement>) {
         const { hasError, errorMessage } = this.validate(value);
-        this.setState({ value, hasError, errorMessage });
+        if (this.props.isNumberOnly) {
+            this.setState({ value: this.removeNonNumericValues(value), hasError, errorMessage });
+        } else {
+            this.setState({ value, hasError, errorMessage });
+        }
+    }
+
+    public removeNonNumericValues(value: string) {
+        const isNumeric = /^-?\d*\.?\d*$/;
+        return value.split('').filter(v => isNumeric.test(v)).join('');
     }
 
     public getData() {
@@ -92,101 +70,45 @@ export class Input extends Component<FieldProps, any> {
         }
     }
 
-    public textInput() {
-        return <input
-            className={'input'}
-            onChange={(e) => this.handleChange(e)}
-            value={this.state.value}
-            type={this.props.type || 'text'}
-            name={this.props.name}
-            id={this.props.id}
-            readOnly={this.props.readOnly}
-            required={this.props.required}
-            placeholder={this.props.placeholder}
-            autoComplete={this.props.autoComplete}
-            disabled={this.props.disabled}
-        />;
-    }
-
-    public searchableInput() {
-        return <input
-            className={'input'}
-            onChange={(e) => this.handleChange(e)}
-            value={this.state.value}
-            type={this.props.type || 'text'}
-            name={this.props.name}
-            id={this.props.id}
-            readOnly={this.props.readOnly}
-            required={this.props.required}
-            placeholder={this.props.placeholder}
-            autoComplete={this.props.autoComplete}
-            disabled={this.props.disabled}
-        />;
-    }
-
-    public searchableDropdown() {
-        return <Fragment>
-            <input
-                className={'input'}
-                onChange={(e) => this.handleChange(e)}
-                value={this.state.value}
-                type={this.props.type || 'text'}
-                name={this.props.name}
-                id={this.props.id}
-                readOnly={this.props.readOnly}
-                required={this.props.required}
-                placeholder={this.props.placeholder}
-                autoComplete={this.props.autoComplete}
-                disabled={this.props.disabled}
-
-            />
-            <div className={`input-dropdown ${this.manageOptions()}`}>
-                <ul>
-                    {(this.state.searchedOptions || []).map(option => this.renderOption(option))}
-                </ul>
-            </div>
-        </Fragment>;
-    }
-
     public onClickHandler(isChosen: boolean, option: string) {
         this.setState({ value: isChosen ? '' : option });
     }
 
-    public renderOption(option: string) {
-        const isChosen = this.state.value === option;
-        return <li
-            key={generateUniqueID()}
-            onClick={() => this.onClickHandler(isChosen, option)}
-            className={`${isChosen && 'color--active'}`}
-        >
-            {option}
-        </li>;
-    }
-
-    public manageOptions() {
-        const hasValue = !!this.state.value;
-        const hasOptions = !!this.state.searchedOptions?.length;
-
-        if (hasValue && hasOptions && this.state.isInFocus) {
-            return 'dropdown dropdown--show';
-        }
-        return 'dropdown dropdown--hide';
-    }
-
     public manageInputType(element: string) {
         const { INPUTS: { TEXTAREA, SEARCHABLE, SEARCHABLE_DROPDOWN, DROPDOWN } } = CONSTANTS;
-
         switch (element) {
             case DROPDOWN:
-                return this.textInput(); // will need the dropdown
+                return <TextInput
+                    {...this.props}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e)}
+                    value={this.state.value}
+                />; // will need the dropdown
             case SEARCHABLE:
-                return this.searchableInput();  // will need the searchable
+                return <TextInput
+                    {...this.props}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e)}
+                    value={this.state.value}
+                />; // will need the dropdown
             case SEARCHABLE_DROPDOWN:
-                return this.searchableDropdown();
+                return <SearchableDropdown
+                    {...this.props}
+                    divRef={this.prodRef}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e)}
+                    value={this.state.value}
+                    onClickHandler={(isChosen: boolean, value: string) => this.onClickHandler(isChosen, value)}
+                />;
             case TEXTAREA:
-                return this.textInput();  // will need the textarea
+                return <TextInput
+                    {...this.props}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e)}
+                    value={this.state.value}
+                />;  // will need the textarea
             default:
-                return this.textInput();
+                return <TextInput
+                    {...this.props}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e)}
+                    value={this.state.value}
+                />;
         }
     }
 
@@ -199,7 +121,6 @@ export class Input extends Component<FieldProps, any> {
             {this.props.label && <label className={`input-label error-${hasError ? 'show' : 'hide'}--label`} htmlFor={this.props.name}>{this.props.label}</label>}
             <div
                 className={`input-wrapper error-${hasError ? 'show' : 'hide'}--div`}
-                onFocus={() => this.setState({ isInFocus: true })}
             >
                 {this.manageInputType(this.props.element || 'text')}
             </div>

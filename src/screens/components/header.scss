@@ -1,0 +1,13 @@
+.header {
+  &--1 {
+
+  }
+
+  &--2 {
+    font-size: clamp(3rem, 3vw, 5rem);
+  }
+
+  &--3 {
+    font-size: clamp(3rem, 2vw, 3rem);
+  }
+}

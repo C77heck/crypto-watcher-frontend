@@ -16,8 +16,10 @@ export const NewCryptoScreen = () => {
     }, []);
 
     return <div>
-        <Header/>
-        <div className={'position-center min-height-vh-78'}>
+        <Header>
+            <h2 className={'header--2'}>Add new purchase</h2>
+        </Header>
+        <div className={'position-center mt-50'}>
             <NewCryptoForm options={options}/>
         </div>
     </div>;
