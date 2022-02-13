@@ -1,13 +1,18 @@
 import * as React from 'react';
+import ReactDOM from 'react-dom';
 
 interface ModalProps {
-    trigger: () => React.ReactNode;
-    content: () => React.ReactNode;
+    content: JSX.Element;
+    trigger: JSX.Element;
     className?: string;
     contentClasses?: string;
     headerClasses?: string;
     size: number; // use grid and up to 100
-    header?: () => React.ReactNode;
+    header?: JSX.Element;
+}
+
+function ModalWrapper(props: any) {
+    return ReactDOM.createPortal(props.children, document.getElementById('modals') as any);
 }
 
 export class Modal extends React.Component<ModalProps, any> {
@@ -43,24 +48,27 @@ export class Modal extends React.Component<ModalProps, any> {
             className={`z-110 modal modal--${show ? 'show' : 'hide'} ${sides} ${modal} ${className}`}
         >
             <div className={headerClasses}>
-                {header && header()}
+                {header && header}
                 <p className={'float-right'}>X</p>
             </div>
             <div className={`${contentClasses} p-20`}>
-                {content()}
+                {content}
             </div>
         </div>;
     }
 
     public render() {
         return <div>
-            <div
-                onClick={(e) => this.handleClick(e, true)}
-            >
-                {this.props.trigger()}
+            <div onClick={(e: any) => this.handleClick(e, true)}>
+                {!!this.props.trigger && this.props.trigger}
             </div>
-            {this.renderOverlay()}
-            {this.renderModal()}
+            <ModalWrapper>
+                <div>
+                    {this.renderOverlay()}
+                    {this.renderModal()}
+                </div>
+            </ModalWrapper>
         </div>;
     }
 }
+

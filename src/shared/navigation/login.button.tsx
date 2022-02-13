@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Button } from '../components/button';
 import { Modal } from '../components/modal';
 import { Field } from '../form/field';
@@ -48,9 +49,9 @@ export const LoginButton = (props: any) => {
 
     return <Modal
         className={'border-radius-px-5 p-15'}
-        trigger={() => <Button buttonStyle={'login'} title={'Login'}/>}
-        content={() => content}
+        content={content}
         size={40}
-        header={() => <h2 className={'header--3 text-align-center'}>Sign in</h2>}
+        header={<h2 className={'header--3 text-align-center'}>Sign in</h2>}
+        trigger={<Button buttonStyle={'login'} title={'Login'}/>}
     />;
 };

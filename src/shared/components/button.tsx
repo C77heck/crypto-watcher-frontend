@@ -5,7 +5,7 @@ export interface ButtonProps {
     name?: string;
     id?: string;
     disabled?: boolean;
-    onClick?: () => void;
+    onClick?: (e: any) => void;
     title: string;
     children?: any;
 }
