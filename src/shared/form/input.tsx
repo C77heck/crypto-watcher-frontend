@@ -24,7 +24,7 @@ export interface FieldProps {
 }
 
 export class Input extends Component<FieldProps, any> {
-    public state = { value: '', hasError: false, errorMessage: '' };
+    public state = { value: '', hasError: false, errorMessage: ''};
     public prodRef: any;
 
     constructor(props: any) {
@@ -114,6 +114,7 @@ export class Input extends Component<FieldProps, any> {
 
     public render() {
         const hasError = this.state.hasError;
+
         return <div
             className={`display-flex flex-column ${this.props.className}`}
             ref={this.prodRef}
