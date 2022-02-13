@@ -38,6 +38,12 @@ $mlg: 56.25em; // 900
 $md: 48.5em; //776
 $sm: 37.5em; // 600
 
+.color {
+  &--active {
+    color: var(--color-secondary-1) !important;
+  }
+}
+
 * {
   box-sizing: border-box;
   outline: none;

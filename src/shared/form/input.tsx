@@ -1,4 +1,5 @@
-import { Component, Fragment } from "react";
+import React, { Component, Fragment } from "react";
+import { generateUniqueID } from 'web-vitals/dist/modules/lib/generateUniqueID';
 import { CONSTANTS } from '../constants';
 import { ValidatorInterface } from './validators/validator-interface';
 
@@ -21,12 +22,51 @@ export interface FieldProps {
 }
 
 export class Input extends Component<FieldProps, any> {
-    public state = { value: '', hasError: false, errorMessage: '', searchedOptions: [] };
+    public state = { value: '', hasError: false, errorMessage: '', searchedOptions: [], isInFocus: false };
+    public prodRef: any;
+
+    constructor(props: any) {
+        super(props);
+        this.prodRef = React.createRef();
+        this.handleClickOutside = this.handleClickOutside.bind(this);
+    }
+
+    public componentDidMount() {
+        this.assignClickHandler();
+    }
+
+    public componentWillUnmount() {
+        this.removeClickHandler();
+    }
+
+    public assignClickHandler() {
+        document.addEventListener('mousedown', this.handleClickOutside);
+    }
+
+    public removeClickHandler() {
+        document.removeEventListener('mousedown', this.handleClickOutside);
+    }
+
+    public handleClickOutside(event: any) {
+        if (!this.prodRef.current.contains(event.target)) {
+            this.setState({ isInFocus: false });
+        }
+    }
 
     public componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
         if (prevState.value !== this.state.value) {
             this.getData();
+            if (this.props.element === CONSTANTS.INPUTS.SEARCHABLE_DROPDOWN) {
+                this.manageSearch();
+            }
         }
+    }
+
+    public manageSearch() {
+        const regex = new RegExp(this.state.value, 'i');
+        this.setState({
+            searchedOptions: this.props.options?.filter(option => regex.test(option))
+        });
     }
 
     public validate(value: string): ValidatorInterface {
@@ -98,20 +138,26 @@ export class Input extends Component<FieldProps, any> {
                 placeholder={this.props.placeholder}
                 autoComplete={this.props.autoComplete}
                 disabled={this.props.disabled}
+
             />
-            <div
-                className={`input-dropdown ${this.manageOptions()}`}
-            >
+            <div className={`input-dropdown ${this.manageOptions()}`}>
                 <ul>
-                    {(this.props.options || []).map(option => this.renderOption(option))}
+                    {(this.state.searchedOptions || []).map(option => this.renderOption(option))}
                 </ul>
             </div>
         </Fragment>;
     }
 
+    public onClickHandler(isChosen: boolean, option: string) {
+        this.setState({ value: isChosen ? '' : option });
+    }
+
     public renderOption(option: string) {
+        const isChosen = this.state.value === option;
         return <li
-            onClick={() => this.setState({ value: option })}
+            key={generateUniqueID()}
+            onClick={() => this.onClickHandler(isChosen, option)}
+            className={`${isChosen && 'color--active'}`}
         >
             {option}
         </li>;
@@ -119,13 +165,12 @@ export class Input extends Component<FieldProps, any> {
 
     public manageOptions() {
         const hasValue = !!this.state.value;
-        const hasOptions = !!this.props.options?.length;
-        // TODO will need to move it to state and search through it.
+        const hasOptions = !!this.state.searchedOptions?.length;
 
-        if (hasValue && hasOptions) {
-            return 'dropdown--show';
+        if (hasValue && hasOptions && this.state.isInFocus) {
+            return 'dropdown dropdown--show';
         }
-        return 'dropdown--hide';
+        return 'dropdown dropdown--hide';
     }
 
     public manageInputType(element: string) {
@@ -147,11 +192,14 @@ export class Input extends Component<FieldProps, any> {
 
     public render() {
         const hasError = this.state.hasError;
-        return <div className={`display-flex flex-column ${this.props.className}`}>
+        return <div
+            className={`display-flex flex-column ${this.props.className}`}
+            ref={this.prodRef}
+        >
             {this.props.label && <label className={`input-label error-${hasError ? 'show' : 'hide'}--label`} htmlFor={this.props.name}>{this.props.label}</label>}
-
             <div
                 className={`input-wrapper error-${hasError ? 'show' : 'hide'}--div`}
+                onFocus={() => this.setState({ isInFocus: true })}
             >
                 {this.manageInputType(this.props.element || 'text')}
             </div>

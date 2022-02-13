@@ -73,11 +73,15 @@
 }
 
 .dropdown {
-  &--show {
+  transition: all 230ms;
 
+  &--show {
+    transform: translateY(0);
   }
 
   &--hide {
-    
+    transform: translateY(-30%);
+    opacity: 0;
+    z-index: -4;
   }
 }
