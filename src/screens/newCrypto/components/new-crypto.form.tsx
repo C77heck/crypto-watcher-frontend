@@ -63,14 +63,14 @@ export const NewCryptoForm = (props: any) => {
     const submit = async (data: any) => {
         try {
             const body: any = {
-                name: data?.name?.value || '',
-                symbol: data?.symbol?.value || '', // will be a automatically populated input. disabled
-                price: data?.price?.value || 0,
-                amount: data?.amount?.value || 0,
+                name: data?.name || '',
+                symbol: data?.symbol || '', // will be a automatically populated input. disabled
+                price: data?.price || 0,
+                amount: data?.amount || 0,
                 thresholds: {
-                    'threshold-1': data?.['threshold-1']?.value || 0,
-                    'threshold-2': data?.['threshold-2']?.value || 0,
-                    'threshold-3': data?.['threshold-3']?.value || 0,
+                    'threshold-1': data?.['threshold-1'] || 0,
+                    'threshold-2': data?.['threshold-2'] || 0,
+                    'threshold-3': data?.['threshold-3'] || 0,
                 }
             };
             const response = await request.post('/add_new_purchase', { body, headers: [] });

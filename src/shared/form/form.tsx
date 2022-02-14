@@ -35,9 +35,21 @@ export const Form = (props: FormProps) => {
     const getData = (data: any, isValid: boolean) => {
         setForm({ ...form, [data?.name]: { value: data?.value, isValid: isValid } });
     };
+
+    const getRestructureForm = (form: any) => {
+        const restructuredForm: any = {};
+        for (const prop in form) {
+            if (form.hasOwnProperty(prop)) {
+                restructuredForm[prop] = form[prop]?.value || null;
+            }
+        }
+
+        return restructuredForm;
+    };
+
     const submit = (e: any) => {
         e.preventDefault();
-        props.onSubmit && props.onSubmit(form);
+        props.onSubmit && props.onSubmit(getRestructureForm(form));
     };
 
     const inputFields = objectToArray(props.form.fields);

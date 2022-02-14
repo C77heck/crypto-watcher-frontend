@@ -23,15 +23,16 @@ export const LoginButton = (props: any) => {
             value: null,
             validators: [],
             className: 'col-60',
-            isNumberOnly: true,
+            type: 'password',
         }),
     });
 
     const submit = async (data: any) => {
         try {
+            console.log({ data });
             const body: any = {
-                email: data?.email?.value || '',
-                password: data?.password?.value || '',
+                email: data?.email || '',
+                password: data?.password || '',
             };
             const response = await request.post('/login', { body, headers: [] });
             console.log(response);
