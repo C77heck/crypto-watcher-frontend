@@ -6,6 +6,8 @@ import { AuthContext } from '../context/auth.context';
 import { Field } from '../form/field';
 import { Form } from '../form/form';
 import { FormStructure } from '../form/form.structure';
+import { emailValidator } from '../form/validators/email-validator';
+import { requiredValidator } from '../form/validators/required-validator';
 import { Repository } from '../libs/repository';
 
 export const LoginButton = (props: any) => {
@@ -16,7 +18,7 @@ export const LoginButton = (props: any) => {
             name: 'email',
             label: 'Email',
             value: null,
-            validators: [],
+            validators: [emailValidator],
             options: props.options || [],
             className: 'col-60'
         }),
@@ -24,7 +26,7 @@ export const LoginButton = (props: any) => {
             name: 'password',
             label: 'Password',
             value: null,
-            validators: [],
+            validators: [requiredValidator],
             className: 'col-60',
             type: 'password',
         }),
