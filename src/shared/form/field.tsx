@@ -1,3 +1,4 @@
+import { generateUniqueID } from 'web-vitals/dist/modules/lib/generateUniqueID';
 import { FieldProps } from "./input";
 
 export class Field implements FieldProps {
@@ -21,7 +22,7 @@ export class Field implements FieldProps {
     public constructor(attributes: any) {
         this.type = attributes?.type || 'text';
         this.name = attributes?.name;
-        this.id = attributes?.id || '';
+        this.id = attributes?.id || generateUniqueID();
         this.readOnly = attributes?.readOnly || false;
         this.required = attributes?.required || false;
         this.placeholder = attributes?.placeholder || '';

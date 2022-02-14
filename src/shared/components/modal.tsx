@@ -1,5 +1,6 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
+import { Close } from './icons';
 
 interface ModalProps {
     content: JSX.Element;
@@ -49,7 +50,11 @@ export class Modal extends React.Component<ModalProps, any> {
         >
             <div className={headerClasses}>
                 {header && header}
-                <p className={'float-right'}>X</p>
+                <Close
+                    className={'float-right hover-opacity'}
+                    width={'w-px-21'}
+                    onClick={() => this.setState({ show: false })}
+                />
             </div>
             <div className={`${contentClasses} p-20`}>
                 {content}
