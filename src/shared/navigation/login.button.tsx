@@ -1,12 +1,15 @@
 import * as React from 'react';
+import { useContext } from 'react';
 import { Button } from '../components/button';
 import { Modal } from '../components/modal';
+import { AuthContext } from '../context/auth.context';
 import { Field } from '../form/field';
 import { Form } from '../form/form';
 import { FormStructure } from '../form/form.structure';
 import { Repository } from '../libs/repository';
 
 export const LoginButton = (props: any) => {
+    const { signout, signin } = useContext(AuthContext);
     const request = new Repository();
     const formData = new FormStructure({
         email: new Field({
@@ -29,12 +32,13 @@ export const LoginButton = (props: any) => {
 
     const submit = async (data: any) => {
         try {
-            console.log({ data });
             const body: any = {
-                email: data?.email || '',
-                password: data?.password || '',
+                email: "zcsilleri@gmail.com" || data?.email || '',
+                password: "Sug@bodyDicHtml32" || data?.password || '',
             };
             const response = await request.post('/users/login', { body, headers: [] });
+
+            signin(response?.userData);
             console.log(response);
         } catch (e) {
             console.log(e);

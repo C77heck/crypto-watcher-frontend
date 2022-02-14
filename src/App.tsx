@@ -5,10 +5,12 @@ import { BaseLayout } from './screens/components/base.layout';
 import { NewCryptoScreen } from './screens/newCrypto/new-crypto.screen';
 import { Spinner } from './shared/components/spinner';
 import { staticData } from './shared/config/static-data';
+import { AuthContext } from './shared/context/auth.context';
+import { useAuth } from './shared/hooks/auth-hook';
 
 function App() {
     const { links: { home, watchlist, newPurchase, profitCalculator } } = staticData;
-
+    const auth = useAuth();
     const routes = (
         <Router>
             <Routes>
@@ -25,7 +27,9 @@ function App() {
             <React.Suspense
                 fallback={<div><Spinner overlay/></div>}
             >
-                {routes}
+                <AuthContext.Provider value={auth}>
+                    {routes}
+                </AuthContext.Provider>
             </React.Suspense>
         </main>
     );
