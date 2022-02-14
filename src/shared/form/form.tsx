@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Button, ButtonProps } from '../components/button';
 import { objectToArray } from '../libs/helpers';
+import { ErrorModal } from './error-modal';
 import { Input } from './input';
 
 interface FormProps {
@@ -27,7 +28,7 @@ const getIsFormValid = (form: any) => {
 export const Form = (props: FormProps) => {
     const [form, setForm] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
-
+    const [error, setError] = useState(false);
     useEffect(() => {
         setIsFormValid(getIsFormValid(form));
     }, [getIsFormValid, form]);
@@ -49,26 +50,34 @@ export const Form = (props: FormProps) => {
 
     const submit = (e: any) => {
         e.preventDefault();
-        props.onSubmit && props.onSubmit(getRestructureForm(form));
+        try {
+            props.onSubmit && props.onSubmit(getRestructureForm(form));
+        } catch (e: any) {
+            console.log(e);
+            setError(e);
+        }
     };
 
     const inputFields = objectToArray(props.form.fields);
 
-    return <form
-        onSubmit={(e) => submit(e)}
-        className={props.className}
-    >
-        {inputFields.map((field, index) => {
-            return <Input
-                {...field}
-                key={index}
-                getData={getData}
-            />;
-        })}
+    return <Fragment>
+        <form
+            onSubmit={(e) => submit(e)}
+            className={props.className}
+        >
+            {inputFields.map((field, index) => {
+                return <Input
+                    {...field}
+                    key={index}
+                    getData={getData}
+                />;
+            })}
 
-        {props.submitButton && <Button
-            disabled={!isFormValid}
-            {...props.submitButton}
-        />}
-    </form>;
+            {props.submitButton && <Button
+                disabled={!isFormValid}
+                {...props.submitButton}
+            />}
+        </form>
+        <ErrorModal error={error}/>
+    </Fragment>;
 };

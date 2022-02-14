@@ -10,12 +10,13 @@ interface SizeProps {
 
 interface ModalProps {
     content: JSX.Element;
-    trigger: JSX.Element;
+    trigger?: JSX.Element;
     className?: string;
     contentClasses?: string;
     headerClasses?: string;
     size: SizeProps; // use grid and up to 100
     header?: JSX.Element;
+    show?: boolean;
 }
 
 function ModalWrapper(props: any) {
@@ -30,6 +31,15 @@ export class Modal extends React.Component<ModalProps, any> {
 
     public componentDidMount() {
         window.addEventListener('resize', (size) => this.checkSize(size));
+        if (!this.props.trigger) {
+            this.setState({ show: this.props.show });
+        }
+    }
+
+    public componentDidUpdate(prevProps: Readonly<ModalProps>, prevState: Readonly<any>, snapshot?: any) {
+        if (prevProps.show !== this.props.show) {
+            this.setState({ show: this.props.show });
+        }
     }
 
     public componentWillUnmount() {
