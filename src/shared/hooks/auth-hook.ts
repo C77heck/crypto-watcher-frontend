@@ -7,13 +7,18 @@ export const useAuth = () => {
     const [userId, setUserId] = useState(null);
     const storage = new Storage('auth');
     const signout = () => {
-
+        storage.remove();
+        setIsLoggedIn(false);
+        setToken(null);
+        setUserId(null);
     };
+
     const signin = (userData: any) => {
-        setIsLoggedIn();
-        setToken();
-        setUserId();
+        setIsLoggedIn(true);
+        setToken(userData?.token);
+        setUserId(userData?.userId);
         storage.set(userData);
     };
+
     return { isLoggedIn, token, userId, signout, signin };
 };
