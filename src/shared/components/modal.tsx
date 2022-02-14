@@ -2,13 +2,19 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { Close } from './icons';
 
+interface SizeProps {
+    sm: number;
+    md: number;
+    lg: number;
+}
+
 interface ModalProps {
     content: JSX.Element;
     trigger: JSX.Element;
     className?: string;
     contentClasses?: string;
     headerClasses?: string;
-    size: number; // use grid and up to 100
+    size: SizeProps; // use grid and up to 100
     header?: JSX.Element;
 }
 
@@ -19,12 +25,38 @@ function ModalWrapper(props: any) {
 export class Modal extends React.Component<ModalProps, any> {
     public state = {
         show: false,
+        screenSize: 1500,
     };
 
-    public getSize(size: number) {
+    public componentDidMount() {
+        window.addEventListener('resize', (size) => this.checkSize(size));
+    }
+
+    public componentWillUnmount() {
+        window.removeEventListener('resize', (size) => this.checkSize(size));
+    }
+
+    public checkSize({ target: { innerWidth } }: any) {
+        this.setState({ screenSize: innerWidth });
+    }
+
+    public getSize(sizes: SizeProps) {
+        const size = this.getSizeByScreen(sizes);
         const modal = `col-${size}`;
         const sides = `left-${Math.round((100 - size) / 2)}`;
+
         return { modal, sides };
+    }
+
+    public getSizeByScreen({ sm, md, lg }: SizeProps): number {
+        if (this.state.screenSize < 700) {
+            return sm;
+        }
+        if (this.state.screenSize < 1000) {
+            return md;
+        }
+
+        return lg;
     }
 
     public handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>, val: boolean) {

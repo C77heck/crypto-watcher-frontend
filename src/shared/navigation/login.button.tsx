@@ -9,7 +9,7 @@ import { FormStructure } from '../form/form.structure';
 import { Repository } from '../libs/repository';
 
 export const LoginButton = (props: any) => {
-    const { signout, signin } = useContext(AuthContext);
+    const { signout, signin, isLoggedIn } = useContext(AuthContext);
     const request = new Repository();
     const formData = new FormStructure({
         email: new Field({
@@ -37,7 +37,9 @@ export const LoginButton = (props: any) => {
                 password: "Sug@bodyDicHtml32" || data?.password || '',
             };
             const response = await request.post('/users/login', { body, headers: [] });
-
+            if (!response || !response?.userData) {
+                throw new Error('Something went wrong, please try again later');
+            }
             signin(response?.userData);
             console.log(response);
         } catch (e) {
@@ -52,10 +54,18 @@ export const LoginButton = (props: any) => {
         className={'row flex-column position-center'}
     />;
 
+    if (isLoggedIn) {
+        return <Button
+            buttonStyle={'login'}
+            title={'Logout'}
+            onClick={() => signout()}
+        />;
+    }
+
     return <Modal
         className={'border-radius-px-5 p-15'}
         content={content}
-        size={40}
+        size={{ sm: 90, md: 60, lg: 40 }}
         header={<h2 className={'header--3 text-align-center'}>Sign in</h2>}
         trigger={<Button buttonStyle={'login'} title={'Login'}/>}
     />;
