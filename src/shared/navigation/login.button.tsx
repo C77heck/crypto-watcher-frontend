@@ -34,7 +34,7 @@ export const LoginButton = (props: any) => {
                 email: data?.email || '',
                 password: data?.password || '',
             };
-            const response = await request.post('/login', { body, headers: [] });
+            const response = await request.post('/users/login', { body, headers: [] });
             console.log(response);
         } catch (e) {
             console.log(e);

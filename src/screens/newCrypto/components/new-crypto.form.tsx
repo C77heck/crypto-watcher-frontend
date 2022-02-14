@@ -73,7 +73,7 @@ export const NewCryptoForm = (props: any) => {
                     'threshold-3': data?.['threshold-3'] || 0,
                 }
             };
-            const response = await request.post('/add_new_purchase', { body, headers: [] });
+            const response = await request.post('/crypto/add_new_purchase', { body, headers: [] });
             console.log(response);
         } catch (e) {
             console.log(e);
