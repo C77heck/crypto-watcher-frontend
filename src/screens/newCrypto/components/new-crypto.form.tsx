@@ -68,9 +68,9 @@ export const NewCryptoForm = (props: any) => {
             price: data?.price || 0,
             amount: data?.amount || 0,
             thresholds: {
-                'threshold-1': (data?.['threshold-1'] || 0) + 100,
-                'threshold-2': (data?.['threshold-2'] || 0) + 100,
-                'threshold-3': (data?.['threshold-3'] || 0) + 100,
+                first: parseFloat(data?.['threshold-1'] || 0) + 100,
+                second: parseFloat(data?.['threshold-2'] || 0) + 100,
+                third: parseFloat(data?.['threshold-3'] || 0) + 100,
             }
         };
         const response = await request.post('/crypto/add_new_purchase', { body, headers: [] });
