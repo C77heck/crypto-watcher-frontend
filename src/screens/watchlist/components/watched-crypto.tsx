@@ -22,32 +22,32 @@ export const WatchedCrypto = (props: any) => {
             <p className={'fs-19'}>{moment(date).format('YYYY.MM.DD')}</p>
         </div>
         <div className={'col-100 data-separator py-6 display-flex justify-content-space-between'}>
-            <p className={'fs-19'}>Purchase date:</p>
+            <p className={'fs-19'}>Price when bought:</p>
             <p className={'fs-19'}>{priceFormat(priceBoughtFor)}</p>
         </div>
         <div className={'col-100 data-separator py-6 display-flex justify-content-space-between'}>
-            <p className={'fs-19'}>Purchase date:</p>
+            <p className={'fs-19'}>Current price:</p>
             <p className={'fs-19'}>{priceFormat(currentPrice)}</p>
         </div>
         <div className={'col-100 data-separator py-6 display-flex justify-content-space-between'}>
-            <p className={'fs-19'}>Purchase date:</p>
+            <p className={'fs-19'}>Difference:</p>
             <p className={'fs-19'}>{percentageDiff}</p>
         </div>
         <div className={'col-100 data-separator py-6 display-flex justify-content-space-between'}>
-            <p className={'fs-19'}>Purchase date:</p>
+            <p className={'fs-19'}>Profit:</p>
             <p className={'fs-19'}>{priceFormat(potentialProfit)}</p>
         </div>
         <div className={'col-100 data-separator py-6 display-flex justify-content-space-between'}>
-            <p className={'fs-19'}>Purchase date:</p>
+            <p className={'fs-19'}>threshold first:</p>
             <p className={'fs-19'}>{first}</p>
 
         </div>
         <div className={'col-100 data-separator py-6 display-flex justify-content-space-between'}>
-            <p className={'fs-19'}>Purchase date:</p>
+            <p className={'fs-19'}>threshold second:</p>
             <p className={'fs-19'}>{second}</p>
         </div>
         <div className={'col-100 data-separator py-6 display-flex justify-content-space-between'}>
-            <p className={'fs-19'}>Purchase date:</p>
+            <p className={'fs-19'}>threshold third:</p>
             <p className={'fs-19'}>{third}</p>
         </div>
     </div>;
