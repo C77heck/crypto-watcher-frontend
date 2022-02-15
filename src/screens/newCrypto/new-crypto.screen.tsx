@@ -7,10 +7,10 @@ export const NewCryptoScreen = () => {
     const [options, setOptions] = useState([{}]);
 
     useEffect(() => {
+        console.log('got hit');
         (async () => {
             const { payload } = await fetch(`/crypto/get_select_assets`, {});
-            console.log(payload?.assets || []);
-            //  setOptions(payload?.assets || ['something', 'another thing']);
+            console.log(payload);
             setOptions(payload?.assets || []);
         })();
     }, []);

@@ -13,7 +13,7 @@ export class Repository {
 
     public async get(url: string, options: RequestInit) {
         options.method = 'GET';
-        options.headers = [...this.headers, ...options.headers as any];
+        options.headers = [...this.headers, ...(options.headers || []) as any];
         try {
             const request = new Request(`${this.baseUrl}${url}`, options);
             const repsonse = await fetch(request);
