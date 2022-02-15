@@ -2,7 +2,8 @@ import { CONSTANTS } from '../../../shared/constants';
 import { Field } from '../../../shared/form/field';
 import { Form } from '../../../shared/form/form';
 import { FormStructure } from '../../../shared/form/form.structure';
-import { onlyStringsValidator } from '../../../shared/form/validators/only-strings-validator';
+import { OptionProps } from '../../../shared/form/searchable-dropdown';
+import { requiredValidator } from '../../../shared/form/validators/required-validator';
 import { Repository } from '../../../shared/libs/repository';
 
 export const NewCryptoForm = (props: any) => {
@@ -13,7 +14,7 @@ export const NewCryptoForm = (props: any) => {
             name: 'name',
             label: 'Crypto name',
             value: null,
-            validators: [onlyStringsValidator],
+            validators: [requiredValidator],
             element: SEARCHABLE_DROPDOWN,
             options: props.options || [],
             className: 'col-100 col-md-22'
@@ -22,7 +23,7 @@ export const NewCryptoForm = (props: any) => {
             name: 'amount',
             label: 'Purchased Amount',
             value: null,
-            validators: [],
+            validators: [requiredValidator],
             className: 'col-100 col-md-22',
             isNumberOnly: true,
         }),
@@ -30,7 +31,7 @@ export const NewCryptoForm = (props: any) => {
             name: 'price',
             label: 'Price (money spent)',
             value: null,
-            validators: [],
+            validators: [requiredValidator],
             className: 'col-100 col-md-22',
             isNumberOnly: true,
         }),
@@ -38,7 +39,7 @@ export const NewCryptoForm = (props: any) => {
             name: 'threshold-1',
             label: 'Threshold 1',
             value: null,
-            validators: [],
+            validators: [requiredValidator],
             className: 'col-100 col-md-22',
             isNumberOnly: true,
         }),
@@ -46,7 +47,7 @@ export const NewCryptoForm = (props: any) => {
             name: 'threshold-2',
             label: 'Threshold 2',
             value: null,
-            validators: [],
+            validators: [requiredValidator],
             className: 'col-100 col-md-22',
             isNumberOnly: true,
         }),
@@ -54,7 +55,7 @@ export const NewCryptoForm = (props: any) => {
             name: 'threshold-3',
             label: 'Threshold 3',
             value: null,
-            validators: [],
+            validators: [requiredValidator],
             className: 'col-100 col-md-22',
             isNumberOnly: true,
         }),
@@ -63,7 +64,7 @@ export const NewCryptoForm = (props: any) => {
     const submit = async (data: any) => {
         const body: any = {
             name: data?.name || '',
-            symbol: data?.symbol || '', // will be a automatically populated input. disabled
+            symbol: (props.options || []).filter(({ name, symbol }: OptionProps) => name === data?.name)[0]?.symbol || data?.name,
             price: data?.price || 0,
             amount: data?.amount || 0,
             thresholds: {

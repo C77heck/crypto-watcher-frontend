@@ -11,3 +11,7 @@ export const fetch = async (path: string, options: RequestInit): Promise<Respons
     }
 };
 
+export const getAuthHeader = (token: string | null) => {
+    return ['Authorization', `Bearer ${token}`];
+};
+

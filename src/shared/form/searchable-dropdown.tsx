@@ -1,6 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { generateUniqueID } from 'web-vitals/dist/modules/lib/generateUniqueID';
-import { CONSTANTS } from '../constants';
+
+export interface OptionProps {
+    id: number | string;
+    name: string;
+    symbol: string;
+    price: number;
+}
 
 export class SearchableDropdown extends Component<any, any> {
     public state = { value: '', hasError: false, errorMessage: '', searchedOptions: [], isInFocus: false };
@@ -34,8 +40,7 @@ export class SearchableDropdown extends Component<any, any> {
     }
 
     public componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
-        if (prevProps.value !== this.props.value
-            && this.props.element === CONSTANTS.INPUTS.SEARCHABLE_DROPDOWN) {
+        if (prevProps.value !== this.props.value) {
             this.manageSearch();
         }
     }
@@ -43,7 +48,7 @@ export class SearchableDropdown extends Component<any, any> {
     public manageSearch() {
         const regex = new RegExp(this.props.value, 'i');
         this.setState({
-            searchedOptions: this.props.options?.filter((option: string) => regex.test(option))
+            searchedOptions: this.props.options?.filter(({ name }: OptionProps) => regex.test(name))
         });
     }
 
@@ -71,14 +76,15 @@ export class SearchableDropdown extends Component<any, any> {
         </Fragment>;
     }
 
-    public renderOption(option: string) {
-        const isChosen = this.props.value === option;
+    public renderOption({ name }: OptionProps) {
+        const isChosen = this.props.value === name;
+
         return <li
             key={generateUniqueID()}
-            onClick={() => this.props.onClickHandler(isChosen, option)}
+            onClick={() => this.props.onClickHandler(isChosen, name)}
             className={`${isChosen && 'color--active'}`}
         >
-            {option}
+            {name}
         </li>;
     }
 
