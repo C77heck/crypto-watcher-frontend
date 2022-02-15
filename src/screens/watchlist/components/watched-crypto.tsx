@@ -5,7 +5,7 @@
 // set up thresholds
 
 import moment from 'moment';
-import { priceFormat } from '../../../shared/libs/helpers';
+import { getClasses, priceFormat, round } from '../../../shared/libs/helpers';
 
 interface WatchedCryptoProps {
     data: WatchedCryptoProps;
@@ -13,9 +13,13 @@ interface WatchedCryptoProps {
 
 export const WatchedCrypto = (props: any) => {
     const { date, first, second, third, name, priceBoughtFor, currentPrice, percentageDiff, potentialProfit } = props.data;
-    console.log(props.data);
-    return <div className={'row w-px-300 crypto-box mx-20'}>
-        <div className={'col-100 data-separator py-6 text-align-center'}>
+    const percentageClasses = getClasses(100 > percentageDiff, 'color-red', 'color-green--light');
+    const threshold1Classes = getClasses(first < percentageDiff, 'color-green--light');
+    const threshold2Classes = getClasses(second < percentageDiff, 'color-green--normal');
+    const threshold3Classes = getClasses(third < percentageDiff, 'color-green--dark');
+
+    return <div className={'row w-100 crypto-box mx-20 hover-scale box-shadow'}>
+        <div className={'col-100 data-separator py-6 position-center'}>
             <p className={'fs-24 fw--900'}>{name}</p>
         </div>
         <div className={'col-100 data-separator py-8 display-flex justify-content-space-between'}>
@@ -30,26 +34,33 @@ export const WatchedCrypto = (props: any) => {
             <p className={'fs-16'}>Current price:</p>
             <p className={'fs-19'}>{priceFormat(currentPrice)}</p>
         </div>
-        <div className={'col-100 data-separator py-8 display-flex justify-content-space-between'}>
+        <div className={`${percentageClasses} col-100 data-separator py-8 display-flex justify-content-space-between`}>
             <p className={'fs-16'}>Difference:</p>
-            <p className={'fs-19'}>{percentageDiff}</p>
+            <p className={'fs-19'}>{round(percentageDiff)} %</p>
         </div>
         <div className={'col-100 data-separator py-8 display-flex justify-content-space-between'}>
             <p className={'fs-16'}>Profit:</p>
             <p className={'fs-19'}>{priceFormat(potentialProfit)}</p>
         </div>
-        <div className={'col-100 data-separator py-8 display-flex justify-content-space-between'}>
+        <div
+            className={`${threshold1Classes} col-100 data-separator`}
+        >
             <p className={'fs-16'}>threshold first:</p>
-            <p className={'fs-19'}>{first}</p>
+            <p className={'fs-19'}>{first} %</p>
 
         </div>
-        <div className={'col-100 data-separator py-8 display-flex justify-content-space-between'}>
+        <div
+            className={`${threshold2Classes} col-100 data-separator`}
+        >
             <p className={'fs-16'}>threshold second:</p>
-            <p className={'fs-19'}>{second}</p>
+            <p className={'fs-19'}>{second} %</p>
         </div>
-        <div className={'col-100 data-separator py-8 display-flex justify-content-space-between'}>
+        <div
+            className={`${threshold3Classes} col-100 data-separator`}
+        >
             <p className={'fs-16'}>threshold third:</p>
-            <p className={'fs-19'}>{third}</p>
+            <p className={'fs-19'}>{third} %</p>
         </div>
     </div>;
 };
+

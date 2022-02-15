@@ -25,3 +25,11 @@ export const priceFormat = (amount: number, currency: string = 'hun') => {
 
     return '';
 };
+
+export const round = (num: number, decimal = 100) => {
+    return Math.round(num * decimal) / decimal;
+};
+
+export const getClasses = (isTrue: boolean, classIfTrue: string, classIfFalse = '') => {
+    return isTrue ? classIfTrue : classIfFalse;
+};
