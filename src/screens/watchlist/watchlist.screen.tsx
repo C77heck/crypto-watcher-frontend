@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../shared/context/auth.context';
 import { fetch, getAuthHeader } from '../../shared/libs/requests';
 import { Header } from "../components/header";
+import { PurchaseManager } from './components/purchase-manager';
 import { WatchedCrypto } from './components/watched-crypto';
 
 export interface WatchedCryptoProps {
@@ -35,7 +36,7 @@ export const WatchlistScreen = () => {
         <div className={'position-center mt-50 max-width-vw-80 margin-auto row'}>
             {(watched || []).map((data: WatchedCryptoProps, index: number) => {
                 return <div key={index} className={'col-30 mt-25 cursor-pointer'}>
-                    <WatchedCrypto data={data}/>
+                    <PurchaseManager data={data}/>
                 </div>;
             })}
         </div>

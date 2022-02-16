@@ -83,7 +83,7 @@ export const NewCryptoForm = (props: any) => {
             onSubmit={(data: any) => submit(data)}
             form={formData}
             submitButton={{ className: 'mt-20 col-100 col-md-22', title: 'Go', type: 'submit' }}
-            className={'row fix-width-400 position-center'}
+            className={'row w-100 position-center'}
         />
     </Fragment>;
 };
