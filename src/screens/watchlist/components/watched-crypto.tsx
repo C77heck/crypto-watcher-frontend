@@ -45,20 +45,20 @@ export const WatchedCrypto = (props: any) => {
         <div
             className={`${threshold1Classes} col-100 data-separator`}
         >
-            <p className={'fs-16'}>threshold first:</p>
+            <p className={'fs-16'}>first threshold:</p>
             <p className={'fs-19'}>{first} %</p>
 
         </div>
         <div
             className={`${threshold2Classes} col-100 data-separator`}
         >
-            <p className={'fs-16'}>threshold second:</p>
+            <p className={'fs-16'}>second threshold:</p>
             <p className={'fs-19'}>{second} %</p>
         </div>
         <div
             className={`${threshold3Classes} col-100 data-separator`}
         >
-            <p className={'fs-16'}>threshold third:</p>
+            <p className={'fs-16'}>third threshold:</p>
             <p className={'fs-19'}>{third} %</p>
         </div>
     </div>;

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { Close } from './icons';
+import { Portal } from './portal';
 
 interface SizeProps {
     sm: number;
@@ -17,10 +18,6 @@ interface ModalProps {
     size: SizeProps; // use grid and up to 100
     header?: JSX.Element;
     show?: boolean;
-}
-
-function ModalWrapper(props: any) {
-    return ReactDOM.createPortal(props.children, document.getElementById('modals') as any);
 }
 
 export class Modal extends React.Component<ModalProps, any> {
@@ -109,12 +106,12 @@ export class Modal extends React.Component<ModalProps, any> {
             <div onClick={(e: any) => this.handleClick(e, true)}>
                 {!!this.props.trigger && this.props.trigger}
             </div>
-            <ModalWrapper>
+            <Portal elementId={'modals'} >
                 <div>
                     {this.renderOverlay()}
                     {this.renderModal()}
                 </div>
-            </ModalWrapper>
+            </Portal>
         </div>;
     }
 }

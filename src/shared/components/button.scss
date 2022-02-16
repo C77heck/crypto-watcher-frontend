@@ -61,4 +61,19 @@
       background-color: var(--color-error-3) !important;
     }
   }
+
+  &--success {
+    background-color: var(--color-success-2);
+    height: 100%;
+    width: 7rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    height: 7rem;
+    min-width: 14rem;
+    font-size: 2.2rem;
+
+    &:hover {
+      background-color: var(--color-success-1) !important;
+    }
+  }
 }

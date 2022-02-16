@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Button, ButtonProps } from '../components/button';
+import { SuccessModal } from '../components/success.modal';
 import { objectToArray } from '../libs/helpers';
-import { ErrorModal } from './error-modal';
 import { Input } from './input';
 
 interface FormProps {
@@ -25,7 +25,13 @@ const getIsFormValid = (form: any) => {
     return !isValidArr.includes('false');
 };
 
+function ErrorModal(props: { show: boolean, onClick: (show) => any, errorMessage: string }) {
+    return null;
+}
+
 export const Form = (props: FormProps) => {
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [showError, setShowError] = useState(false);
     const [form, setForm] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
     const [error, setError] = useState(false);
@@ -48,12 +54,16 @@ export const Form = (props: FormProps) => {
         return restructuredForm;
     };
 
-    const submit = (e: any) => {
+    const submit = async (e: any) => {
         e.preventDefault();
         try {
-            props.onSubmit && props.onSubmit(getRestructureForm(form));
+            const response = await props.onSubmit(getRestructureForm(form));
+            console.log(response);
+            setShowSuccess(true);
         } catch (e: any) {
             console.log(e);
+            setShowError(true);
+
             setError(e);
         }
     };
@@ -78,6 +88,15 @@ export const Form = (props: FormProps) => {
                 {...props.submitButton}
             />}
         </form>
-        <ErrorModal error={error}/>
+        <ErrorModal
+            show={showSuccess}
+            errorMessage={'Fuck Success'}
+            onClick={(show: boolean) => setShowError(show)}
+        />
+        <SuccessModal
+            show={showError}
+            successMessage={'Error'}
+            onClick={(show: boolean) => setShowSuccess(show)}
+        />
     </Fragment>;
 };

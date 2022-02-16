@@ -16,9 +16,9 @@ export class Repository {
         options.headers = [...this.headers, ...(options.headers || []) as any];
         try {
             const request = new Request(`${this.baseUrl}${url}`, options);
-            const repsonse = await fetch(request);
+            const response = await fetch(request);
 
-            return repsonse.json();
+            return response.json();
         } catch (error: any) {
             return new HttpError(error.message, error.code);
         }
@@ -28,14 +28,16 @@ export class Repository {
         options.method = 'POST';
         options.headers = this.headers;
         options.body = JSON.stringify(options.body, null);
+        const request = new Request(`${this.baseUrl}${url}`, options);
+        const response = await fetch(request);
+
+        console.log(response);
+        return response.json();
         try {
 
-            const request = new Request(`${this.baseUrl}${url}`, options);
-            const repsonse = await fetch(request);
-
-            return repsonse.json();
         } catch (error: any) {
-            return new HttpError(error.message, error.code);
+            console.log(error);
+            throw new HttpError(error.message, error.code);
         }
     }
 
@@ -45,9 +47,9 @@ export class Repository {
         options.body = JSON.stringify(options.body, null);
         try {
             const request = new Request(`${this.baseUrl}${url}`, options);
-            const repsonse = await fetch(request);
+            const response = await fetch(request);
 
-            return repsonse.json();
+            return response.json();
         } catch (error: any) {
 
             return new HttpError(error.message, error.code);
@@ -60,9 +62,9 @@ export class Repository {
         options.body = JSON.stringify(options.body, null);
         try {
             const request = new Request(`${this.baseUrl}${url}`, options);
-            const repsonse = await fetch(request);
+            const response = await fetch(request);
 
-            return repsonse.json();
+            return response.json();
         } catch (error: any) {
 
             return new HttpError(error.message, error.code);
@@ -75,9 +77,9 @@ export class Repository {
         options.body = JSON.stringify(options.body, null);
         try {
             const request = new Request(`${this.baseUrl}${url}`, options);
-            const repsonse = await fetch(request);
+            const response = await fetch(request);
 
-            return repsonse.json();
+            return response.json();
         } catch (error: any) {
 
             return new HttpError(error.message, error.code);

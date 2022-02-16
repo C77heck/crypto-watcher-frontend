@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { CONSTANTS } from '../../../shared/constants';
 import { Field } from '../../../shared/form/field';
 import { Form } from '../../../shared/form/form';
@@ -73,17 +74,16 @@ export const NewCryptoForm = (props: any) => {
                 third: parseFloat(data?.['threshold-3'] || 0) + 100,
             }
         };
-        const response = await request.post('/crypto/add_new_purchase', { body, headers: [] });
 
-        if (!response) {
-            throw new Error('something went wrong');
-        }
+        return await request.post('/crypto/add_new_purchase', { body, headers: [] });
     };
 
-    return <Form
-        onSubmit={(data: any) => submit(data)}
-        form={formData}
-        submitButton={{ className: 'mt-20 col-100 col-md-22', title: 'Go', type: 'submit' }}
-        className={'row flex-column position-center'}
-    />;
+    return <Fragment>
+        <Form
+            onSubmit={(data: any) => submit(data)}
+            form={formData}
+            submitButton={{ className: 'mt-20 col-100 col-md-22', title: 'Go', type: 'submit' }}
+            className={'row fix-width-400 position-center'}
+        />
+    </Fragment>;
 };
