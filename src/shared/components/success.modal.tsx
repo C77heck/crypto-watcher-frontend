@@ -14,7 +14,7 @@ export const SuccessModal = (props: SuccessModalProps) => {
 
     useEffect(() => {
         setShow(props.show);
-    });
+    }, [props.show]);
 
     const content = <div>
         <h4 className={'fs-24'}>{props.successMessage}</h4>

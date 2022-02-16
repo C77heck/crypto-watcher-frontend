@@ -14,7 +14,7 @@ export const ErrorModal = (props: ErrorModalProps) => {
 
     useEffect(() => {
         setShow(props.show);
-    });
+    }, [props.show]);
 
     const content = <div>
         <h4 className={'fs-17'}>{props.errorMessage}</h4>

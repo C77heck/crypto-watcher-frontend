@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { Button, ButtonProps } from '../components/button';
 import { SuccessModal } from '../components/success.modal';
 import { objectToArray } from '../libs/helpers';
+import { ErrorModal } from './error-modal';
 import { Input } from './input';
 
 interface FormProps {
@@ -24,10 +25,6 @@ const getIsFormValid = (form: any) => {
 
     return !isValidArr.includes('false');
 };
-
-function ErrorModal(props: { show: boolean, onClick: (show) => any, errorMessage: string }) {
-    return null;
-}
 
 export const Form = (props: FormProps) => {
     const [showSuccess, setShowSuccess] = useState(false);
@@ -91,12 +88,12 @@ export const Form = (props: FormProps) => {
         <ErrorModal
             show={showSuccess}
             errorMessage={'Fuck Success'}
-            onClick={(show: boolean) => setShowError(show)}
+            onClick={(show) => setShowError(show)}
         />
         <SuccessModal
             show={showError}
             successMessage={'Error'}
-            onClick={(show: boolean) => setShowSuccess(show)}
+            onClick={(show) => setShowSuccess(show)}
         />
     </Fragment>;
 };
