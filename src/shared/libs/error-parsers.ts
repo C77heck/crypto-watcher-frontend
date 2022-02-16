@@ -7,5 +7,5 @@ export const parseError = (error: any): string => {
 };
 
 const tryForErrorText = (error: string, test: boolean) => {
-  return test ? { error, type: 'succes' } : false
+    return test ? { error, type: 'succes' } : false;
 };
