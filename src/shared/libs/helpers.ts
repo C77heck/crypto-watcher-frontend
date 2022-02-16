@@ -33,3 +33,10 @@ export const round = (num: number, decimal = 100) => {
 export const getClasses = (isTrue: boolean, classIfTrue: string, classIfFalse = '') => {
     return isTrue ? classIfTrue : classIfFalse;
 };
+
+export const numArray = (number: number, value: any = false) => {
+    if (!value) {
+        return Array.from({ length: number }, (i, index) => (index + 1));
+    }
+    return Array.from({ length: number }, (i, index) => value || index);
+};

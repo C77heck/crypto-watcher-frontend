@@ -28,7 +28,7 @@ const getIsFormValid = (form: any) => {
 };
 
 export const Form = (props: FormProps) => {
-    const [showSuccess, setShowSuccess] = useState(false);
+    const [showSuccess, setShowSuccess] = useState('');
     const [error, setError] = useState('');
     const [form, setForm] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
@@ -55,8 +55,8 @@ export const Form = (props: FormProps) => {
     const submit = async (e: any) => {
         e.preventDefault();
         try {
-            const response = await props.onSubmit(getRestructureForm(form));
-            setShowSuccess(true);
+            const response: any = await props.onSubmit(getRestructureForm(form));
+            setShowSuccess(response?.message);
         } catch (e: any) {
             const error = parseError(e);
             console.log(error);
@@ -91,9 +91,9 @@ export const Form = (props: FormProps) => {
             onClick={(show) => setError('')}
         />
         <SuccessModal
-            show={showSuccess}
-            successMessage={'Error'}
-            onClick={(show) => setShowSuccess(show)}
+            show={!!showSuccess}
+            successMessage={showSuccess}
+            onClick={(show) => setShowSuccess('')}
         />
     </Fragment>;
 };

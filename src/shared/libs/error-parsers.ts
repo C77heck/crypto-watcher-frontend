@@ -1,11 +1,29 @@
-export const parseError = (error: any): string => {
+import { numArray } from './helpers';
+
+export const parseError = (error: any) => {
     try {
-        tryForErrorText(error.toString(), typeof error.toString() === 'string');
+        const parser = loopErrorParsing(error);
+        const chances = numArray(5);
+        for (const chance of chances) {
+            const error = parser.next();
+            if (!error.value) {
+                continue;
+            }
+
+            return error.value;
+        }
     } catch (e) {
         return '';
     }
 };
 
-const tryForErrorText = (error: string, test: boolean) => {
-    return test ? { error, type: 'succes' } : false;
+function* loopErrorParsing(error: any): any {
+    yield tryForErrorText(error.toString(), typeof error.toString() === 'string');
+    yield tryForErrorText(error, error?.statusText);
+    yield tryForErrorText(error, error?.response?.error);
+    yield tryForErrorText(error, error?.response?.errorMessage);
+}
+
+const tryForErrorText = (error: string, test: boolean): any => {
+    return !!test ? error : false;
 };
