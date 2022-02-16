@@ -1,11 +1,11 @@
 export const parseError = (error: any): string => {
-    if (typeof error === 'string') {
-        return error;
-    }
-
     try {
-        return error?.statusText || JSON.stringify(error);
+        tryForErrorText(error.toString(), typeof error.toString() === 'string');
     } catch (e) {
         return '';
     }
+};
+
+const tryForErrorText = (error: string, test: boolean) => {
+  return test ? { error, type: 'succes' } : false
 };

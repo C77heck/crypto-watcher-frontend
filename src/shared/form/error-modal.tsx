@@ -13,7 +13,6 @@ export const ErrorModal = (props: ErrorModalProps) => {
     const [show, setShow] = useState(false);
 
     useEffect(() => {
-        console.log(props.show);
         setShow(props.show);
     });
 

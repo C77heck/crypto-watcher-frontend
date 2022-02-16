@@ -87,7 +87,7 @@ export const Form = (props: FormProps) => {
         </form>
         <ErrorModal
             show={!!error}
-            errorMessage={'Fuck Success'}
+            errorMessage={error}
             onClick={(show) => setError('')}
         />
         <SuccessModal

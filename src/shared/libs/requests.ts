@@ -7,7 +7,6 @@ export const fetch = async (path: string, options: RequestInit): Promise<Respons
         const payload = await repository.get(path, options);
         return new Response({ payload });
     } catch (error) {
-        console.log(error);
         return new Response({ error, errorMessage: 'Something went wrong' });
     }
 };

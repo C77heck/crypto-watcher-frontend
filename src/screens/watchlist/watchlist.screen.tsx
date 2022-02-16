@@ -23,7 +23,7 @@ export const WatchlistScreen = () => {
     useEffect(() => {
         (async () => {
             const { payload } = await fetch(`/crypto/should_sell`, { headers: [getAuthHeader(token)] });
-            console.log(payload?.items || []);
+
             setWatched(payload?.items || []);
         })();
     }, []);

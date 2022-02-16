@@ -31,12 +31,10 @@ export class Repository {
         const request = new Request(`${this.baseUrl}${url}`, options);
         const response = await fetch(request);
 
-        console.log(response);
         return response.json();
         try {
 
         } catch (error: any) {
-            console.log(error, error.json());
             throw new HttpError(error.message, error.code);
         }
     }

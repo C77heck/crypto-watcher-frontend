@@ -5,7 +5,6 @@ import { Backdrop } from './backdrop';
 export const Spinner = (props: any) => {
 
     if (props.overlay) {
-        console.log('this got rendered');
         return <React.Fragment>
             <Backdrop />
             <SvgSpinner />
