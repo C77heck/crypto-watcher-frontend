@@ -36,7 +36,7 @@ export class Repository {
         try {
 
         } catch (error: any) {
-            console.log(error);
+            console.log(error, error.json());
             throw new HttpError(error.message, error.code);
         }
     }

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import ReactDOM from 'react-dom';
 import { Close } from './icons';
 import { Portal } from './portal';
 
@@ -18,6 +17,7 @@ interface ModalProps {
     size: SizeProps; // use grid and up to 100
     header?: JSX.Element;
     show?: boolean;
+    overlayClick?: (show: boolean) => void;
 }
 
 export class Modal extends React.Component<ModalProps, any> {
@@ -49,7 +49,7 @@ export class Modal extends React.Component<ModalProps, any> {
 
     public getSize(sizes: SizeProps) {
         const size = this.getSizeByScreen(sizes);
-        const modal = `col-${size}`;
+        const modal = `w-vw-${size}`;
         const sides = `left-${Math.round((100 - size) / 2)}`;
 
         return { modal, sides };
@@ -66,10 +66,14 @@ export class Modal extends React.Component<ModalProps, any> {
         return lg;
     }
 
-    public handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>, val: boolean) {
-        event.preventDefault();
-        event.stopPropagation();
-        this.setState({ show: val });
+    public handleClick(event: any, val: boolean) {
+        event?.preventDefault();
+        event?.stopPropagation();
+        if (!this.props.trigger) {
+            this.props.overlayClick && this.props.overlayClick(val);
+        } else {
+            this.setState({ show: val });
+        }
     }
 
     public renderOverlay() {
@@ -92,10 +96,10 @@ export class Modal extends React.Component<ModalProps, any> {
                 <Close
                     className={'float-right hover-opacity'}
                     width={'w-px-21'}
-                    onClick={() => this.setState({ show: false })}
+                    onClick={() => this.handleClick(null, false)}
                 />
             </div>
-            <div className={`${contentClasses} p-20`}>
+            <div className={`${contentClasses} px-20 pt-20 pb-5`}>
                 {content}
             </div>
         </div>;
@@ -106,7 +110,7 @@ export class Modal extends React.Component<ModalProps, any> {
             <div onClick={(e: any) => this.handleClick(e, true)}>
                 {!!this.props.trigger && this.props.trigger}
             </div>
-            <Portal elementId={'modals'} >
+            <Portal elementId={'modals'}>
                 <div>
                     {this.renderOverlay()}
                     {this.renderModal()}

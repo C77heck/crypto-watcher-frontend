@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Button, ButtonProps } from '../components/button';
 import { SuccessModal } from '../components/success.modal';
+import { parseError } from '../libs/error-parsers';
 import { objectToArray } from '../libs/helpers';
 import { ErrorModal } from './error-modal';
 import { Input } from './input';
@@ -28,10 +29,10 @@ const getIsFormValid = (form: any) => {
 
 export const Form = (props: FormProps) => {
     const [showSuccess, setShowSuccess] = useState(false);
-    const [showError, setShowError] = useState(false);
+    const [error, setError] = useState('');
     const [form, setForm] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
-    const [error, setError] = useState(false);
+
     useEffect(() => {
         setIsFormValid(getIsFormValid(form));
     }, [getIsFormValid, form]);
@@ -55,13 +56,11 @@ export const Form = (props: FormProps) => {
         e.preventDefault();
         try {
             const response = await props.onSubmit(getRestructureForm(form));
-            console.log(response);
             setShowSuccess(true);
         } catch (e: any) {
-            console.log(e);
-            setShowError(true);
-
-            setError(e);
+            const error = parseError(e);
+            console.log(error);
+            setError(error);
         }
     };
 
@@ -79,19 +78,20 @@ export const Form = (props: FormProps) => {
                     getData={getData}
                 />;
             })}
-
-            {props.submitButton && <Button
-                disabled={!isFormValid}
-                {...props.submitButton}
-            />}
+            <div className={'row'}>
+                {props.submitButton && <Button
+                    disabled={!isFormValid}
+                    {...props.submitButton}
+                />}
+            </div>
         </form>
         <ErrorModal
-            show={showSuccess}
+            show={!!error}
             errorMessage={'Fuck Success'}
-            onClick={(show) => setShowError(show)}
+            onClick={(show) => setError('')}
         />
         <SuccessModal
-            show={showError}
+            show={showSuccess}
             successMessage={'Error'}
             onClick={(show) => setShowSuccess(show)}
         />

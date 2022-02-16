@@ -19,3 +19,12 @@
         font-weight: 900;
     }
 }
+
+.text-color {
+    &--red {
+        color: var(--color-error-2);
+    }
+    &--light{
+        color: var(--color-dark-3);
+    }
+}

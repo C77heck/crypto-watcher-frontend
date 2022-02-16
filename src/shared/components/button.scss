@@ -1,79 +1,87 @@
 .button {
-  box-sizing: border-box;
-  width: 6rem;
-  height: 4rem;
-  border: none;
-  outline: none;
-  transition: all 250ms;
-  cursor: pointer;
-  background-color: var(--color-primary-1);
-  color: #ffffff;
-  font-weight: bold;
-  border-radius: 0.7rem;
-
-  &:hover {
-    opacity: 0.7;
-  }
-
-  &:active {
-    transform: translateY(2px);
-  }
-
-  &:disabled {
-    background-color: var(--color-dark-3);
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-
-  &--submit {
-    background-color: var(--color-primary-3);
-    font-size: 2rem;
-  }
-
-  &--login {
-    background-color: var(--color-secondary-1);
-    height: 100%;
-    width: 7rem;
+    box-sizing: border-box;
+    width: 6rem;
+    height: 4rem;
+    border: none;
+    outline: none;
+    transition: all 250ms;
+    cursor: pointer;
+    background-color: var(--color-primary-1);
+    color: #ffffff;
     font-weight: bold;
-    letter-spacing: 1.5px;
-    height: 7rem;
-    min-width: 14rem;
-    font-size: 2.2rem;
+    border-radius: 0.7rem;
 
-    &:hover {
-      background-color: var(--color-secondary-3) !important;
+
+    &:active {
+        transform: translateY(2px);
     }
-  }
 
-  &--error {
-    background-color: var(--color-error-1);
-    height: 100%;
-    width: 7rem;
-    font-weight: bold;
-    letter-spacing: 1.5px;
-    height: 7rem;
-    min-width: 14rem;
-    font-size: 2.2rem;
+    &:disabled {
+        background-color: var(--color-dark-3);
 
-    &:hover {
-      background-color: var(--color-error-3) !important;
+        &:hover {
+            opacity: 1;
+        }
     }
-  }
 
-  &--success {
-    background-color: var(--color-success-2);
-    height: 100%;
-    width: 7rem;
-    font-weight: bold;
-    letter-spacing: 1.5px;
-    height: 7rem;
-    min-width: 14rem;
-    font-size: 2.2rem;
-
-    &:hover {
-      background-color: var(--color-success-1) !important;
+    &--submit {
+        background-color: var(--color-primary-3);
+        font-size: 2rem;
     }
-  }
+
+    &--login {
+        background-color: var(--color-secondary-1);
+        font-weight: bold;
+        letter-spacing: 1.5px;
+        height: 7rem;
+        min-width: 14rem;
+        font-size: 2rem;
+
+        &:hover {
+            background-color: var(--color-secondary-3) !important;
+        }
+    }
+
+    &--delete {
+        background-color: var(--color-error-1);
+        height: 100%;
+        font-weight: bold;
+        letter-spacing: 1.5px;
+        height: 4rem;
+        min-width: 14rem;
+        font-size: 2rem;
+
+        &:hover {
+            background-color: var(--color-error-3) !important;
+        }
+    }
+
+
+    &--error {
+        background-color: var(--color-error-3);
+        height: 100%;
+        font-weight: bold;
+        letter-spacing: 1.5px;
+        height: 4rem;
+        min-width: 14rem;
+        font-size: 2rem;
+
+        &:hover {
+            background-color: var(--color-error-2) !important;
+        }
+    }
+
+    &--success {
+        background-color: var(--color-success-2);
+        height: 100%;
+        font-weight: bold;
+        letter-spacing: 1.5px;
+        height: 4rem;
+        min-width: 14rem;
+        font-size: 2rem;
+
+        &:hover {
+            background-color: var(--color-success-1) !important;
+        }
+    }
 }
