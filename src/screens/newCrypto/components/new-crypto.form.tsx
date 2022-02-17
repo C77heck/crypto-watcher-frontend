@@ -14,7 +14,7 @@ export const NewCryptoForm = (props: any) => {
         name: new Field({
             name: 'name',
             label: 'Crypto name',
-            value: null,
+            value: props?.name || null,
             validators: [requiredValidator],
             element: SEARCHABLE_DROPDOWN,
             options: props.options || [],
@@ -23,7 +23,7 @@ export const NewCryptoForm = (props: any) => {
         amount: new Field({
             name: 'amount',
             label: 'Purchased Amount',
-            value: null,
+            value: props?.amount || null,
             validators: [requiredValidator],
             className: 'col-100 col-md-22',
             isNumberOnly: true,
@@ -31,7 +31,7 @@ export const NewCryptoForm = (props: any) => {
         price: new Field({
             name: 'price',
             label: 'Price (money spent)',
-            value: null,
+            value: props?.price || null,
             validators: [requiredValidator],
             className: 'col-100 col-md-22',
             isNumberOnly: true,
@@ -39,7 +39,7 @@ export const NewCryptoForm = (props: any) => {
         'threshold-1': new Field({
             name: 'threshold-1',
             label: 'Threshold 1',
-            value: null,
+            value: props?.first || null,
             validators: [requiredValidator],
             className: 'col-100 col-md-22',
             isNumberOnly: true,
@@ -47,7 +47,7 @@ export const NewCryptoForm = (props: any) => {
         'threshold-2': new Field({
             name: 'threshold-2',
             label: 'Threshold 2',
-            value: null,
+            value: props?.second || null,
             validators: [requiredValidator],
             className: 'col-100 col-md-22',
             isNumberOnly: true,
@@ -55,7 +55,7 @@ export const NewCryptoForm = (props: any) => {
         'threshold-3': new Field({
             name: 'threshold-3',
             label: 'Threshold 3',
-            value: null,
+            value: props?.third || null,
             validators: [requiredValidator],
             className: 'col-100 col-md-22',
             isNumberOnly: true,
