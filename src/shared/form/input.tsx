@@ -24,7 +24,7 @@ export interface FieldProps {
 }
 
 export class Input extends Component<FieldProps, any> {
-    public state = { value: '', hasError: false, errorMessage: ''};
+    public state = { value: '', hasError: false, errorMessage: '' };
     public prodRef: any;
 
     constructor(props: any) {

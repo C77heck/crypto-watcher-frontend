@@ -74,6 +74,7 @@ export const Form = (props: FormProps) => {
             className={props.className}
         >
             {inputFields.map((field, index) => {
+                console.count('input rerenders');
                 return <Input
                     {...field}
                     key={index}
