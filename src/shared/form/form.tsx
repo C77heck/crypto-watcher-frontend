@@ -59,7 +59,7 @@ export const Form = (props: FormProps) => {
             setShowSuccess(response?.message);
         } catch (e: any) {
             const error = parseError(e);
-            console.log(error);
+            console.log({ error, e });
             setError(error);
         }
     };
