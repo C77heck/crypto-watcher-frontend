@@ -1,6 +1,4 @@
 // https://microsoft.github.io/PowerBI-JavaScript/interfaces/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.requestinit.html
-
-// create a proper Request object. that can be used. then create a proper fetching helper.
 import { HttpError } from './http-error';
 
 export class Repository {
@@ -17,7 +15,6 @@ export class Repository {
             const request = new Request(path, options);
             const response = await fetch(request);
             const responseData = await response.json();
-            this.abortController.abort();
 
             if (!responseData?.ok) {
                 throw new Error(responseData);
@@ -25,6 +22,8 @@ export class Repository {
 
             return responseData;
         } catch (error: any) {
+            this.abortController.abort();
+            console.log({ error });
             throw new HttpError(error.message, error.code);
         }
     }
@@ -33,8 +32,9 @@ export class Repository {
         options.signal = this.abortController.signal;
         options.method = method;
         options.headers = this.headers;
-        options.body = JSON.stringify(options.body || {}, null);
-
+        if (method !== 'GET') {
+            options.body = JSON.stringify(options.body || {}, null);
+        }
         return options;
     }
 

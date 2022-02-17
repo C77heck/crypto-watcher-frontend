@@ -32,7 +32,7 @@ export const Form = (props: FormProps) => {
     const [error, setError] = useState('');
     const [form, setForm] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
-
+    const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
         setIsFormValid(getIsFormValid(form));
     }, [getIsFormValid, form]);
@@ -55,11 +55,15 @@ export const Form = (props: FormProps) => {
     const submit = async (e: any) => {
         e.preventDefault();
         try {
+            setIsLoading(true);
             const response: any = await props.onSubmit(getRestructureForm(form));
+            setIsLoading(false);
             setShowSuccess(response?.message);
         } catch (e: any) {
             const error = parseError(e);
-            console.log({ error, e });
+            setIsLoading(false);
+
+            // console.log({ error, e });
             setError(error);
         }
     };
