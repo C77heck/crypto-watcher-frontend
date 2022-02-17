@@ -62,8 +62,6 @@ export const Form = (props: FormProps) => {
         } catch (e: any) {
             const error = parseError(e);
             setIsLoading(false);
-
-            // console.log({ error, e });
             setError(error);
         }
     };

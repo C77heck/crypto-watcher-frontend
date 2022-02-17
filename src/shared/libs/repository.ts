@@ -17,14 +17,12 @@ export class Repository {
             const responseData = await response.json();
 
             if (!responseData?.ok) {
-                throw new Error(responseData);
+                throw new HttpError(responseData?.message, responseData?.statusCode);
             }
 
             return responseData;
         } catch (error: any) {
-            this.abortController.abort();
-            console.log({ error });
-            throw new HttpError(error.message, error.code);
+            throw new HttpError(error?.message, error?.code);
         }
     }
 
