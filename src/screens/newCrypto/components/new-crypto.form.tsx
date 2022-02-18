@@ -1,5 +1,6 @@
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import { CONSTANTS } from '../../../shared/constants';
+import { AuthContext } from '../../../shared/context/auth.context';
 import { Field } from '../../../shared/form/field';
 import { Form } from '../../../shared/form/form';
 import { FormStructure } from '../../../shared/form/form.structure';
@@ -8,7 +9,10 @@ import { requiredValidator } from '../../../shared/form/validators/required-vali
 import { Repository } from '../../../shared/libs/repository';
 
 export const NewCryptoForm = (props: any) => {
+    const { token, isLoggedIn } = useContext(AuthContext);
     const request = new Repository();
+    request.setAuth(token);
+
     const { INPUTS: { SEARCHABLE_DROPDOWN } } = CONSTANTS;
     const formData = new FormStructure([
         new Field({
@@ -17,7 +21,7 @@ export const NewCryptoForm = (props: any) => {
             value: props?.data?.name || null,
             validators: [requiredValidator],
             element: SEARCHABLE_DROPDOWN,
-            options: props?.data?.options || [],
+            options: props?.options || [],
             className: 'col-100 col-md-22'
         }),
         new Field({
@@ -63,6 +67,9 @@ export const NewCryptoForm = (props: any) => {
     ]);
 
     const submit = async (data: any) => {
+        if (!isLoggedIn) {
+            throw new Error('You need to login first!');
+        }
         const body: any = {
             name: data?.name || '',
             symbol: (props.options || []).filter(({ name, symbol }: OptionProps) => name === data?.name)[0]?.symbol || data?.name,

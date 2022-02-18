@@ -10,6 +10,10 @@ export class Repository {
         this.headers.push([header, value]);
     }
 
+    public setAuth(token: string | null) {
+        this.headers.push(['Authorization', `Bearer ${token}`]);
+    }
+
     public async request(path: string, options: RequestInit) {
         try {
             const request = new Request(path, options);
