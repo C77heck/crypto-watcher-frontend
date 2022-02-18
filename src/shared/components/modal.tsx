@@ -6,6 +6,7 @@ interface SizeProps {
     sm: number;
     md: number;
     lg: number;
+    xl: number;
 }
 
 interface ModalProps {

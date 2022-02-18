@@ -12,7 +12,7 @@ interface WatchedCryptoProps {
 }
 
 export const WatchedCrypto = (props: any) => {
-    const { date, first, second, third, name, priceBoughtFor, currentPrice, percentageDiff, potentialProfit } = props.data;
+    const { date, first, second, amount, third, name, priceBoughtFor, currentPrice, percentageDiff, potentialProfit } = props.data;
     const percentageClasses = getClasses(100 > percentageDiff, 'color-red', 'color-green--light');
     const threshold1Classes = getClasses(first < percentageDiff, 'color-green--light');
     const threshold2Classes = getClasses(second < percentageDiff, 'color-green--normal');
@@ -25,6 +25,10 @@ export const WatchedCrypto = (props: any) => {
         <div className={'col-100 data-separator py-8 display-flex justify-content-space-between'}>
             <p className={'fs-16'}>Purchase date:</p>
             <p className={'fs-19'}>{moment(date).format('YYYY.MM.DD')}</p>
+        </div>
+        <div className={'col-100 data-separator py-8 display-flex justify-content-space-between'}>
+            <p className={'fs-16'}>Amount:</p>
+            <p className={'fs-19'}>{amount}</p>
         </div>
         <div className={'col-100 data-separator py-8 display-flex justify-content-space-between'}>
             <p className={'fs-16'}>Price when bought:</p>

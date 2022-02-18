@@ -2,9 +2,8 @@ import { Fragment, useEffect, useState } from 'react';
 import { Button, ButtonProps } from '../components/button';
 import { SuccessModal } from '../components/success.modal';
 import { parseError } from '../libs/error-parsers';
-import { objectToArray } from '../libs/helpers';
 import { ErrorModal } from './error-modal';
-import { Input } from './input';
+import Input from './input';
 
 interface FormProps {
     onSubmit: (form: any) => void;
@@ -66,23 +65,21 @@ export const Form = (props: FormProps) => {
         }
     };
 
-    const inputFields = objectToArray(props.form.fields);
-
     return <Fragment>
         <form
             onSubmit={(e) => submit(e)}
             className={props.className}
         >
-            {inputFields.map((field, index) => {
-                console.count('input rerenders');
+            {props.form.fields.map((field: any, index: number) => {
                 return <Input
                     {...field}
-                    key={index}
+                    key={field.name}
                     getData={getData}
                 />;
             })}
             <div className={'row'}>
                 {props.submitButton && <Button
+                    isLoading={isLoading}
                     disabled={!isFormValid}
                     {...props.submitButton}
                 />}

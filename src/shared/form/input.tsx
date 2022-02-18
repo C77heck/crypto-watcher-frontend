@@ -21,15 +21,22 @@ export interface FieldProps {
     options?: string[];
     element?: 'text' | 'dropdown' | 'searchable' | 'searchable_dropdown' | 'textarea';
     isNumberOnly?: boolean;
+    value: string | null;
 }
 
-export class Input extends Component<FieldProps, any> {
+class Input extends Component<FieldProps, any> {
     public state = { value: '', hasError: false, errorMessage: '' };
     public prodRef: any;
 
     constructor(props: any) {
         super(props);
         this.prodRef = React.createRef();
+    }
+
+    public componentDidMount() {
+        if (!!this.props.value) {
+            this.setState({ value: this.props.value });
+        }
     }
 
     public componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
@@ -129,3 +136,5 @@ export class Input extends Component<FieldProps, any> {
         </div>;
     }
 }
+
+export default React.memo(Input);

@@ -13,8 +13,8 @@ import { Repository } from '../libs/repository';
 export const LoginButton = (props: any) => {
     const { signout, signin, isLoggedIn } = useContext(AuthContext);
     const request = new Repository();
-    const formData = new FormStructure({
-        email: new Field({
+    const formData = new FormStructure([
+        new Field({
             name: 'email',
             label: 'Email',
             value: null,
@@ -22,7 +22,7 @@ export const LoginButton = (props: any) => {
             options: props.options || [],
             className: 'col-100'
         }),
-        password: new Field({
+        new Field({
             name: 'password',
             label: 'Password',
             value: null,
@@ -30,7 +30,7 @@ export const LoginButton = (props: any) => {
             className: 'col-100',
             type: 'password',
         }),
-    });
+    ]);
 
     const submit = async (data: any) => {
         const body: any = {
@@ -38,9 +38,7 @@ export const LoginButton = (props: any) => {
             password: "Sug@bodyDicHtml32" || data?.password || '',
         };
         const response = await request.post('/users/login', { body, headers: [] });
-        if (!response || !response?.userData) {
-            throw new Error('Something went wrong, please try again later');
-        }
+
         signin(response?.userData);
     };
 
@@ -62,7 +60,7 @@ export const LoginButton = (props: any) => {
     return <Modal
         className={'border-radius-px-5 p-15'}
         content={content}
-        size={{ sm: 90, md: 50, lg: 30 }}
+        size={{ sm: 90, md: 72, lg: 60, xl: 40 }}
         header={<h2 className={'header--3 text-align-center'}>Sign in</h2>}
         trigger={<Button buttonStyle={'login'} title={'Login'}/>}
     />;

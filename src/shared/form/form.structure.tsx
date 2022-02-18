@@ -1,9 +1,9 @@
 import { FieldProps } from './input';
 
 export class FormStructure {
-    public fields: any;
+    public fields: FieldProps[];
 
-    public constructor(fields: any) {
+    public constructor(fields: FieldProps[]) {
         this.fields = fields;
     }
 }

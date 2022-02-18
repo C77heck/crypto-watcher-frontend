@@ -10,57 +10,57 @@ import { Repository } from '../../../shared/libs/repository';
 export const NewCryptoForm = (props: any) => {
     const request = new Repository();
     const { INPUTS: { SEARCHABLE_DROPDOWN } } = CONSTANTS;
-    const formData = new FormStructure({
-        name: new Field({
+    const formData = new FormStructure([
+        new Field({
             name: 'name',
             label: 'Crypto name',
-            value: props?.name || null,
+            value: props?.data?.name || null,
             validators: [requiredValidator],
             element: SEARCHABLE_DROPDOWN,
-            options: props.options || [],
+            options: props?.data?.options || [],
             className: 'col-100 col-md-22'
         }),
-        amount: new Field({
+        new Field({
             name: 'amount',
             label: 'Purchased Amount',
-            value: props?.amount || null,
+            value: props?.data?.amount || null,
             validators: [requiredValidator],
             className: 'col-100 col-md-22',
             isNumberOnly: true,
         }),
-        price: new Field({
+        new Field({
             name: 'price',
             label: 'Price (money spent)',
-            value: props?.price || null,
+            value: props?.data?.price || null,
             validators: [requiredValidator],
             className: 'col-100 col-md-22',
             isNumberOnly: true,
         }),
-        'threshold-1': new Field({
+        new Field({
             name: 'threshold-1',
             label: 'Threshold 1',
-            value: props?.first || null,
+            value: props?.data?.thresholds?.first || null,
             validators: [requiredValidator],
             className: 'col-100 col-md-22',
             isNumberOnly: true,
         }),
-        'threshold-2': new Field({
+        new Field({
             name: 'threshold-2',
             label: 'Threshold 2',
-            value: props?.second || null,
+            value: props?.data?.thresholds?.second || null,
             validators: [requiredValidator],
             className: 'col-100 col-md-22',
             isNumberOnly: true,
         }),
-        'threshold-3': new Field({
+        new Field({
             name: 'threshold-3',
             label: 'Threshold 3',
-            value: props?.third || null,
+            value: props?.data?.thresholds?.third || null,
             validators: [requiredValidator],
             className: 'col-100 col-md-22',
             isNumberOnly: true,
         }),
-    });
+    ]);
 
     const submit = async (data: any) => {
         const body: any = {
@@ -74,6 +74,7 @@ export const NewCryptoForm = (props: any) => {
                 third: parseFloat(data?.['threshold-3'] || 0) + 100,
             }
         };
+
         return await request.post('/crypto/add_new_purchase', { body, headers: [] });
     };
 

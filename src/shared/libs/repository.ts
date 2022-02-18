@@ -16,12 +16,13 @@ export class Repository {
             const response = await fetch(request);
             const responseData = await response.json();
 
-            if (!responseData?.ok) {
+            if (!response.ok) {
                 throw new HttpError(responseData?.message, responseData?.statusCode);
             }
 
             return responseData;
         } catch (error: any) {
+            this.abortController.abort();
             throw new HttpError(error?.message, error?.code);
         }
     }

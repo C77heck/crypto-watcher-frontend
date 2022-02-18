@@ -7,7 +7,7 @@ export interface ButtonProps {
     disabled?: boolean;
     onClick?: (e: any) => void;
     title: string;
-    children?: any;
+    isLoading?: boolean;
 }
 
 export const Button = (props: ButtonProps) => {
@@ -19,7 +19,8 @@ export const Button = (props: ButtonProps) => {
         disabled={props.disabled}
         onClick={props.onClick}
     >
-        {!!props.children ? props.children : props.title}
+
+        {props.isLoading ? 'loading...' : <span>{props.title}</span>}
     </button>;
 };
 

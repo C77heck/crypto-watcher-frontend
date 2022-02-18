@@ -26,10 +26,10 @@ export const ErrorModal = (props: ErrorModalProps) => {
     </div>;
 
     return <Modal
-        overlayClick={(show)=> props.onClick('')}
-        className={'border-radius-px-5 p-15'}
+        overlayClick={(show) => props.onClick('')}
+        className={'border-radius-px-5 p-15 z-100'}
         content={content}
-        size={{ sm: 90, md: 60, lg: 40 }}
+        size={{ sm: 90, md: 72, lg: 60, xl: 40 }}
         header={<h2 className={'header--3 text-color--red text-align-center'}>Error</h2>}
         show={show}
     />;
