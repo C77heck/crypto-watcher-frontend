@@ -70,10 +70,12 @@ export const NewCryptoForm = (props: any) => {
         if (!isLoggedIn) {
             throw new Error('You need to login first!');
         }
+        const crypto = (props.options || []).filter(({ name, symbol }: OptionProps) => name === data?.name)?.[0] || {};
         const body: any = {
             name: data?.name || '',
-            symbol: (props.options || []).filter(({ name, symbol }: OptionProps) => name === data?.name)[0]?.symbol || data?.name,
+            symbol: crypto?.symbol,
             price: data?.price || 0,
+            identifier: crypto?.id || 0,
             amount: data?.amount || 0,
             thresholds: {
                 first: parseFloat(data?.['threshold-1'] || 0) + 100,

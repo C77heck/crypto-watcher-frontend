@@ -21,7 +21,7 @@ export const PurchaseManager = (props: any) => {
         <Form
             onSubmit={deletePurchase}
             form={null}
-            submitButton={{ className: 'mt-20 col-100 col-md-22', title: 'delete', type: 'submit', buttonStyle: 'delete' }}
+            submitButton={{ className: 'mt-20 col-100 col-22', title: 'delete', type: 'submit', buttonStyle: 'delete' }}
             className={'row w-100 position-center'}
         />
     </div>;

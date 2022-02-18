@@ -25,7 +25,7 @@ export const WatchlistScreen = () => {
 
     useEffect(() => {
         (async () => {
-            const response = await request.get('/crypto/should_sell', {});
+            const response = await request.get('/crypto/get_purchases', {});
             setWatched(response?.items || []);
         })();
     }, []);
@@ -36,7 +36,7 @@ export const WatchlistScreen = () => {
         </Header>
         <div className={'position-center mt-50 max-width-vw-80 margin-auto row'}>
             {(watched || []).map((data: WatchedCryptoProps, index: number) => {
-                return <div key={index} className={'col-30 mt-25 cursor-pointer'}>
+                return <div key={index} className={'col-100 col-md-50 col-lg-33 col-xl-25 mt-25 cursor-pointer'}>
                     <PurchaseManager data={data}/>
                 </div>;
             })}
