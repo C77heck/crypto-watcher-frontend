@@ -20,7 +20,7 @@ export const SuccessModal = (props: SuccessModalProps) => {
         <h4 className={'fs-17 mb-30 text-color--lighter'}>{props.successMessage}</h4>
         <Button
             title={'Ok'}
-            buttonStyle={'error'}
+            buttonStyle={'success'}
             onClick={() => props.onClick('')}
         />
     </div>;

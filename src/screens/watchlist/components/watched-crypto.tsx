@@ -1,9 +1,3 @@
-// name
-// bought price
-// current price
-// difference between
-// set up thresholds
-
 import moment from 'moment';
 import { getClasses, priceFormat, round } from '../../../shared/libs/helpers';
 

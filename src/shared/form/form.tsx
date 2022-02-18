@@ -32,6 +32,7 @@ export const Form = (props: FormProps) => {
     const [form, setForm] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+
     useEffect(() => {
         setIsFormValid(getIsFormValid(form));
     }, [getIsFormValid, form]);
@@ -70,7 +71,7 @@ export const Form = (props: FormProps) => {
             onSubmit={(e) => submit(e)}
             className={props.className}
         >
-            {props.form.fields.map((field: any, index: number) => {
+            {props.form?.fields && props.form.fields.map((field: any, index: number) => {
                 return <Input
                     {...field}
                     key={field.name}

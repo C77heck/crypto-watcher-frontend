@@ -8,8 +8,10 @@
     cursor: pointer;
     background-color: var(--color-primary-1);
     color: #ffffff;
-    font-weight: bold;
     border-radius: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    font-size: 2rem;
 
 
     &:active {
@@ -45,11 +47,8 @@
     &--delete {
         background-color: var(--color-error-1);
         height: 100%;
-        font-weight: bold;
-        letter-spacing: 1.5px;
         height: 4rem;
         min-width: 14rem;
-        font-size: 2rem;
 
         &:hover {
             background-color: var(--color-error-3) !important;

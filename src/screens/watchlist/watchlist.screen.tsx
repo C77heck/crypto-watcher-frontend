@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../shared/context/auth.context';
-import { fetch, getAuthHeader } from '../../shared/libs/requests';
+import { Repository } from '../../shared/libs/repository';
 import { Header } from "../components/header";
 import { PurchaseManager } from './components/purchase-manager';
-import { WatchedCrypto } from './components/watched-crypto';
 
 export interface WatchedCryptoProps {
     date: Date;
@@ -21,11 +20,13 @@ export interface WatchedCryptoProps {
 export const WatchlistScreen = () => {
     const [watched, setWatched] = useState([]);
     const { token } = useContext(AuthContext);
+    const request = new Repository();
+    request.setAuth(token);
+
     useEffect(() => {
         (async () => {
-            const { payload } = await fetch(`/crypto/should_sell`, { headers: [getAuthHeader(token)] });
-
-            setWatched(payload?.items || []);
+            const response = await request.get('/crypto/should_sell', {});
+            setWatched(response?.items || []);
         })();
     }, []);
 

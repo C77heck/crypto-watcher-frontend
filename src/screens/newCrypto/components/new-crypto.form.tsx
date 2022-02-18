@@ -25,17 +25,17 @@ export const NewCryptoForm = (props: any) => {
             className: 'col-100 col-md-22'
         }),
         new Field({
-            name: 'amount',
-            label: 'Purchased Amount',
-            value: props?.data?.amount || null,
+            name: 'price',
+            label: 'Price (money spent)',
+            value: props?.data?.price || null,
             validators: [requiredValidator],
             className: 'col-100 col-md-22',
             isNumberOnly: true,
         }),
         new Field({
-            name: 'price',
-            label: 'Price (money spent)',
-            value: props?.data?.price || null,
+            name: 'amount',
+            label: 'Purchased Amount',
+            value: props?.data?.amount || null,
             validators: [requiredValidator],
             className: 'col-100 col-md-22',
             isNumberOnly: true,
