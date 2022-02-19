@@ -470,10 +470,14 @@
       padding-top: $i + px !important;
       padding-bottom: $i + px !important;
     }
-    .#{col- + $i} {
-      flex: 0 0 $i * 1% !important;
-      max-width: $i * 1% !important;
+
+    .#{col-xl- + $i} {
+      @media (min-width: $xl) {
+        flex: 0 0 $i * 1% !important;
+        max-width: $i * 1% !important;
+      }
     }
+
     .#{col-lg-sm- + $i} {
       @media (min-width: $sm) {
         flex: 0 0 $i * 1% !important;
@@ -481,29 +485,28 @@
       }
     }
 
-    .#{col-md- + $i} {
-      @media (min-width: $md) {
-        flex: 0 0 $i * 1% !important;
-        max-width: $i * 1% !important;
-      }
-    }
-    .#{col-mlg- + $i} {
-      @media (min-width: $mlg) {
-        flex: 0 0 $i * 1% !important;
-        max-width: $i * 1% !important;
-      }
-    }
     .#{col-lg- + $i} {
       @media (min-width: $lg) {
         flex: 0 0 $i * 1% !important;
         max-width: $i * 1% !important;
       }
     }
-    .#{col-xl- + $i} {
-      @media (min-width: $xl) {
+
+    .#{col-mlg- + $i} {
+      @media (min-width: $mlg) {
         flex: 0 0 $i * 1% !important;
         max-width: $i * 1% !important;
       }
+    }
+    .#{col-md- + $i} {
+      @media (min-width: $md) {
+        flex: 0 0 $i * 1% !important;
+        max-width: $i * 1% !important;
+      }
+    }
+    .#{col- + $i} {
+      flex: 0 0 $i * 1%;
+      max-width: $i * 1%;
     }
   }
 }

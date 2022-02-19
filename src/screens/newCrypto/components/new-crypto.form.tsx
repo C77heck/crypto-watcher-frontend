@@ -22,14 +22,14 @@ export const NewCryptoForm = (props: any) => {
             validators: [requiredValidator],
             element: SEARCHABLE_DROPDOWN,
             options: props?.options || [],
-            className: 'col-100 col-md-22'
+            className: 'col-100'
         }),
         new Field({
             name: 'price',
             label: 'Price (money spent)',
             value: props?.data?.price || null,
             validators: [requiredValidator],
-            className: 'col-100 col-md-22',
+            className: 'col-100',
             isNumberOnly: true,
         }),
         new Field({
@@ -37,7 +37,7 @@ export const NewCryptoForm = (props: any) => {
             label: 'Purchased Amount',
             value: props?.data?.amount || null,
             validators: [requiredValidator],
-            className: 'col-100 col-md-22',
+            className: 'col-100',
             isNumberOnly: true,
         }),
         new Field({
@@ -45,7 +45,7 @@ export const NewCryptoForm = (props: any) => {
             label: 'Threshold 1',
             value: props?.data?.thresholds?.first || null,
             validators: [requiredValidator],
-            className: 'col-100 col-md-22',
+            className: 'col-100',
             isNumberOnly: true,
         }),
         new Field({
@@ -53,7 +53,7 @@ export const NewCryptoForm = (props: any) => {
             label: 'Threshold 2',
             value: props?.data?.thresholds?.second || null,
             validators: [requiredValidator],
-            className: 'col-100 col-md-22',
+            className: 'col-100',
             isNumberOnly: true,
         }),
         new Field({
@@ -61,7 +61,7 @@ export const NewCryptoForm = (props: any) => {
             label: 'Threshold 3',
             value: props?.data?.thresholds?.third || null,
             validators: [requiredValidator],
-            className: 'col-100 col-md-22',
+            className: 'col-100',
             isNumberOnly: true,
         }),
     ]);
