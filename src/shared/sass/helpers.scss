@@ -1,508 +1,521 @@
 @mixin Helpers($lg, $xl, $md, $sm, $mlg) {
 
-  .display-flex {
-    display: flex;
-  }
-
-  .display-inline {
-    display: inline;
-  }
-
-  .display-block {
-    display: block;
-  }
-
-  .display-inline-block {
-    display: inline-block;
-  }
-
-  .display-grid {
-    display: grid;
-  }
-
-  .flex-column {
-    flex-direction: column;
-  }
-
-  .flex-row {
-    flex-direction: row;
-  }
-
-  .justify-content-center {
-    justify-content: center !important;
-  }
-
-  .justify-content-right {
-    justify-content: right !important;
-  }
-
-  .justify-content-start {
-    justify-content: flex-start !important;
-  }
-
-  .justify-content-end {
-    justify-content: flex-end !important;
-  }
-  .justify-content-space-around {
-    justify-content: space-around !important;
-  }
-
-  .justify-content-space-between {
-    justify-content: space-between !important;
-  }
-
-  .justify-content-space-evenly {
-    justify-content: space-evenly !important;
-  }
-
-  .align-items-center {
-    align-items: center;
-  }
+    .display-flex {
+        display: flex;
+    }
 
-  .align-items-end {
-    align-items: flex-end;
-  }
+    .display-inline {
+        display: inline;
+    }
 
-  .align-items-start {
-    align-items: flex-start;
-  }
+    .display-block {
+        display: block;
+    }
 
-  .word-break-word {
-    word-break: break-word;
-  }
+    .display-inline-block {
+        display: inline-block;
+    }
 
-  .margin-auto {
-    margin: auto;
-  }
+    .display-grid {
+        display: grid;
+    }
 
-  .text-align-center {
-    text-align: center;
-  }
+    .flex-column {
+        flex-direction: column;
+    }
 
-  .text-align-right {
-    text-align: right;
-  }
+    .flex-row {
+        flex-direction: row;
+    }
 
-  .text-align-left {
-    text-align: left;
-  }
+    .justify-content-center {
+        justify-content: center !important;
+    }
 
-  .text-align-justify {
-    text-align: justify;
-  }
-
-  .uppercase {
-    text-transform: uppercase;
-  }
-
-  .no-clear-fix {
-    &::after {
-      content: none;
-    }
-  }
-
-  .list-style-none {
-    list-style: none;
-  }
+    .justify-content-right {
+        justify-content: right !important;
+    }
 
-  .border-box {
-    box-sizing: border-box;
-  }
+    .justify-content-start {
+        justify-content: flex-start !important;
+    }
 
-  .box-shadow {
-    box-shadow: 0 2px 4px 0 var(--color-shadow);
-  }
+    .justify-content-end {
+        justify-content: flex-end !important;
+    }
+    .justify-content-space-around {
+        justify-content: space-around !important;
+    }
 
-  .transition {
-    transition: all 400ms;
-  }
+    .justify-content-space-between {
+        justify-content: space-between !important;
+    }
 
-  .ease-in-transition {
-    transition: all 700ms ease-in;
-  }
+    .justify-content-space-evenly {
+        justify-content: space-evenly !important;
+    }
 
-  .scale-0 {
-    transform: scale(0);
-  }
+    .align-items-center {
+        align-items: center;
+    }
 
-  .scale-1 {
-    transform: scale(1);
-  }
+    .align-items-end {
+        align-items: flex-end;
+    }
 
-  .animate--flickering-btn {
-    animation: flicker 60ms 3;
-  }
+    .align-items-start {
+        align-items: flex-start;
+    }
 
-  .clr {
-    &--secondary {
-      background-color: #eaba6b;
+    .word-break-word {
+        word-break: break-word;
     }
-  }
 
-  @keyframes flicker {
-    0% {
-      background-color: #6c6c6c;
-      color: #eaba6b;
+    .margin-auto {
+        margin: auto;
     }
-    20% {
-      background-color: #868383;
+
+    .text-align-center {
+        text-align: center;
     }
-    20% {
-      background-color: #adaaaa;
+
+    .text-align-right {
+        text-align: right;
     }
-    60% {
-      background-color: #d0c9c9;
+
+    .text-align-left {
+        text-align: left;
     }
-    80% {
-      background-color: #7f7e7e;
+
+    .text-align-justify {
+        text-align: justify;
     }
-    100% {
-      background-color: #4c4c4c;
-      color: black;
+
+    .uppercase {
+        text-transform: uppercase;
     }
-  }
 
-  .width-auto {
-    width: auto !important;
-  }
+    .no-clear-fix {
+        &::after {
+            content: none;
+        }
+    }
 
-  .border-none {
-    border: none;
-  }
+    .list-style-none {
+        list-style: none;
+    }
 
-  .outline-none {
-    outline: none;
-  }
+    .border-box {
+        box-sizing: border-box;
+    }
 
-  .position-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    .box-shadow {
+        box-shadow: 0 2px 4px 0 var(--color-shadow);
+    }
 
-  .position-left {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
+    .transition {
+        transition: all 400ms;
+    }
 
-  .position-right {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
+    .ease-in-transition {
+        transition: all 700ms ease-in;
+    }
 
-  .position-bottom {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-  }
+    .scale-0 {
+        transform: scale(0);
+    }
 
-  .position-top {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-  }
+    .scale-1 {
+        transform: scale(1);
+    }
 
-  .position-relative {
-    position: relative;
-  }
+    .animate--flickering-btn {
+        animation: flicker 60ms 3;
+    }
 
-  .height-auto {
-    height: auto;
-  }
+    .clr {
+        &--secondary {
+            background-color: #eaba6b;
+        }
+    }
 
-  .hr {
-    &--light {
-      border-top: 1px solid rgb(167, 165, 165);
+    @keyframes flicker {
+        0% {
+            background-color: #6c6c6c;
+            color: #eaba6b;
+        }
+        20% {
+            background-color: #868383;
+        }
+        20% {
+            background-color: #adaaaa;
+        }
+        60% {
+            background-color: #d0c9c9;
+        }
+        80% {
+            background-color: #7f7e7e;
+        }
+        100% {
+            background-color: #4c4c4c;
+            color: black;
+        }
     }
 
-    &--dark {
-      border-top: 1px solid rgb(110, 108, 108);
+    .width-auto {
+        width: auto !important;
     }
-  }
 
-  .vertical-line-full {
-    border-left: 1px solid rgb(167, 165, 165);
-    height: 89%;
-    margin-top: 3rem;
-  }
+    .border-none {
+        border: none;
+    }
 
-  .border-x {
-    border-right: 1px solid rgb(167, 165, 165);
-    border-left: 1px solid rgb(167, 165, 165);
-  }
+    .outline-none {
+        outline: none;
+    }
 
-  .hover-opacity {
-    opacity: 1;
-    transition: all 190ms ease-in-out;
-    cursor: pointer !important;
+    .position-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-    &:hover {
-      opacity: 0.7;
+    .position-left {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
     }
-  }
 
-  .hover-scale {
-    transform: translateY(0);
-    transition: all 190ms ease-in-out;
-    cursor: pointer !important;
+    .position-right {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
 
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px 0 var(--color-shadow);
+    .position-bottom {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
     }
 
-    &:active {
-      transform: translateY(1px);
+    .position-top {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
     }
-  }
 
-  .hover-primary {
-    color: rgb(82, 80, 80);
-    text-decoration: none;
-    transition: color 220ms ease-in-out;
-    cursor: pointer !important;
+    .position-relative {
+        position: relative;
+    }
 
-    &:hover {
-      color: rgb(35, 148, 201);
+    .height-auto {
+        height: auto;
     }
 
-    & span {
-      color: rgb(82, 80, 80);
-      text-decoration: none;
-      transition: color 220ms ease-in-out;
+    .hr {
+        &--light {
+            border-top: 1px solid rgb(167, 165, 165);
+        }
 
-      &:hover {
-        color: rgb(35, 148, 201);
-      }
+        &--dark {
+            border-top: 1px solid rgb(110, 108, 108);
+        }
     }
-  }
 
-  .hover-secondary {
-    color: white;
-    text-decoration: none;
-    transition: color 220ms ease-in-out;
-    cursor: pointer !important;
+    .vertical-line-full {
+        border-left: 1px solid rgb(167, 165, 165);
+        height: 89%;
+        margin-top: 3rem;
+    }
 
-    &:hover {
-      color: rgb(218, 175, 58);
+    .border-x {
+        border-right: 1px solid rgb(167, 165, 165);
+        border-left: 1px solid rgb(167, 165, 165);
     }
-  }
 
-  .hover-green {
-    color: #1db37d;
-    transition: color 220ms ease-in-out;
-    cursor: pointer !important;
+    .hover-opacity {
+        opacity: 1;
+        transition: all 190ms ease-in-out;
+        cursor: pointer !important;
 
-    &:hover {
-      color: #21deb3;
+        &:hover {
+            opacity: 0.7;
+        }
     }
-  }
 
-  .hover-lift {
-    box-shadow: 0 4px 8px 0 var(--color-shadow);
-    transition: all 250ms;
-    cursor: pointer !important;
+    .hover-scale {
+        transform: translateY(0);
+        transition: all 190ms ease-in-out;
+        cursor: pointer !important;
 
-    &:hover {
-      box-shadow: 0 9px 11px 0 var(--color-shadow);
-      transform: scale(1.02);
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px 0 var(--color-shadow);
+        }
+
+        &:active {
+            transform: translateY(1px);
+        }
     }
-  }
 
-  .row {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
+    .hover-primary {
+        color: rgb(82, 80, 80);
+        text-decoration: none;
+        transition: color 220ms ease-in-out;
+        cursor: pointer !important;
 
-  @for $i from 1 through 1000 {
-    .#{btn-w- + $i} {
-      width: $i + px !important;
-      box-sizing: border-box !important;
-    }
-    .#{min-height- + $i} {
-      min-height: $i + px !important;
-    }
-    .#{min-height-vh- + $i} {
-      min-height: $i + vh !important;
-    }
-    .#{fix-height- + $i} {
-      min-height: $i + px !important;
-      max-height: $i + px !important;
-    }
-    .#{fix-width- + $i} {
-      min-width: $i + px !important;
-      max-width: $i + px !important;
-    }
-    .#{max-height- + $i} {
-      max-height: $i + px !important;
-    }
-    .#{max-height-vh- + $i} {
-      max-height: $i + vh !important;
-    }
-    .#{max-width- + $i} {
-      max-width: $i + px !important;
-    }
-    .#{min-width- + $i} {
-      min-width: $i + px !important;
-    }
-    .#{z- + $i} {
-      z-index: $i !important;
-    }
-    .#{h-px- + $i} {
-      height: $i + px !important;
-    }
-    .#{w-px- + $i} {
-      width: $i + px !important;
-    }
-    .#{fs- + $i} {
-      font-size: $i + px !important;
-    }
-    .#{border-radius-px- + $i} {
-      border-radius: $i + px !important;
-    }
-  }
+        &:hover {
+            color: rgb(35, 148, 201);
+        }
 
-  @for $i from 1 through 100 {
-    .#{h- + $i} {
-      height: $i * 1% !important;
-    }
-    .#{w- + $i} {
-      width: $i * 1% !important;
-    }
-    .#{w-sm- + $i} {
-      width: 100%;
-      @media (min-width: 500px) {
-        width: $i * 1% !important;
-      }
-    }
+        & span {
+            color: rgb(82, 80, 80);
+            text-decoration: none;
+            transition: color 220ms ease-in-out;
 
-    .#{min-width-vw- + $i} {
-      width: 100%;
-      min-width: $i + vw !important;
-    }
-    .#{max-width-vw- + $i} {
-      width: 100%;
-      max-width: $i + vw !important;
-    }
-    .#{w-md- + $i} {
-      width: 100%;
-      @media (min-width: 1000px) {
-        width: $i * 1% !important;
-      }
+            &:hover {
+                color: rgb(35, 148, 201);
+            }
+        }
     }
 
-    .#{flex-basis- + $i} {
-      flex-basis: $i * 1% !important;
-    }
-  }
+    .hover-secondary {
+        color: white;
+        text-decoration: none;
+        transition: color 220ms ease-in-out;
+        cursor: pointer !important;
 
-  @for $i from 1 through 100 {
-    .#{left- + $i} {
-      left: $i * 1% !important;
-    }
-    .#{border-radius- + $i} {
-      border-radius: $i + px !important;
+        &:hover {
+            color: rgb(218, 175, 58);
+        }
     }
-  }
 
-  @for $i from 1 through 1000 {
-    .#{z- + $i} {
-      z-index: $i !important;
-    }
-  }
+    .hover-green {
+        color: #1db37d;
+        transition: color 220ms ease-in-out;
+        cursor: pointer !important;
 
-  @for $i from 1 through 100 {
-    .#{w- + $i} {
-      width: $i * 1% !important;
-    }
-    .#{w-vw- + $i} {
-      width: $i + vw !important;
-    }
-    .#{m- + $i} {
-      margin: $i + px !important;
-    }
-    .#{mt- + $i} {
-      margin-top: $i + px !important;
-    }
-    .#{mb- + $i} {
-      margin-bottom: $i + px !important;
-    }
-    .#{mr- + $i} {
-      margin-right: $i + px !important;
-    }
-    .#{ml- + $i} {
-      margin-left: $i + px !important;
-    }
-    .#{mx- + $i} {
-      margin-left: $i + px !important;
-      margin-right: $i + px !important;
+        &:hover {
+            color: #21deb3;
+        }
     }
-    .#{my- + $i} {
-      margin-top: $i + px !important;
-      margin-bottom: $i + px !important;
-    }
 
-    .#{p- + $i} {
-      padding: $i + px !important;
-    }
-    .#{pt- + $i} {
-      padding-top: $i + px !important;
-    }
-    .#{pb- + $i} {
-      padding-bottom: $i + px !important;
-    }
-    .#{pr- + $i} {
-      padding-right: $i + px !important;
-    }
-    .#{pl- + $i} {
-      padding-left: $i + px !important;
-    }
-    .#{px- + $i} {
-      padding-left: $i + px !important;
-      padding-right: $i + px !important;
-    }
-    .#{py- + $i} {
-      padding-top: $i + px !important;
-      padding-bottom: $i + px !important;
-    }
+    .hover-lift {
+        box-shadow: 0 4px 8px 0 var(--color-shadow);
+        transition: all 250ms;
+        cursor: pointer !important;
 
-    .#{col-md- + $i} {
-      @media (min-width: $md) {
-        flex: 0 0 $i * 1% !important;
-        max-width: $i * 1% !important;
-      }
+        &:hover {
+            box-shadow: 0 9px 11px 0 var(--color-shadow);
+            transform: scale(1.02);
+        }
     }
 
-    .#{col-mlg- + $i} {
-      @media (min-width: $mlg) {
-        flex: 0 0 $i * 1% !important;
-        max-width: $i * 1% !important;
-      }
+    .row {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
     }
-    .#{col-lg- + $i} {
-      @media (min-width: $lg) {
-        flex: 0 0 $i * 1% !important;
-        max-width: $i * 1% !important;
-      }
-    }
 
-    .#{col-xl- + $i} {
-      @media (min-width: $xl) {
-        flex: 0 0 $i * 1% !important;
-        max-width: $i * 1% !important;
-      }
-    }
-    .#{col- + $i} {
-      flex: 0 0 $i * 1%;
-      max-width: $i * 1%;
-    }
-    .#{gap- + $i} {
-      padding-right: $i + px;
-      padding-left: $i + px;
+    @for $i from 1 through 1000 {
+        .#{btn-w- + $i} {
+            width: $i + px !important;
+            box-sizing: border-box !important;
+        }
+        .#{min-height- + $i} {
+            min-height: $i + px !important;
+        }
+        .#{min-height-vh- + $i} {
+            min-height: $i + vh !important;
+        }
+        .#{fix-height- + $i} {
+            min-height: $i + px !important;
+            max-height: $i + px !important;
+        }
+        .#{fix-width- + $i} {
+            min-width: $i + px !important;
+            max-width: $i + px !important;
+        }
+        .#{max-height- + $i} {
+            max-height: $i + px !important;
+        }
+        .#{max-height-vh- + $i} {
+            max-height: $i + vh !important;
+        }
+        .#{max-width- + $i} {
+            max-width: $i + px !important;
+        }
+        .#{min-width- + $i} {
+            min-width: $i + px !important;
+        }
+        .#{z- + $i} {
+            z-index: $i !important;
+        }
+        .#{h-px- + $i} {
+            height: $i + px !important;
+        }
+        .#{w-px- + $i} {
+            width: $i + px !important;
+        }
+        .#{fs- + $i} {
+            font-size: $i + px !important;
+        }
+        .#{border-radius-px- + $i} {
+            border-radius: $i + px !important;
+        }
+    }
+
+    @for $i from 1 through 100 {
+        .#{h- + $i} {
+            height: $i * 1% !important;
+        }
+        .#{w- + $i} {
+            width: $i * 1% !important;
+        }
+        .#{w-sm- + $i} {
+            width: 100%;
+            @media (min-width: 500px) {
+                width: $i * 1% !important;
+            }
+        }
+
+        .#{min-width-vw- + $i} {
+            width: 100%;
+            min-width: $i + vw !important;
+        }
+        .#{max-width-vw- + $i} {
+            width: 100%;
+            max-width: $i + vw !important;
+        }
+        .#{w-md- + $i} {
+            width: 100%;
+            @media (min-width: 1000px) {
+                width: $i * 1% !important;
+            }
+        }
+
+        .#{flex-basis- + $i} {
+            flex-basis: $i * 1% !important;
+        }
+    }
+
+    @for $i from 1 through 100 {
+        .#{left- + $i} {
+            left: $i * 1% !important;
+        }
+        .#{border-radius- + $i} {
+            border-radius: $i + px !important;
+        }
+    }
+
+    @for $i from 1 through 1000 {
+        .#{z- + $i} {
+            z-index: $i !important;
+        }
+    }
+
+    @for $i from 1 through 100 {
+        .#{w- + $i} {
+            width: $i * 1% !important;
+        }
+        .#{w-vw- + $i} {
+            width: $i + vw !important;
+        }
+        .#{m- + $i} {
+            margin: $i + px !important;
+        }
+        .#{mt- + $i} {
+            margin-top: $i + px !important;
+        }
+        .#{mb- + $i} {
+            margin-bottom: $i + px !important;
+        }
+        .#{mr- + $i} {
+            margin-right: $i + px !important;
+        }
+        .#{ml- + $i} {
+            margin-left: $i + px !important;
+        }
+        .#{mx- + $i} {
+            margin-left: $i + px !important;
+            margin-right: $i + px !important;
+        }
+        .#{my- + $i} {
+            margin-top: $i + px !important;
+            margin-bottom: $i + px !important;
+        }
+
+        .#{p- + $i} {
+            padding: $i + px !important;
+        }
+        .#{pt- + $i} {
+            padding-top: $i + px !important;
+        }
+        .#{pb- + $i} {
+            padding-bottom: $i + px !important;
+        }
+        .#{pr- + $i} {
+            padding-right: $i + px !important;
+        }
+        .#{pl- + $i} {
+            padding-left: $i + px !important;
+        }
+        .#{px- + $i} {
+            padding-left: $i + px !important;
+            padding-right: $i + px !important;
+        }
+        .#{py- + $i} {
+            padding-top: $i + px !important;
+            padding-bottom: $i + px !important;
+        }
+
+        .#{col-md- + $i} {
+            @media (min-width: $md) {
+                flex: 0 0 $i * 1% !important;
+                max-width: $i * 1% !important;
+            }
+        }
+        .#{col- + $i} {
+            flex: 0 0 $i * 1%;
+            max-width: $i * 1%;
+        }
+        .#{gap- + $i} {
+            padding-right: $i + px;
+            padding-left: $i + px;
+        }
+    }
+
+    @for $i from 1 through 100 {
+        .#{col-mlg- + $i} {
+            @media (min-width: $mlg) {
+                flex: 0 0 $i * 1% !important;
+                max-width: $i * 1% !important;
+            }
+        }
+    }
+    @for $i from 1 through 100 {
+        .#{col-mlg- + $i} {
+            @media (min-width: $mlg) {
+                flex: 0 0 $i * 1% !important;
+                max-width: $i * 1% !important;
+            }
+        }
+    }
+    @for $i from 1 through 100 {
+        .#{col-lg- + $i} {
+            @media (min-width: $lg) {
+                flex: 0 0 $i * 1% !important;
+                max-width: $i * 1% !important;
+            }
+        }
+    }
+    @for $i from 1 through 100 {
+        .#{col-xl- + $i} {
+            @media (min-width: $xl) {
+                flex: 0 0 $i * 1% !important;
+                max-width: $i * 1% !important;
+            }
+        }
     }
-  }
 }

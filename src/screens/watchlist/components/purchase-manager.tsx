@@ -14,6 +14,8 @@ export const PurchaseManager = (props: any) => {
 
     const deletePurchase = async () => {
         await request.delete(`/crypto/delete_purchase/${props?.data?._id}`, {});
+
+        window.location.reload();
     };
 
     const content = <div>

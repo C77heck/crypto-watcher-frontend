@@ -9,6 +9,7 @@ export const NewCryptoScreen = () => {
     const { token, isLoggedIn } = useContext(AuthContext);
     const request = new Repository();
     request.setAuth(token);
+
     useEffect(() => {
         if (isLoggedIn) {
             (async () => {
