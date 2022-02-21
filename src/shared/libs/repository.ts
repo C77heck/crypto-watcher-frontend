@@ -4,7 +4,6 @@ import { HttpError } from './http-error';
 export class Repository {
     public baseUrl = process.env.REACT_APP_BASE_URL;
     public headers: string[][] = [['Content-Type', 'application/json']];
-    public abortController = new AbortController();
 
     public setHeader(header: string, value: string) {
         this.headers.push([header, value]);
@@ -14,9 +13,10 @@ export class Repository {
         this.headers.push(['Authorization', `Bearer ${token}`]);
     }
 
-    public async request(path: string, options: RequestInit) {
+    public async request(path: string, options: RequestInit, method: string) {
+        const abortController = new AbortController();
         try {
-            const request = new Request(path, options);
+            const request = new Request(path, this.formatOptions(options, abortController, method));
             const response = await fetch(request);
             const responseData = await response.json();
 
@@ -27,13 +27,13 @@ export class Repository {
             return responseData;
         } catch (error: any) {
             console.log('fetching failed', error);
-            // this.abortController.abort();
+            abortController.abort();
             throw new HttpError(error?.message, error?.code);
         }
     }
 
-    public formatOptions(options: any, method: string) {
-        options.signal = this.abortController.signal;
+    public formatOptions(options: any, abortController: AbortController, method: string) {
+        options.signal = abortController.signal;
         options.method = method;
         options.headers = this.headers;
         if (method !== 'GET') {
@@ -43,23 +43,23 @@ export class Repository {
     }
 
     public async get(url: string, options: RequestInit) {
-        return await this.request(`${this.baseUrl}${url}`, this.formatOptions(options, 'GET'));
+        return await this.request(`${this.baseUrl}${url}`, options, 'GET');
     }
 
     public async post(url: string, options: RequestInit) {
-        return await this.request(`${this.baseUrl}${url}`, this.formatOptions(options, 'POST'));
+        return await this.request(`${this.baseUrl}${url}`, options, 'POST');
     }
 
     public async put(url: string, options: RequestInit) {
-        return await this.request(`${this.baseUrl}${url}`, this.formatOptions(options, 'PUT'));
+        return await this.request(`${this.baseUrl}${url}`, options, 'PUT');
     }
 
     public async patch(url: string, options: RequestInit) {
-        return await this.request(`${this.baseUrl}${url}`, this.formatOptions(options, 'PATCH'));
+        return await this.request(`${this.baseUrl}${url}`, options, 'PATCH');
     }
 
     public async delete(url: string, options: RequestInit) {
-        return await this.request(`${this.baseUrl}${url}`, this.formatOptions(options, 'DELETE'));
+        return await this.request(`${this.baseUrl}${url}`, options, 'DELETE');
     }
 
 }
