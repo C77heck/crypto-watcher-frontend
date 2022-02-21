@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import { generateUniqueID } from 'web-vitals/dist/modules/lib/generateUniqueID';
 
 export interface OptionProps {
     id: number | string;
@@ -67,6 +66,9 @@ export class SearchableDropdown extends Component<any, any> {
                 autoComplete={this.props.autoComplete}
                 disabled={this.props.disabled}
                 onFocus={() => this.setState({ isInFocus: true })}
+                onKeyDown={(e) => this.manageKeyEvent(e)}
+                onKeyDownCapture={(e) => this.manageKeyEvent(e)}
+                onKeyPress={(e) => this.manageKeyEvent(e)}
             />
             <div className={`input-dropdown ${this.manageOptions()}`}>
                 <ul>
@@ -76,11 +78,32 @@ export class SearchableDropdown extends Component<any, any> {
         </Fragment>;
     }
 
+    public manageKeyEvent({ key }: React.KeyboardEvent<HTMLInputElement>) {
+        console.log(key);
+        if (key === 'arrowDown') {
+            console.log('kind of success');
+        }
+        switch (key) {
+            case 'arrowDown':
+                console.log('bitch arrowDown');
+                return;
+            case 'arrowUp':
+                console.log('suck me arrowUp');
+                return;
+            case 'enter':
+                console.log('enter');
+                return;
+            default:
+                return;
+        }
+    }
+
     public renderOption({ name }: OptionProps) {
         const isChosen = this.props.value === name;
 
         return <li
-            key={generateUniqueID()}
+            onFocus={() => console.log('its on focus', name)}
+            key={name}
             onClick={() => this.props.onClickHandler(isChosen, name)}
             className={`${isChosen && 'color--active'}`}
         >
