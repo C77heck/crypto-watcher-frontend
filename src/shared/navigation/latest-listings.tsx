@@ -18,6 +18,8 @@ export const LatestListings = (prop: any) => {
     return <div
         onClick={getLatestListings}
     >
-        Latest listings
+        <p>
+            Latest listings
+        </p>
     </div>;
 };

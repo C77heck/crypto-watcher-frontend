@@ -4,6 +4,7 @@
   border-radius: 4px;
   display: inline-block;
   position: relative;
+  background-color: var(--color-light);
 
   & input {
     width: 100%;
@@ -34,7 +35,7 @@
 
 .input-label {
   margin: 0.4rem 0;
-  font-size: 1.4rem;
+  font-size: 18px;
   font-weight: bold;
   color: var(--color-dark-2);
 }

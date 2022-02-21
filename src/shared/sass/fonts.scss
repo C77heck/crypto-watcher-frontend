@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Roboto+Condensed:wght@300;400;700&display=swap');
 
-p, small, span, a, button, div {
+p, small, span, a, button, div, label {
   font-family: 'Roboto Condensed', sans-serif;
+  color: var(--color-dark-1);
 }
 
 h1, h2, h3, h4, h5 {
   font-family: 'Playfair Display SC', serif;
+  color: var(--color-dark-2);
 }
 
 .fw {
