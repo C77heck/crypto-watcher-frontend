@@ -22,7 +22,7 @@ export const Sum = (props: any) => {
         </div>
         <div className={'col-33 py-5 sum-values display-flex flex-column align-items-center'}>
             <p className={'fs-19 fw--700 pb-5'}>{potentialProfit < 0 ? 'Accumulated Loss' : 'Accumulated Profit'}</p>
-            <p className={'fs-19'}>{round(potentialProfit)}</p>
+            <p className={'fs-19'}>{priceFormat(potentialProfit)}</p>
         </div>
     </div>;
 };
