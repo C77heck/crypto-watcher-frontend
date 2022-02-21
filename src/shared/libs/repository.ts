@@ -27,7 +27,7 @@ export class Repository {
             return responseData;
         } catch (error: any) {
             console.log('fetching failed', error);
-            this.abortController.abort();
+            // this.abortController.abort();
             throw new HttpError(error?.message, error?.code);
         }
     }

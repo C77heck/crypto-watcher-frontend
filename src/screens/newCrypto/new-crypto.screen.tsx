@@ -6,16 +6,18 @@ import { NewCryptoForm } from './components/new-crypto.form';
 
 export const NewCryptoScreen = () => {
     const [options, setOptions] = useState([{}]);
-    const { token } = useContext(AuthContext);
+    const { token, isLoggedIn } = useContext(AuthContext);
     const request = new Repository();
     request.setAuth(token);
     useEffect(() => {
-        (async () => {
-            const response = await request.get('/crypto/get_select_assets', {});
-            console.log(response);
-            setOptions(response?.assets || []);
-        })();
-    }, []);
+        if (isLoggedIn) {
+            (async () => {
+                const response = await request.get('/crypto/get_select_assets', {});
+                console.log(response);
+                setOptions(response?.assets || []);
+            })();
+        }
+    }, [isLoggedIn]);
 
     return <div>
         <Header>
