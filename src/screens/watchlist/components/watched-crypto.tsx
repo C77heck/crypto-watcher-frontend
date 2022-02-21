@@ -37,7 +37,7 @@ export const WatchedCrypto = (props: any) => {
             <p className={'fs-19'}>{round(percentageDiff)} %</p>
         </div>
         <div className={'col-100 data-separator py-8 display-flex justify-content-space-between'}>
-            <p className={'fs-16'}>Profit:</p>
+            <p className={'fs-16'}>{potentialProfit < 0 ? 'Loss' : 'Profit'}:</p>
             <p className={'fs-19'}>{priceFormat(potentialProfit)}</p>
         </div>
         <div
