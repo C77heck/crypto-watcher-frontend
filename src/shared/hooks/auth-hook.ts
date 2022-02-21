@@ -1,15 +1,30 @@
+import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { Storage } from '../libs/storage';
 
+export interface UserProps {
+    userId: string;
+    token: string;
+    expiry: Date;
+}
+
 export const useAuth = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [token, setToken] = useState(null);
-    const [userId, setUserId] = useState(null);
+    const [token, setToken] = useState('');
+    const [userId, setUserId] = useState('');
     const storage = new Storage('auth');
+
+    const hasNotExpired = (data: UserProps) => {
+        if (!data?.expiry) {
+            return false;
+        }
+
+        return moment(data?.expiry).isBefore(moment());
+    };
 
     useEffect(() => {
         const data = storage.get();
-        if (data) {
+        if (data && hasNotExpired(data)) {
             signin(data);
         }
     });
@@ -17,12 +32,12 @@ export const useAuth = () => {
     const signout = () => {
         storage.remove();
         setIsLoggedIn(false);
-        setToken(null);
-        setUserId(null);
+        setToken('');
+        setUserId('');
     };
 
     // TODO -> Will need an expiry ddate. make sure to use my own date manager.
-    const signin = (userData: any) => {
+    const signin = (userData: UserProps) => {
         setIsLoggedIn(true);
         setToken(userData?.token);
         setUserId(userData?.userId);

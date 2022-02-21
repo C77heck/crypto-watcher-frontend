@@ -1,10 +1,11 @@
 import { createContext } from 'react';
+import { UserProps } from '../hooks/auth-hook';
 
 export const AuthContext = createContext({
-    userId: null,
-    token: null,
+    userId: '',
+    token: '',
     isLoggedIn: false,
-    signin: (data: any) => {
+    signin: (data: UserProps) => {
     },
     signout: () => {
     },

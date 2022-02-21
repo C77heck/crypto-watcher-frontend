@@ -1,3 +1,4 @@
+import moment from 'moment';
 import * as React from 'react';
 import { useContext } from 'react';
 import { Button } from '../components/button';
@@ -39,7 +40,7 @@ export const LoginButton = (props: any) => {
         };
         const response = await request.post('/users/login', { body, headers: [] });
 
-        signin(response?.userData);
+        signin({ ...(response?.userData || {}), expiry: moment() });
     };
 
     const content = <Form

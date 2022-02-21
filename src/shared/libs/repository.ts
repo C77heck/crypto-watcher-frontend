@@ -19,7 +19,7 @@ export class Repository {
             const request = new Request(path, options);
             const response = await fetch(request);
             const responseData = await response.json();
-            console.log(response.ok, response, responseData);
+
             if (!response.ok) {
                 throw new HttpError(responseData?.message, responseData?.statusCode);
             }
