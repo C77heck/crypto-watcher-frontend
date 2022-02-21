@@ -52,7 +52,7 @@ export const LoginButton = (props: any) => {
 
     if (isLoggedIn) {
         return <Button
-            buttonStyle={'login'}
+            buttonStyle={isLoggedIn ? 'logout' : 'login'}
             title={'Logout'}
             onClick={() => signout()}
         />;
