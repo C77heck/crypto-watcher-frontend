@@ -42,7 +42,7 @@ export const WatchlistScreen = () => {
         </div>
         <div className={'position-center mt-50 max-width-vw-80 margin-auto row'}>
             {(watched || []).map((data: WatchedCryptoProps, index: number) => {
-                return <div key={index} className={'col-100 col-md-50 col-mlg-33 col-lg-25 mt-25 cursor-pointer gap-20'}>
+                return <div key={index} className={'col-100 col-md-50 col-mlg-33 col-xl-25 mt-25 cursor-pointer gap-20'}>
                     <PurchaseManager data={data}/>
                 </div>;
             })}

@@ -24,7 +24,7 @@ function App() {
     );
 
     return (
-        <main className="center mt-100">
+        <main className="center pt-100 background--1">
             <React.Suspense
                 fallback={<div><Spinner overlay/></div>}
             >

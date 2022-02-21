@@ -12,7 +12,7 @@ export const WatchedCrypto = (props: any) => {
     const threshold2Classes = getClasses(second < percentageDiff, 'color-green--normal');
     const threshold3Classes = getClasses(third < percentageDiff, 'color-green--dark');
 
-    return <div className={'row w-100 crypto-box mx-20 hover-scale box-shadow'}>
+    return <div className={'row w-100 crypto-box mx-20 hover-scale box-shadow background--light'}>
         <div className={'col-100 data-separator py-6 position-center'}>
             <p className={'fs-24 fw--900'}>{name}</p>
         </div>
