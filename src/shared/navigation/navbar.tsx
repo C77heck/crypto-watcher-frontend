@@ -31,14 +31,6 @@ export const NavBar = (props: any) => {
                             new purchase
                         </Link>
                     </li>
-                    <li>
-                        <Link
-                            className={getColor(profitCalculator)}
-                            to={profitCalculator}
-                        >
-                            profit calculator
-                        </Link>
-                    </li>
                     <li><LatestListings/></li>
                 </ul>
                 <div className={'col-14'}>

@@ -84,7 +84,9 @@ export const NewCryptoForm = (props: any) => {
             }
         };
 
-        return await request.post('/crypto/add_new_purchase', { body, headers: [] });
+        return props.update
+            ? await request.put('/crypto/update_purchase', { body, headers: [] })
+            : await request.post('/crypto/add_new_purchase', { body, headers: [] });
     };
 
     return <Fragment>
