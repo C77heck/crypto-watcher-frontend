@@ -8,12 +8,16 @@ import { OptionProps } from '../../../shared/form/searchable-dropdown';
 import { requiredValidator } from '../../../shared/form/validators/required-validator';
 import { Repository } from '../../../shared/libs/repository';
 
-const getFormData = (data1: any, data2: any) => {
+const getFormData = (data1: any, data2: any, options: any[]) => {
+    const name = data1?.name || data2?.name || '';
+    const option = options.filter((op: OptionProps) => op.name === name)?.[0] || {};
+
     return {
-        name: data1?.name || data2?.name || '',
+        name,
         price: data1?.price || data2?.price || '',
         amount: data1?.amount || data2?.amount || '',
-        identifier: data1?.identifier || data2?.identifier || '',
+        identifier: data1?.identifier || data2?.identifier || option?.id || '',
+        symbol: data1?.symbol || data2?.symbol || option?.symbol || '',
         thresholds: {
             first: data1?.first || data2?.first || 0,
             second: data1?.second || data2?.second || 0,
@@ -84,11 +88,9 @@ export const NewCryptoForm = (props: any) => {
         if (!isLoggedIn) {
             throw new Error('You need to login first!');
         }
-        const { name, price, identifier, amount, thresholds: { first, second, third } } = getFormData(data, props?.data);
-        const crypto = (props.options || []).filter((op: OptionProps) => op.name === name)?.[0] || {};
+        const { name, price, identifier, amount, symbol, thresholds: { first, second, third } } = getFormData(data, props?.data, (props.options || []));
         const body: any = {
-            name, price, identifier, amount,
-            symbol: crypto?.symbol,
+            name, price, identifier, amount, symbol,
             thresholds: {
                 first: parseFloat(first || 0) + 100,
                 second: parseFloat(second || 0) + 100,
@@ -97,8 +99,8 @@ export const NewCryptoForm = (props: any) => {
         };
 
         return props.update
-            ? await request.put('/crypto/update_purchase', { body, headers: [] })
-            : await request.post('/crypto/add_new_purchase', { body, headers: [] });
+            ? await request.patch('/crypto/update_purchase', { body })
+            : await request.post('/crypto/add_new_purchase', { body });
     };
 
     return <Fragment>

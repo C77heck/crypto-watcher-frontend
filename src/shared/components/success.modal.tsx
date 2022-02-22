@@ -26,6 +26,7 @@ export const SuccessModal = (props: SuccessModalProps) => {
     </div>;
 
     return <Modal
+        level={1}
         overlayClick={(show) => props.onClick('')}
         className={'border-radius-px-5 p-15 z-100'}
         content={content}

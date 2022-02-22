@@ -28,6 +28,7 @@ export const PurchaseManager = (props: any) => {
         />
     </div>;
     return <Modal
+        level={3}
         className={'border-radius-px-5 p-15'}
         content={content}
         size={{ sm: 90, md: 60, lg: 50, xl: 40 }}

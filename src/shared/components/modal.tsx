@@ -19,6 +19,7 @@ interface ModalProps {
     header?: JSX.Element;
     show?: boolean;
     overlayClick?: (show: boolean) => void;
+    level?: number;
 }
 
 export class Modal extends React.Component<ModalProps, any> {
@@ -85,12 +86,25 @@ export class Modal extends React.Component<ModalProps, any> {
         />;
     }
 
+    public getStackingOrder(level: number) {
+        switch (level) {
+            case 1:
+                return 'z-200';
+            case 2:
+                return 'z-150';
+            case 3:
+                return 'z-110';
+            default:
+                return 'z-100';
+        }
+    }
+
     public renderModal() {
-        const { className, content, size, contentClasses, headerClasses, header } = this.props;
+        const { className, content, size, contentClasses, headerClasses, header, level } = this.props;
         const { modal, sides } = this.getSize(size);
         const { show } = this.state;
         return <div
-            className={`z-110 modal modal--${show ? 'show' : 'hide'} ${sides} ${modal} ${className}`}
+            className={`modal modal--${show ? 'show' : 'hide'} ${this.getStackingOrder(level || 0)} ${sides} ${modal} ${className}`}
         >
             <div className={headerClasses}>
                 {header && header}

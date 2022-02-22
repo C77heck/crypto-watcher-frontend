@@ -1,52 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Roboto+Condensed:wght@300;400;700&display=swap');
 
-p, small, span, a, button, div, label {
-  font-family: 'Roboto Condensed', sans-serif;
-  color: var(--color-dark-1);
+p, small, a, div, label {
+    font-family: 'Roboto Condensed', sans-serif;
+    color: var(--color-dark-1);
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: 'Playfair Display SC', serif;
-  color: var(--color-dark-2);
+    font-family: 'Playfair Display SC', serif;
+    color: var(--color-dark-2);
 }
 
 .fw {
-  &--400 {
-    font-weight: 400;
-  }
+    &--400 {
+        font-weight: 400;
+    }
 
-  &--600 {
-    font-weight: 600;
-  }
+    &--600 {
+        font-weight: 600;
+    }
 
-  &--700 {
-    font-weight: 700;
-  }
+    &--700 {
+        font-weight: 700;
+    }
 
-  &--800 {
-    font-weight: 800;
-  }
+    &--800 {
+        font-weight: 800;
+    }
 
-  &--900 {
-    font-weight: 900;
-  }
+    &--900 {
+        font-weight: 900;
+    }
 }
 
 .text-color {
-  &--red {
-    color: var(--color-error-2);
-  }
+    &--red {
+        color: var(--color-error-2);
+    }
 
-  &--light-1 {
-    color: var(--color-light);
-  }
+    &--light-1 {
+        color: var(--color-light);
+    }
 
-  &--light-2 {
-    color: var(--color-dark-3);
-  }
+    &--light-2 {
+        color: var(--color-dark-3);
+    }
 
-  &--active {
-    color: var(--color-dark-3) !important;
-  }
+    &--active {
+        color: var(--color-dark-3) !important;
+    }
 }

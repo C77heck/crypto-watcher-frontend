@@ -60,6 +60,7 @@ export const LoginButton = (props: any) => {
     }
 
     return <Modal
+        level={2}
         className={'border-radius-px-5 p-15'}
         content={content}
         size={{ sm: 90, md: 72, lg: 60, xl: 40 }}

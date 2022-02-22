@@ -349,9 +349,6 @@
         .#{min-width- + $i} {
             min-width: $i + px !important;
         }
-        .#{z- + $i} {
-            z-index: $i !important;
-        }
         .#{h-px- + $i} {
             height: $i + px !important;
         }
