@@ -21,7 +21,9 @@ export const Button = (props: ButtonProps) => {
         onClick={props.onClick}
     >
 
-        {props.isLoading ? 'loading...' : <span className={props.textColor}>{props.title}</span>}
+        {props.isLoading
+            ? <span className={`${props.textColor} fs-13`}>loading...</span>
+            : <span className={props.textColor}>{props.title}</span>}
     </button>;
 };
 

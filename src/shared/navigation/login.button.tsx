@@ -53,7 +53,7 @@ export const LoginButton = (props: any) => {
     if (isLoggedIn) {
         return <Button
             textColor={'text-color--light-1'}
-            buttonStyle={isLoggedIn ? 'logout' : 'login'}
+            buttonStyle={'logout'}
             title={'Logout'}
             onClick={() => signout()}
         />;
@@ -64,6 +64,6 @@ export const LoginButton = (props: any) => {
         content={content}
         size={{ sm: 90, md: 72, lg: 60, xl: 40 }}
         header={<h2 className={'header--3 text-align-center'}>Sign in</h2>}
-        trigger={<Button buttonStyle={'login'} title={'Login'}/>}
+        trigger={<Button textColor={'text-color--light-1'} buttonStyle={'login'} title={'Login'}/>}
     />;
 };
