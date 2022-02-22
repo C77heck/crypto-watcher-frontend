@@ -8,6 +8,20 @@ import { OptionProps } from '../../../shared/form/searchable-dropdown';
 import { requiredValidator } from '../../../shared/form/validators/required-validator';
 import { Repository } from '../../../shared/libs/repository';
 
+const getFormData = (data1: any, data2: any) => {
+    return {
+        name: data1?.name || data2?.name || '',
+        price: data1?.price || data2?.price || '',
+        amount: data1?.amount || data2?.amount || '',
+        identifier: data1?.identifier || data2?.identifier || '',
+        thresholds: {
+            first: data1?.first || data2?.first || 0,
+            second: data1?.second || data2?.second || 0,
+            third: data1?.third || data2?.third || 0,
+        }
+    };
+};
+
 export const NewCryptoForm = (props: any) => {
     const { token, isLoggedIn } = useContext(AuthContext);
     const request = new Repository();
@@ -70,17 +84,15 @@ export const NewCryptoForm = (props: any) => {
         if (!isLoggedIn) {
             throw new Error('You need to login first!');
         }
-        const crypto = (props.options || []).filter(({ name, symbol }: OptionProps) => name === data?.name)?.[0] || {};
+        const { name, price, identifier, amount, thresholds: { first, second, third } } = getFormData(data, props?.data);
+        const crypto = (props.options || []).filter((op: OptionProps) => op.name === name)?.[0] || {};
         const body: any = {
-            name: data?.name || '',
+            name, price, identifier, amount,
             symbol: crypto?.symbol,
-            price: data?.price || 0,
-            identifier: crypto?.id || 0,
-            amount: data?.amount || 0,
             thresholds: {
-                first: parseFloat(data?.['threshold-1'] || 0) + 100,
-                second: parseFloat(data?.['threshold-2'] || 0) + 100,
-                third: parseFloat(data?.['threshold-3'] || 0) + 100,
+                first: parseFloat(first || 0) + 100,
+                second: parseFloat(second || 0) + 100,
+                third: parseFloat(third || 0) + 100,
             }
         };
 
