@@ -18,7 +18,7 @@ export const LatestListings = (prop: any) => {
     return <div
         onClick={getLatestListings}
     >
-        <p>
+        <p className={'text-color--light-1'}>
             Latest listings
         </p>
     </div>;

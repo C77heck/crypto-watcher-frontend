@@ -8,6 +8,7 @@ export interface ButtonProps {
     onClick?: (e: any) => void;
     title: string;
     isLoading?: boolean;
+    textColor?: string;
 }
 
 export const Button = (props: ButtonProps) => {
@@ -20,7 +21,7 @@ export const Button = (props: ButtonProps) => {
         onClick={props.onClick}
     >
 
-        {props.isLoading ? 'loading...' : <span>{props.title}</span>}
+        {props.isLoading ? 'loading...' : <span className={props.textColor}>{props.title}</span>}
     </button>;
 };
 
