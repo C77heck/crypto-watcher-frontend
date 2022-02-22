@@ -45,4 +45,8 @@ h1, h2, h3, h4, h5 {
   &--light-2 {
     color: var(--color-dark-3);
   }
+
+  &--active {
+    color: var(--color-dark-3) !important;
+  }
 }
