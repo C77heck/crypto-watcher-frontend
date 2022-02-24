@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom';
 import './App.scss';
 import { BaseLayout } from './screens/components/base.layout';
+import { Home } from './screens/homeScreen/home';
 import { NewCryptoScreen } from './screens/newCrypto/new-crypto.screen';
 import { WatchlistScreen } from './screens/watchlist/watchlist.screen';
 import { Auth } from './shared/components/Auth';
@@ -16,7 +17,7 @@ function App() {
     const routes = (
         <Router>
             <Routes>
-                <Route path={home} element={<BaseLayout><NewCryptoScreen/></BaseLayout>}/>
+                <Route path={home} element={<BaseLayout><Home/></BaseLayout>}/>
                 <Route path={watchlist} element={<Auth><BaseLayout><WatchlistScreen/></BaseLayout></Auth>}/>
                 <Route path={newPurchase} element={<Auth><BaseLayout><NewCryptoScreen/></BaseLayout></Auth>}/>
                 <Route path={profitCalculator} element={<BaseLayout><NewCryptoScreen/></BaseLayout>}/>

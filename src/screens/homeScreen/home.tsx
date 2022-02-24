@@ -4,11 +4,6 @@ export const Home = (props: any) => {
 
     return <div>
         <Header/>
+        <h3>Home screen</h3>
     </div>;
 };
-
-// <Input
-//     validator={(data: any) => onlyStringsValidator(data)}
-//     getData={(data: any, error: any) => console.log(data, error)}
-//     errorMessage={'whaaat?'}
-// />
