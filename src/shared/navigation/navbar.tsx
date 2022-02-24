@@ -17,25 +17,27 @@ export const NavBar = (props: any) => {
     return <Portal elementId={'navbar'}>
         <nav className="nav-bar position-center">
             <div className={'row max-width-vw-85'}>
-                <ul className="nav-bar--ul col-60">
-                    <li>
-                        <Link className={getColor(home)} to={home}>
-                            Home
-                        </Link>
-                    </li>
-                    {isLoggedIn && <li>
-                        <Link className={getColor(watchlist)} to={watchlist}>
-                            watchlist
-                        </Link>
-                    </li>}
-                    {isLoggedIn && <li>
-                        <Link className={getColor(newPurchase)} to={newPurchase}>
-                            new purchase
-                        </Link>
-                    </li>}
-                    <li><LatestListings/></li>
-                </ul>
-                <div className={'col-14'}>
+                <div className={'col-60'}>
+                    <ul className="nav-bar--ul row">
+                        <li className={'col-25'}>
+                            <Link className={getColor(home)} to={home}>
+                                Home
+                            </Link>
+                        </li>
+                        {isLoggedIn && <li className={'col-25'}>
+                            <Link className={getColor(watchlist)} to={watchlist}>
+                                watchlist
+                            </Link>
+                        </li>}
+                        {isLoggedIn && <li className={'col-25'}>
+                            <Link className={getColor(newPurchase)} to={newPurchase}>
+                                new purchase
+                            </Link>
+                        </li>}
+                        <li className={'col-25'}><LatestListings/></li>
+                    </ul>
+                </div>
+                <div className={'col-40 display-flex justify-content-end'}>
                     <LoginButton/>
                 </div>
             </div>

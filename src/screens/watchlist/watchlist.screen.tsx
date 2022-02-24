@@ -21,22 +21,33 @@ export interface WatchedCryptoProps {
 
 export const WatchlistScreen = () => {
     const [watched, setWatched] = useState([]);
+    const [shouldRefetch, setShouldRefetch] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const { token, isLoggedIn } = useContext(AuthContext);
+
     const request = new Repository();
     request.setAuth(token);
 
     useEffect(() => {
-        if (isLoggedIn) {
+        if (isLoggedIn || !!shouldRefetch) {
             (async () => {
+                console.log('fired');
+                setIsLoading(true);
                 await request.get('/crypto/latest_listings', {});
                 const response = await request.get('/crypto/get_purchases', {});
                 setWatched(response?.items || []);
+                setIsLoading(false);
             })();
         }
-    }, [isLoggedIn]);
+    }, [isLoggedIn, shouldRefetch]);
+
+    useEffect(() => {
+        const timer = setInterval(() => setShouldRefetch(!shouldRefetch), 1000 * 60 * 3);
+        return () => clearInterval(timer);
+    }, [shouldRefetch]);
 
     return <div>
-        <Spinner asOverlay/>
+        {isLoading && <Spinner asOverlay/>}
         <Header>
             <h2 className={'header--2'}>Add new purchase</h2>
         </Header>

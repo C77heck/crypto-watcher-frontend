@@ -1,33 +1,31 @@
 .nav-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: var(--color-primary-transparent);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-primary-transparent);
 
-  &--ul {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    &--ul {
+        display: flex;
 
-    & li {
-      color: var(--text-color-light);
-      text-decoration: none;
-      font-size: 2rem;
-      list-style: none;
-      padding: 2rem;
-      cursor: pointer;
-      transition: all 250ms;
-      color: hsl(0, 0, 96);
+        & li {
+            color: var(--text-color-light);
+            text-decoration: none;
+            font-size: 2rem;
+            list-style: none;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 250ms;
+            color: hsl(0, 0, 96);
 
-      & a {
-        text-decoration: none;
-        color: inherit;
-      }
+            & a {
+                text-decoration: none;
+                color: inherit;
+            }
 
-      &:hover {
-        opacity: 0.7;
-      }
+            &:hover {
+                opacity: 0.7;
+            }
+        }
     }
-  }
 }
