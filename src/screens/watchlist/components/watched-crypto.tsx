@@ -7,7 +7,7 @@ interface WatchedCryptoProps {
 
 export const WatchedCrypto = (props: any) => {
     const { date, first, second, amount, third, name, priceBoughtFor, currentPrice, percentageDiff, potentialProfit } = props.data;
-    const percentageClasses = getClasses(100 > percentageDiff, 'color-red', 'color-green--light');
+    const percentageClasses = getClasses(100 > percentageDiff, 'background-color--error-3', 'color-green--light');
     const threshold1Classes = getClasses(first < percentageDiff, 'color-green--light');
     const threshold2Classes = getClasses(second < percentageDiff, 'color-green--normal');
     const threshold3Classes = getClasses(third < percentageDiff, 'color-green--dark');

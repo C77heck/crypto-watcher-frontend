@@ -12,7 +12,7 @@ export const LatestListings = (prop: any) => {
             return;
         }
 
-        const response = await request.get('/crypto/latest_listings', { headers: [] });
+        const response = await request.get('/crypto/latest_listings', {});
         console.log(response);
     };
     return <div

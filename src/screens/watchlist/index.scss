@@ -11,28 +11,6 @@
   padding: 8px 0;
 }
 
-.color-green {
-  &--light {
-    color: var(--color-light);
-    background-color: var(--color-success-1);
-  }
-
-  &--normal {
-    color: var(--color-light);
-    background-color: var(--color-success-2);
-  }
-
-  &--dark {
-    color: var(--color-light);
-    background-color: var(--color-success-3);
-  }
-}
-
-.color-red {
-  color: var(--color-light);
-  background-color: var(--color-error-1);
-}
-
 .sum-values {
   border: 2px solid var(--color-primary-2);
   border-radius: 4px;

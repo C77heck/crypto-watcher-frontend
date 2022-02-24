@@ -19,7 +19,7 @@ export const NavBar = (props: any) => {
             <div className={'row max-width-vw-85'}>
                 <ul className="nav-bar--ul col-60">
                     <li>
-                        <Link className={getColor(newPurchase)} to={home}>
+                        <Link className={getColor(home)} to={home}>
                             Home
                         </Link>
                     </li>

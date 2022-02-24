@@ -105,7 +105,7 @@ export class SearchableDropdown extends Component<any, any> {
             onFocus={() => console.log('its on focus', name)}
             key={name}
             onClick={() => this.props.onClickHandler(isChosen, name)}
-            className={`${isChosen && 'color--active'}`}
+            className={`${isChosen && 'text-color--active'}`}
         >
             {name}
         </li>;
