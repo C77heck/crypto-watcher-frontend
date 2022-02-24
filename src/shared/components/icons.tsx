@@ -18,3 +18,12 @@ export const Close = (props: any) => {
         </svg>
     </div>;
 };
+
+export const SpinnerIcon = (props: any) => {
+    return <div
+        className={props.className}
+        onClick={props.onClick}
+    >
+        <i className="fa fa-spinner" aria-hidden="true"></i>
+    </div>;
+};

@@ -1,3 +1,5 @@
+import { SpinnerIcon } from './icons';
+
 export interface ButtonProps {
     type?: "button" | "submit" | "reset" | undefined;
     className?: string;
@@ -22,8 +24,8 @@ export const Button = (props: ButtonProps) => {
     >
 
         {props.isLoading
-            ? <span className={`${props.textColor} fs-13`}>loading...</span>
-            : <span className={props.textColor}>{props.title}</span>}
+            ? <span className={`${props.textColor} fs-13`}><SpinnerIcon/> loading...</span>
+            : <span className={props.textColor}><SpinnerIcon/>{props.title}</span>}
     </button>;
 };
 
