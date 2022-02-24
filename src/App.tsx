@@ -4,6 +4,7 @@ import './App.scss';
 import { BaseLayout } from './screens/components/base.layout';
 import { NewCryptoScreen } from './screens/newCrypto/new-crypto.screen';
 import { WatchlistScreen } from './screens/watchlist/watchlist.screen';
+import { Auth } from './shared/components/Auth';
 import { Spinner } from './shared/components/spinner';
 import { staticData } from './shared/config/static-data';
 import { AuthContext } from './shared/context/auth.context';
@@ -16,8 +17,8 @@ function App() {
         <Router>
             <Routes>
                 <Route path={home} element={<BaseLayout><NewCryptoScreen/></BaseLayout>}/>
-                <Route path={watchlist} element={<BaseLayout><WatchlistScreen/></BaseLayout>}/>
-                <Route path={newPurchase} element={<BaseLayout><NewCryptoScreen/></BaseLayout>}/>
+                <Route path={watchlist} element={<Auth><BaseLayout><WatchlistScreen/></BaseLayout></Auth>}/>
+                <Route path={newPurchase} element={<Auth><BaseLayout><NewCryptoScreen/></BaseLayout></Auth>}/>
                 <Route path={profitCalculator} element={<BaseLayout><NewCryptoScreen/></BaseLayout>}/>
             </Routes>
         </Router>
