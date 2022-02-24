@@ -28,7 +28,7 @@ function App() {
     return (
         <main className="center pt-100 background--1">
             <React.Suspense
-                fallback={<div><Spinner overlay/></div>}
+                fallback={<div><Spinner asOverlay/></div>}
             >
                 <AuthContext.Provider value={auth}>
                     {routes}

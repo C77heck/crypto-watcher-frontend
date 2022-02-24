@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import { Spinner } from '../../shared/components/spinner';
 import { AuthContext } from '../../shared/context/auth.context';
 import { Repository } from '../../shared/libs/repository';
 import { Header } from "../components/header";
@@ -35,6 +36,7 @@ export const WatchlistScreen = () => {
     }, [isLoggedIn]);
 
     return <div>
+        <Spinner asOverlay/>
         <Header>
             <h2 className={'header--2'}>Add new purchase</h2>
         </Header>
