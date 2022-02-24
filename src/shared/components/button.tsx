@@ -25,7 +25,7 @@ export const Button = (props: ButtonProps) => {
 
         {props.isLoading
             ? <span className={`${props.textColor} fs-13`}><SpinnerIcon/> loading...</span>
-            : <span className={props.textColor}><SpinnerIcon/>{props.title}</span>}
+            : <span className={`${props.textColor}`}><SpinnerIcon/>{props.title}</span>}
     </button>;
 };
 
