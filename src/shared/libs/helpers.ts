@@ -40,3 +40,12 @@ export const numArray = (number: number, value: any = false) => {
     }
     return Array.from({ length: number }, (i, index) => value || index);
 };
+
+export const redirect = (location: string, inSite: boolean = true) => {
+    if (inSite) {
+        const baseUrl = window.location.origin;
+        window.location.replace(`${baseUrl}${location}`);
+    } else {
+        window.location.replace(location);
+    }
+};
