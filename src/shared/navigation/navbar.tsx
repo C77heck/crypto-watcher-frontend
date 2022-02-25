@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Portal } from '../components/portal';
 import { staticData } from '../config/static-data';
 import { AuthContext } from '../context/auth.context';
-import { LatestListings } from './latest-listings';
 import { LoginButton } from './login.button';
 
 const getColor = (link: string) => {
@@ -12,7 +11,7 @@ const getColor = (link: string) => {
 
 export const NavBar = (props: any) => {
     const { isLoggedIn } = useContext(AuthContext);
-    const { links: { watchlist, newPurchase, profitCalculator, home } } = staticData;
+    const { links: { watchlist, newPurchase, changesInValue, home } } = staticData;
 
     return <Portal elementId={'navbar'}>
         <nav className="nav-bar position-center">
@@ -34,7 +33,13 @@ export const NavBar = (props: any) => {
                                 new purchase
                             </Link>
                         </li>}
-                        <li className={'col-25'}><LatestListings/></li>
+                        <li className={'col-25'}>
+                            {isLoggedIn && <li className={'col-25'}>
+                                <Link className={getColor(changesInValue)} to={changesInValue}>
+                                    Crypto fluctuation
+                                </Link>
+                            </li>}
+                        </li>
                     </ul>
                 </div>
                 <div className={'col-40 display-flex justify-content-end'}>

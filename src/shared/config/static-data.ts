@@ -3,6 +3,6 @@ export const staticData = {
         home: '/',
         watchlist: '/watchlist',
         newPurchase: '/new-purchase',
-        profitCalculator: '/profit-calculator',
+        changesInValue: '/changes-in-value',
     },
 };

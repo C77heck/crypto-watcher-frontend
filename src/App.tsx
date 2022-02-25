@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom';
 import './App.scss';
+import { ChangesScreen } from './screens/changesScreen/changes.screen';
 import { BaseLayout } from './screens/components/base.layout';
 import { Home } from './screens/homeScreen/home';
 import { NewCryptoScreen } from './screens/newCrypto/new-crypto.screen';
@@ -12,7 +13,7 @@ import { AuthContext } from './shared/context/auth.context';
 import { useAuth } from './shared/hooks/auth-hook';
 
 function App() {
-    const { links: { home, watchlist, newPurchase, profitCalculator } } = staticData;
+    const { links: { home, watchlist, newPurchase, changesInValue } } = staticData;
     const auth = useAuth();
     const routes = (
         <Router>
@@ -20,7 +21,7 @@ function App() {
                 <Route path={home} element={<BaseLayout><Home/></BaseLayout>}/>
                 <Route path={watchlist} element={<Auth><BaseLayout><WatchlistScreen/></BaseLayout></Auth>}/>
                 <Route path={newPurchase} element={<Auth><BaseLayout><NewCryptoScreen/></BaseLayout></Auth>}/>
-                <Route path={profitCalculator} element={<BaseLayout><NewCryptoScreen/></BaseLayout>}/>
+                <Route path={changesInValue} element={<BaseLayout><ChangesScreen/></BaseLayout>}/>
             </Routes>
         </Router>
     );

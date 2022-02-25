@@ -122,7 +122,7 @@ export class Modal extends React.Component<ModalProps, any> {
 
     public render() {
         return <div>
-            <div onClick={(e: any) => this.handleClick(e, true)}>
+            <div className={'h-100'} onClick={(e: any) => this.handleClick(e, true)}>
                 {!!this.props.trigger && this.props.trigger}
             </div>
             <Portal elementId={'modals'}>
