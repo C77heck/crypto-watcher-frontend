@@ -1,3 +1,4 @@
+import { SpinnerIcon } from '../../shared/components/icons';
 import { Header } from "../components/header";
 
 export const Home = (props: any) => {
