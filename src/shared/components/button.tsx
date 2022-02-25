@@ -24,8 +24,8 @@ export const Button = (props: ButtonProps) => {
     >
 
         {props.isLoading
-            ? <span className={`${props.textColor} fs-13`}><SpinnerIcon width={15}/> loading...</span>
-            : <span className={`${props.textColor}`}><SpinnerIcon width={15}/>{props.title}</span>}
+            ? <span className={`${props.textColor} fs-13 display-flex`}><SpinnerIcon width={15}/><span className={'pl-10'}>Loading...</span> </span>
+            : <span className={`${props.textColor}`}>{props.title}</span>}
     </button>;
 };
 
