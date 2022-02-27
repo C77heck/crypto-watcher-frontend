@@ -17,8 +17,6 @@ export const ChangesScreen = (props: any) => {
                 try {
                     setIsLoading(true);
                     const response = await request.get('/crypto/get_changes_in_value', {});
-                    console.log(response?.items || 'Something went wrong');
-
                     setWatched(response?.items || []);
                     setIsLoading(false);
                 } catch (e) {

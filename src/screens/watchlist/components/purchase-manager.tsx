@@ -13,8 +13,6 @@ export const PurchaseManager = (props: any) => {
 
     const deletePurchase = async () => {
         await request.delete(`/crypto/delete_purchase/${props?.data?._id}`, {});
-
-        window.location.reload();
     };
 
     const content = <div>
@@ -24,8 +22,10 @@ export const PurchaseManager = (props: any) => {
             form={null}
             submitButton={{ className: 'mt-20 col-100 col-22', title: 'delete', type: 'submit', buttonStyle: 'delete' }}
             className={'row w-100 position-center'}
+            onSuccess={() => window.location.reload()}
         />
     </div>;
+
     return <Modal
         level={3}
         className={'border-radius-px-5 p-15'}

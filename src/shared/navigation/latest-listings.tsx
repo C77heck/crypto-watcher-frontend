@@ -12,8 +12,8 @@ export const LatestListings = (prop: any) => {
         }
 
         const response = await request.get('/crypto/latest_listings', {});
-        console.log(response);
     };
+
     return <div
         onClick={getLatestListings}
     >

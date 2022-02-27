@@ -79,7 +79,6 @@ export class SearchableDropdown extends Component<any, any> {
     }
 
     public manageKeyEvent({ key }: React.KeyboardEvent<HTMLInputElement>) {
-        console.log(key);
         if (key === 'arrowDown') {
             console.log('kind of success');
         }

@@ -13,7 +13,6 @@ export const NewCryptoScreen = () => {
         if (isLoggedIn) {
             (async () => {
                 const response = await request.get('/crypto/get_select_assets', {});
-                console.log(response);
                 setOptions(response?.assets || []);
             })();
         }

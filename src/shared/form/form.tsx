@@ -69,7 +69,6 @@ export const Form = (props: FormProps) => {
     };
 
     const manageSuccessClose = () => {
-        console.log('we are in', !!props.onSuccess);
         if (props.onSuccess) {
             props.onSuccess();
         }
