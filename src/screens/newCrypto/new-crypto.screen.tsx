@@ -25,7 +25,7 @@ export const NewCryptoScreen = () => {
         </Header>
         <div className={'position-center mt-50'}>
             <div className={'fix-width-400'}>
-                <NewCryptoForm options={options}/>
+                <NewCryptoForm options={options} onSuccess={() => window.location.reload()}/>
             </div>
         </div>
     </div>;

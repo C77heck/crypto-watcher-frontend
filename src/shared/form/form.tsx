@@ -10,6 +10,8 @@ interface FormProps {
     form: any;
     submitButton?: ButtonProps;
     className?: string;
+    onSuccess?: () => void;
+    onError?: () => void;
 }
 
 const getIsFormValid = (form: any) => {
@@ -58,12 +60,29 @@ export const Form = (props: FormProps) => {
             setIsLoading(true);
             const response: any = await props.onSubmit(getRestructureForm(form));
             setIsLoading(false);
-            setShowSuccess(response?.message);
+            setShowSuccess(response?.message || 'Success');
         } catch (e: any) {
             const error = parseError(e);
             setIsLoading(false);
             setError(error);
         }
+    };
+
+    const manageSuccessClose = () => {
+        console.log('we are in', !!props.onSuccess);
+        if (props.onSuccess) {
+            props.onSuccess();
+        }
+
+        setShowSuccess('');
+    };
+
+    const manageErrorClose = () => {
+        if (props.onError) {
+            props.onError();
+        }
+
+        setError('');
     };
 
     return <Fragment>
@@ -89,12 +108,12 @@ export const Form = (props: FormProps) => {
         <ErrorModal
             show={!!error}
             errorMessage={error}
-            onClick={(show) => setError('')}
+            onClick={manageErrorClose}
         />
         <SuccessModal
             show={!!showSuccess}
             successMessage={showSuccess}
-            onClick={(show) => setShowSuccess('')}
+            onClick={manageSuccessClose}
         />
     </Fragment>;
 };

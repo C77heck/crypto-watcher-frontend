@@ -18,7 +18,7 @@ export const PurchaseManager = (props: any) => {
     };
 
     const content = <div>
-        <NewCryptoForm {...props} update={true}/>
+        <NewCryptoForm {...props} update={true} onSuccess={() => window.location.reload()}/>
         <Form
             onSubmit={deletePurchase}
             form={null}

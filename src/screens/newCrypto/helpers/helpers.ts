@@ -39,6 +39,7 @@ export class Purchase implements PurchaseProps {
     }
 
     public formatThreshold(threshold: number) {
+
         return threshold > 100 ? threshold : threshold + 100;
     }
 }

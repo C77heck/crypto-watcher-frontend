@@ -98,12 +98,12 @@ export class SearchableDropdown extends Component<any, any> {
         }
     }
 
-    public renderOption({ name }: OptionProps) {
+    public renderOption({ name, symbol }: OptionProps) {
         const isChosen = this.props.value === name;
 
         return <li
             onFocus={() => console.log('its on focus', name)}
-            key={name}
+            key={`${name}-${symbol}`}
             onClick={() => this.props.onClickHandler(isChosen, name)}
             className={`${isChosen && 'text-color--active'}`}
         >

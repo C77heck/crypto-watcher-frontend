@@ -23,7 +23,7 @@ export const NavBar = (props: any) => {
             (async () => {
                 try {
                     console.log('Pulling the latest data...');
-                    await request.get('/crypto/latest_listings', {});
+                    // await request.get('/crypto/latest_listings', {});
                     console.log('Pulling the latest data was successful');
                 } catch (e) {
                     console.log('Pulling the latest data was unsuccussfull');

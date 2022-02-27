@@ -40,7 +40,7 @@ export const NewCryptoForm = (props: any) => {
             isNumberOnly: true,
         }),
         new Field({
-            name: 'threshold-1',
+            name: 'first',
             label: 'Threshold 1',
             value: props?.data?.thresholds?.first - 100 || null,
             validators: [requiredValidator],
@@ -48,7 +48,7 @@ export const NewCryptoForm = (props: any) => {
             isNumberOnly: true,
         }),
         new Field({
-            name: 'threshold-2',
+            name: 'second',
             label: 'Threshold 2',
             value: props?.data?.thresholds?.second - 100 || null,
             validators: [requiredValidator],
@@ -56,7 +56,7 @@ export const NewCryptoForm = (props: any) => {
             isNumberOnly: true,
         }),
         new Field({
-            name: 'threshold-3',
+            name: 'third',
             label: 'Threshold 3',
             value: props?.data?.thresholds?.third - 100 || null,
             validators: [requiredValidator],
@@ -75,12 +75,11 @@ export const NewCryptoForm = (props: any) => {
         props.update
             ? await request.patch(`/crypto/update_purchase/${props?.data?._id}`, { body })
             : await request.post('/crypto/add_new_purchase', { body });
-
-        window.location.reload();
     };
 
     return <Fragment>
         <Form
+            onSuccess={props.onSuccess}
             onSubmit={(data: any) => submit(data)}
             form={formData}
             submitButton={{ className: 'mt-20 col-100', title: 'Go', type: 'submit' }}

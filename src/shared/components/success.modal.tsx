@@ -13,6 +13,7 @@ export const SuccessModal = (props: SuccessModalProps) => {
     const [show, setShow] = useState(false);
 
     useEffect(() => {
+        console.log(props);
         setShow(props.show);
     });
 
