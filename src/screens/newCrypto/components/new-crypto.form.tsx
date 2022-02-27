@@ -10,8 +10,7 @@ import { Purchase } from '../helpers/helpers';
 
 export const NewCryptoForm = (props: any) => {
     const { token, isLoggedIn } = useContext(AuthContext);
-    const request = new Repository();
-    request.setAuth(token);
+    const request = new Repository(token);
 
     const { INPUTS: { SEARCHABLE_DROPDOWN } } = CONSTANTS;
     const formData = new FormStructure([

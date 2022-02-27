@@ -5,6 +5,12 @@ export class Repository {
     public baseUrl = process.env.REACT_APP_BASE_URL;
     public headers: string[][] = [['Content-Type', 'application/json']];
 
+    public constructor(token: string | null = null) {
+        if (token) {
+            this.setAuth(token);
+        }
+    }
+
     public setHeader(header: string, value: string) {
         this.headers.push([header, value]);
     }

@@ -4,8 +4,7 @@ import { Repository } from '../libs/repository';
 
 export const LatestListings = (prop: any) => {
     const { token, isLoggedIn } = useContext(AuthContext);
-    const request = new Repository();
-    request.setAuth(token);
+    const request = new Repository(token);
 
     const getLatestListings = async () => {
         if (!isLoggedIn) {

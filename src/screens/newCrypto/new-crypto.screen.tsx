@@ -7,8 +7,7 @@ import { NewCryptoForm } from './components/new-crypto.form';
 export const NewCryptoScreen = () => {
     const [options, setOptions] = useState([{}]);
     const { token, isLoggedIn } = useContext(AuthContext);
-    const request = new Repository();
-    request.setAuth(token);
+    const request = new Repository(token);
 
     useEffect(() => {
         if (isLoggedIn) {

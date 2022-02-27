@@ -9,8 +9,7 @@ import { WatchedCrypto } from './watched-crypto';
 
 export const PurchaseManager = (props: any) => {
     const { token } = useContext(AuthContext);
-    const request = new Repository();
-    request.setAuth(token);
+    const request = new Repository(token);
 
     const deletePurchase = async () => {
         await request.delete(`/crypto/delete_purchase/${props?.data?._id}`, {});

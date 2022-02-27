@@ -13,6 +13,7 @@ import { AuthContext } from './shared/context/auth.context';
 import { useAuth } from './shared/hooks/auth-hook';
 
 function App() {
+
     const { links: { home, watchlist, newPurchase, changesInValue } } = staticData;
     const auth = useAuth();
     const routes = (

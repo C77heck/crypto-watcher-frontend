@@ -9,8 +9,7 @@ export const ChangesScreen = (props: any) => {
     const [isLoading, setIsLoading] = useState(false);
     const { token, isLoggedIn } = useContext(AuthContext);
 
-    const request = new Repository();
-    request.setAuth(token);
+    const request = new Repository(token);
 
     useEffect(() => {
         if (isLoggedIn || !!shouldRefetch) {
