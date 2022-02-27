@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../shared/context/auth.context';
 import { Repository } from '../../shared/libs/repository';
 import { Header } from '../components/header';
+import { CryptoCard } from './components/crypto-card';
 
 export const ChangesScreen = (props: any) => {
     const [watched, setWatched] = useState([]);
@@ -17,6 +18,8 @@ export const ChangesScreen = (props: any) => {
                 try {
                     setIsLoading(true);
                     const response = await request.get('/crypto/get_changes_in_value', {});
+                    console.log(response?.items);
+
                     setWatched(response?.items || []);
                     setIsLoading(false);
                 } catch (e) {
@@ -30,6 +33,9 @@ export const ChangesScreen = (props: any) => {
         <Header>
             <h2 className={'header--2'}>Crypto fluctuation</h2>
         </Header>
+        <div>
+            {(watched || []).map(item => <CryptoCard data={item}/>)}
+        </div>
     </div>;
 };
 
