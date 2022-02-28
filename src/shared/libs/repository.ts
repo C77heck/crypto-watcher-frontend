@@ -43,7 +43,6 @@ export class Repository {
 
             return responseData;
         } catch (error: any) {
-            console.log('fetching failed', error);
             abortController.abort();
             throw new HttpError(error?.message, error?.code);
         }
@@ -53,7 +52,9 @@ export class Repository {
         if (!query || !query.length) {
             return url;
         }
+
         const queryManager = new QueryManager();
+
         for (const item of query) {
             queryManager.add(item?.prop || '', item?.value);
         }
