@@ -1,3 +1,4 @@
+import { ArrowLeft, ArrowRight } from '../../../shared/components/icons';
 import { getClasses, numArray } from '../../../shared/libs/helpers';
 
 export const Paginator = (props: any) => {
@@ -12,19 +13,16 @@ export const Paginator = (props: any) => {
 
     const prevHref = () => currentPage > 0 && fetchPage(currentPage - 1);
     const nextHref = () => currentPage < totalPage && totalPage !== 1 && fetchPage(currentPage + 1);
-    const firstHref = () => currentPage > 0 && fetchPage(0);
-    const lastHref = () => currentPage < totalPage && fetchPage(end);
 
     return <div className={'position-center py-60'}>
-        <p className={'fs-25 px-10 cursor-pointer hover-opacity'} onClick={firstHref}>{'<='}</p>
-        <p className={'fs-25 px-10 cursor-pointer hover-opacity'} onClick={prevHref}>{'<-'}</p>
+        <ArrowLeft width={20} className={'px-10 cursor-pointer hover-opacity'} onClick={prevHref}/>
         <Option {...props} item={start}/>
         {startDot && <Option {...props} isDot={true} item={startDotRef}/>}
         {(middle || []).map(item => <Option {...props} item={item}/>)}
         {endDot && <Option {...props} item={endDotRef}/>}
         <Option {...props} isDot={true} item={end}/>
-        <p className={'fs-25 px-10 cursor-pointer hover-opacity'} onClick={nextHref}>{'->'}</p>
-        <p className={'fs-25 px-10 cursor-pointer hover-opacity'} onClick={lastHref}>{'=>'}</p>
+        <ArrowRight width={20} className={'px-10 cursor-pointer hover-opacity'} onClick={nextHref}/>
+
     </div>;
 };
 
