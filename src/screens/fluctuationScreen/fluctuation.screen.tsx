@@ -4,9 +4,12 @@ import { Repository } from '../../shared/libs/repository';
 import { Header } from '../components/header';
 import { WatchedCryptoProps } from '../watchlist/watchlist.screen';
 import { CryptoCard } from './components/crypto-card';
+import { Paginator } from './components/paginator';
 
 export const FluctuationScreen = (props: any) => {
     const [watched, setWatched] = useState([]);
+    const [total, setTotal] = useState(0);
+    const [page, setPage] = useState(0);
     const [shouldRefetch, setShouldRefetch] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { token, isLoggedIn } = useContext(AuthContext);
@@ -14,14 +17,13 @@ export const FluctuationScreen = (props: any) => {
     const request = new Repository(token);
 
     useEffect(() => {
-        if (isLoggedIn || !!shouldRefetch) {
+        if (isLoggedIn || !!shouldRefetch || page) {
             (async () => {
                 try {
                     setIsLoading(true);
-                    // request.setHeader('page', '1');
-                    const response = await request.get('/crypto/get_changes_in_value', {}, { page: 2 });
+                    const response = await request.get('/crypto/get_changes_in_value', {}, { page });
                     console.log(response?.items);
-
+                    setTotal(response?.total || 0);
                     setWatched(response?.items || []);
                     setIsLoading(false);
                 } catch (e) {
@@ -29,7 +31,10 @@ export const FluctuationScreen = (props: any) => {
                 }
             })();
         }
-    }, [isLoggedIn, shouldRefetch]);
+    }, [isLoggedIn, shouldRefetch, page]);
+    const paginate = (page: number) => {
+        setPage(page);
+    };
 
     return <div>
         <Header>
@@ -42,7 +47,7 @@ export const FluctuationScreen = (props: any) => {
                 </div>;
             })}
         </div>
-
+        <Paginator currentPage={page} fetchPage={(data: number) => paginate(data)} total={total}/>
     </div>;
 };
 
