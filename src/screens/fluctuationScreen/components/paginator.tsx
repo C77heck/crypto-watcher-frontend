@@ -10,25 +10,27 @@ export const Paginator = (props: any) => {
     const shouldPrevBeDisabled = currentPage > 0 ? 'hover-primary' : 'color--black-3';
     const shouldNextBeDisabled = currentPage < totalPage - 1 && totalPage !== 1 ? 'hover-primary' : 'color--black-3';
 
-    const prevHref = currentPage > 0 ? fetchPage(currentPage - 1) : null;
-    const nextHref = currentPage < totalPage && totalPage !== 1 ? fetchPage(currentPage + 1) : null;
-    const firstHref = currentPage > 0 ? fetchPage(0) : null;
-    const lastHref = currentPage < totalPage ? fetchPage(end) : null;
+    const prevHref = () => currentPage > 0 && fetchPage(currentPage - 1);
+    const nextHref = () => currentPage < totalPage && totalPage !== 1 && fetchPage(currentPage + 1);
+    const firstHref = () => currentPage > 0 && fetchPage(0);
+    const lastHref = () => currentPage < totalPage && fetchPage(end);
 
     return <div className={'position-center py-60'}>
-        <p onClick={() => firstHref()}>{'<='}</p>
-        <p onClick={() => prevHref()}>{'<-'}</p>
-        <Option {...props} item={start}/>
+        <p className={'fs-25 px-10 cursor-pointer hover-opacity'} onClick={firstHref}>{'<='}</p>
+        <p className={'fs-25 px-10 cursor-pointer hover-opacity'} onClick={prevHref}>{'<-'}</p>
+        <Option {...props} isDot={true} item={start}/>
+        {startDot && <Option {...props} item={startDotRef}/>}
         {(middle || []).map(item => <Option {...props} item={item}/>)}
-        <Option {...props} item={end}/>
-        <p onClick={() => nextHref()}>{'->'}</p>
-        <p onClick={() => lastHref()}>{'=>'}</p>
+        {endDot && <Option {...props} item={endDotRef}/>}
+        <Option {...props} isDot={true} item={end}/>
+        <p className={'fs-25 px-10 cursor-pointer hover-opacity'} onClick={nextHref}>{'->'}</p>
+        <p className={'fs-25 px-10 cursor-pointer hover-opacity'} onClick={lastHref}>{'=>'}</p>
     </div>;
 };
 
-const Option = ({ fetchPage, item, currentPage }: any) => {
+const Option = ({ fetchPage, item, currentPage, isDot }: any) => {
     const classes = getClasses(currentPage === item, 'color-green--light');
-    return <a className={`fs-34 cursor-pointer hover-opacity ${classes}`} onClick={() => fetchPage(item)}>{item + 1}</a>;
+    return <a className={`fs-34 cursor-pointer hover-opacity ${classes}`} onClick={() => fetchPage(item)}>{!isDot ? item : '...'}</a>;
 };
 
 interface PaginationProps {
@@ -47,7 +49,7 @@ interface PaginationProp {
     middle: any[] | null;
 }
 
-export const getPaginationMap = (total: number, page: number = 1, limit: number = 100): PaginationProp => {
+export const getPaginationMap = (total: number, page: number = 1): PaginationProp => {
 
     if (total === 0) {
         return {
