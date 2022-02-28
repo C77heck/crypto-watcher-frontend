@@ -5,6 +5,7 @@ export const Paginator = (props: any) => {
     const { total, currentPage, fetchPage } = props;
     const { startDot, startDotRef, start, endDot, endDotRef, end, middle } = getPaginationMap(total, currentPage);
     console.log(getPaginationMap(total, currentPage));
+    // finish these too.
     const shouldPrevBeDisabled = currentPage > 0 ? 'hover-primary' : 'color--black-3';
     const shouldNextBeDisabled = currentPage < total - 1 && total !== 1 ? 'hover-primary' : 'color--black-3';
 
