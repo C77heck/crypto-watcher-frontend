@@ -22,9 +22,10 @@ export const FluctuationScreen = (props: any) => {
                 try {
                     setIsLoading(true);
                     const response = await request.get('/crypto/get_changes_in_value', {}, { page });
-                    console.log(response?.items);
                     setTotal(response?.total || 0);
                     setWatched(response?.items || []);
+                    console.log('GOT FIRED', response?.items || []);
+
                     setIsLoading(false);
                 } catch (e) {
                     setIsLoading(false);
