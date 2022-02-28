@@ -1,13 +1,28 @@
 import { getClasses, numArray } from '../../../shared/libs/helpers';
 
 export const Paginator = (props: any) => {
-    const { total, currentPage } = props;
-    const { firstPart, middlePart, endPart } = getPaginationMaőp(total, currentPage);
+    const { total, currentPage, fetchPage } = props;
+    const { startDot, startDotRef, start, endDot, endDotRef, end, middle } = getPaginationMap(total, currentPage);
     console.log(getPaginationMap(total, currentPage));
+    const numTotal = parseInt(total, 10);
+    const numLimit = 100;
+    const totalPage = total;
+    const shouldPrevBeDisabled = currentPage > 0 ? 'hover-primary' : 'color--black-3';
+    const shouldNextBeDisabled = currentPage < totalPage - 1 && totalPage !== 1 ? 'hover-primary' : 'color--black-3';
+
+    const prevHref = currentPage > 0 ? fetchPage(currentPage - 1) : null;
+    const nextHref = currentPage < totalPage && totalPage !== 1 ? fetchPage(currentPage + 1) : null;
+    const firstHref = currentPage > 0 ? fetchPage(0) : null;
+    const lastHref = currentPage < totalPage ? fetchPage(end) : null;
+
     return <div className={'position-center py-60'}>
-        {(firstPart || []).map(item => <Option {...props} item={item}/>)}
-        {(middlePart || []).map(item => <Option {...props} item={item}/>)}
-        {(endPart || []).map(item => <Option {...props} item={item}/>)}
+        <p onClick={() => firstHref()}>{'<='}</p>
+        <p onClick={() => prevHref()}>{'<-'}</p>
+        <Option {...props} item={start}/>
+        {(middle || []).map(item => <Option {...props} item={item}/>)}
+        <Option {...props} item={end}/>
+        <p onClick={() => nextHref()}>{'->'}</p>
+        <p onClick={() => lastHref()}>{'=>'}</p>
     </div>;
 };
 
@@ -22,24 +37,27 @@ interface PaginationProps {
     endPart: number[];
 }
 
-const getPaginationMaőp = (options: number, currentOption: number): PaginationProps => {
-    // need to figure the logic. take it from
-    const firstPart = currentOption - 4; // 4 numbers to show
-    const middlePart = currentOption - 4; // 4 numbers to show
-    const endPart = currentOption - 4; // 4 numbers to show
+interface PaginationProp {
+    startDot: boolean;
+    startDotRef: number | boolean;
+    start: number | null;
+    endDot: number | boolean;
+    endDotRef: number | boolean;
+    end: number | null;
+    middle: any[] | null;
+}
 
-    return { firstPart: [1], middlePart: [2], endPart: [3] };
-};
-
-export const getPaginationMap = (total: number, page: number = 1, limit: number = 100) => {
+export const getPaginationMap = (total: number, page: number = 1, limit: number = 100): PaginationProp => {
 
     if (total === 0) {
         return {
             startDot: false,
+            startDotRef: false,
             start: null,
-            middle: [],
             endDot: false,
-            end: null
+            endDotRef: false,
+            middle: [],
+            end: null,
         };
     }
     const pages = numArray(total);
@@ -49,9 +67,11 @@ export const getPaginationMap = (total: number, page: number = 1, limit: number 
     if (pages.length <= 7) {
         return {
             startDot: false,
+            startDotRef: false,
             start: start,
-            middle: pages.slice(1, pages.length - 1),
             endDot: false,
+            endDotRef: false,
+            middle: pages.slice(1, pages.length - 1),
             end: end
         };
     }
