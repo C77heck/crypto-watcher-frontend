@@ -18,8 +18,8 @@ export const Paginator = (props: any) => {
     return <div className={'position-center py-60'}>
         <p className={'fs-25 px-10 cursor-pointer hover-opacity'} onClick={firstHref}>{'<='}</p>
         <p className={'fs-25 px-10 cursor-pointer hover-opacity'} onClick={prevHref}>{'<-'}</p>
-        <Option {...props} isDot={true} item={start}/>
-        {startDot && <Option {...props} item={startDotRef}/>}
+        <Option {...props} item={start}/>
+        {startDot && <Option {...props} isDot={true} item={startDotRef}/>}
         {(middle || []).map(item => <Option {...props} item={item}/>)}
         {endDot && <Option {...props} item={endDotRef}/>}
         <Option {...props} isDot={true} item={end}/>
