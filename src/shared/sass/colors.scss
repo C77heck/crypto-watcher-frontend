@@ -22,6 +22,9 @@
     --color-success-1: hsl(85, 69%, 54%);
     --color-success-2: hsl(114, 69%, 54%);
     --color-success-3: hsl(111, 81%, 45%);
+    --color-failure-1: #f97070;
+    --color-failure-2: #ea3737;
+    --color-failure-3: #ec1212;
 }
 
 .background-color {
@@ -79,3 +82,19 @@
     }
 }
 
+.color-red {
+    &--light {
+        color: var(--color-light);
+        background-color: var(--color-failure-1);
+    }
+
+    &--normal {
+        color: var(--color-light);
+        background-color: var(--color-failure-2);
+    }
+
+    &--dark {
+        color: var(--color-light);
+        background-color: var(--color-failure-3);
+    }
+}
