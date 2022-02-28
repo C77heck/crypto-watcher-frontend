@@ -19,7 +19,7 @@ export const FluctuationScreen = (props: any) => {
                 try {
                     setIsLoading(true);
                     // request.setHeader('page', '1');
-                    const response = await request.get('/crypto/get_changes_in_value', {});
+                    const response = await request.get('/crypto/get_changes_in_value', { query: [{ prop: 'page', value: '2' }] });
                     console.log(response?.items);
 
                     setWatched(response?.items || []);

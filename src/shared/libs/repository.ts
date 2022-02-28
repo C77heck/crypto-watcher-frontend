@@ -8,7 +8,7 @@ interface QueryProps {
 }
 
 interface ClientProp extends RequestInit {
-    query?: QueryProps;
+    query?: QueryProps[];
 }
 
 export class Repository {
@@ -32,8 +32,8 @@ export class Repository {
     public async request(path: string, options: ClientProp, method: string) {
         const abortController = new AbortController();
         try {
-            console.log(this.formatUrl(path, options.query));
-            const request = new Request(this.formatUrl(path, options.query), this.formatOptions(options, abortController, method));
+            console.log(this.formatUrl(path, options?.query || []));
+            const request = new Request(this.formatUrl(path, options?.query || []), this.formatOptions(options, abortController, method));
             const response = await fetch(request);
             const responseData = await response.json();
 
@@ -49,16 +49,16 @@ export class Repository {
         }
     }
 
-    public formatUrl(url: string, query: QueryProps[]): string {
+    public formatUrl(url: string, query: QueryProps[] = []): string {
         if (!query || !query.length) {
             return url;
         }
         const queryManager = new QueryManager();
         for (const item of query) {
-            queryManager.add(item?.prop, item?.value);
+            queryManager.add(item?.prop || '', item?.value);
         }
 
-        return `${url}${queryManager.getQuery()}`;
+        return `${url}?${queryManager.getQuery()}`;
     }
 
     public formatOptions(options: any, abortController: AbortController, method: string) {
