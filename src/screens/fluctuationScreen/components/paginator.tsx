@@ -5,22 +5,19 @@ export const Paginator = (props: any) => {
     const { total, currentPage, fetchPage } = props;
     const { startDot, startDotRef, start, endDot, endDotRef, end, middle } = getPaginationMap(total, currentPage);
     console.log(getPaginationMap(total, currentPage));
-    const numTotal = parseInt(total, 10);
-    const numLimit = 100;
-    const totalPage = total;
     const shouldPrevBeDisabled = currentPage > 0 ? 'hover-primary' : 'color--black-3';
-    const shouldNextBeDisabled = currentPage < totalPage - 1 && totalPage !== 1 ? 'hover-primary' : 'color--black-3';
+    const shouldNextBeDisabled = currentPage < total - 1 && total !== 1 ? 'hover-primary' : 'color--black-3';
 
     const prevHref = () => currentPage > 0 && fetchPage(currentPage - 1);
-    const nextHref = () => currentPage < totalPage && totalPage !== 1 && fetchPage(currentPage + 1);
+    const nextHref = () => currentPage < total && total !== 1 && fetchPage(currentPage + 1);
 
     return <div className={'position-center py-60'}>
         <ArrowLeft width={20} className={'px-10 cursor-pointer hover-opacity'} onClick={prevHref}/>
         <Option {...props} item={start}/>
         {startDot && <Option {...props} isDot={true} item={startDotRef}/>}
         {(middle || []).map(item => <Option {...props} item={item}/>)}
-        {endDot && <Option {...props} item={endDotRef}/>}
-        <Option {...props} isDot={true} item={end}/>
+        {endDot && <Option {...props} isDot={true} item={endDotRef}/>}
+        <Option {...props} item={end}/>
         <ArrowRight width={20} className={'px-10 cursor-pointer hover-opacity'} onClick={nextHref}/>
 
     </div>;
@@ -28,7 +25,7 @@ export const Paginator = (props: any) => {
 
 const Option = ({ fetchPage, item, currentPage, isDot }: any) => {
     const classes = getClasses(currentPage === item, 'color-green--light');
-    return <a className={`fs-34 cursor-pointer hover-opacity ${classes}`} onClick={() => fetchPage(item)}>{!isDot ? item : '...'}</a>;
+    return <a className={`fs-34 px-12 cursor-pointer hover-opacity ${classes}`} onClick={() => fetchPage(item)}>{!isDot ? item : '...'}</a>;
 };
 
 interface PaginationProps {
