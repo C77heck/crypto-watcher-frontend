@@ -17,6 +17,7 @@ export const ChangesScreen = (props: any) => {
             (async () => {
                 try {
                     setIsLoading(true);
+                    // request.setHeader('page', '1');
                     const response = await request.get('/crypto/get_changes_in_value', {});
                     console.log(response?.items);
 

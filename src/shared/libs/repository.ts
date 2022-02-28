@@ -45,6 +45,7 @@ export class Repository {
         if (method !== 'GET') {
             options.body = JSON.stringify(options.body || {}, null);
         }
+
         return options;
     }
 
