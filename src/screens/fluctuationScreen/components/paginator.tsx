@@ -24,15 +24,14 @@ export const Paginator = (props: any) => {
 };
 
 const Option = ({ fetchPage, item, currentPage, isDot }: any) => {
-    const classes = getClasses(currentPage === item, 'color-green--light');
-    return <a className={`fs-34 px-12 cursor-pointer hover-opacity ${classes}`} onClick={() => fetchPage(item)}>{!isDot ? item : '...'}</a>;
+    const classes = getClasses(currentPage === item, 'color-custom--1 border-radius-px-4');
+    return <a
+        className={`fs-34 fw--700 px-12 cursor-pointer hover-opacity ${classes}`}
+        onClick={() => fetchPage(item)}
+    >
+        {!isDot ? item : '...'}
+    </a>;
 };
-
-interface PaginationProps {
-    firstPart: number[];
-    middlePart: number[];
-    endPart: number[];
-}
 
 interface PaginationProp {
     startDot: boolean;
