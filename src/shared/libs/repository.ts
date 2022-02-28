@@ -2,15 +2,6 @@
 import { HttpError } from './http-error';
 import { QueryManager } from './query.manager';
 
-interface QueryProps {
-    prop?: string;
-    value?: any;
-}
-
-interface ClientProp extends RequestInit {
-    query?: QueryProps[];
-}
-
 export class Repository {
     public baseUrl = process.env.REACT_APP_BASE_URL;
     public headers: string[][] = [['Content-Type', 'application/json']];
@@ -29,11 +20,11 @@ export class Repository {
         this.headers.push(['Authorization', `Bearer ${token}`]);
     }
 
-    public async request(path: string, options: ClientProp, method: string) {
+    public async request(path: string, options: RequestInit, method: string, query: any) {
         const abortController = new AbortController();
         try {
-            console.log(this.formatUrl(path, options?.query || []));
-            const request = new Request(this.formatUrl(path, options?.query || []), this.formatOptions(options, abortController, method));
+            console.log(this.formatUrl(path, query));
+            const request = new Request(this.formatUrl(path, query), this.formatOptions(options, abortController, method));
             const response = await fetch(request);
             const responseData = await response.json();
 
@@ -48,15 +39,17 @@ export class Repository {
         }
     }
 
-    public formatUrl(url: string, query: QueryProps[] = []): string {
-        if (!query || !query.length) {
+    public formatUrl(url: string, query: any = null): string {
+        if (!query) {
             return url;
         }
 
         const queryManager = new QueryManager();
 
-        for (const item of query) {
-            queryManager.add(item?.prop || '', item?.value);
+        for (const prop in query) {
+            if (query.hasOwnProperty(prop)) {
+                queryManager.add(prop, query[prop]);
+            }
         }
 
         return `${url}?${queryManager.getQuery()}`;
@@ -73,24 +66,24 @@ export class Repository {
         return options;
     }
 
-    public async get(url: string, options: ClientProp) {
-        return await this.request(`${this.baseUrl}${url}`, options, 'GET');
+    public async get(url: string, options: RequestInit, query: any = null) {
+        return await this.request(`${this.baseUrl}${url}`, options, 'GET', query);
     }
 
-    public async post(url: string, options: ClientProp) {
-        return await this.request(`${this.baseUrl}${url}`, options, 'POST');
+    public async post(url: string, options: RequestInit, query: any = null) {
+        return await this.request(`${this.baseUrl}${url}`, options, 'POST', query);
     }
 
-    public async put(url: string, options: ClientProp) {
-        return await this.request(`${this.baseUrl}${url}`, options, 'PUT');
+    public async put(url: string, options: RequestInit, query: any = null) {
+        return await this.request(`${this.baseUrl}${url}`, options, 'PUT', query);
     }
 
-    public async patch(url: string, options: ClientProp) {
-        return await this.request(`${this.baseUrl}${url}`, options, 'PATCH');
+    public async patch(url: string, options: RequestInit, query: any = null) {
+        return await this.request(`${this.baseUrl}${url}`, options, 'PATCH', query);
     }
 
-    public async delete(url: string, options: ClientProp) {
-        return await this.request(`${this.baseUrl}${url}`, options, 'DELETE');
+    public async delete(url: string, options: RequestInit, query: any = null) {
+        return await this.request(`${this.baseUrl}${url}`, options, 'DELETE', query);
     }
 
 }
