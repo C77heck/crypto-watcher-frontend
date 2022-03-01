@@ -7,7 +7,7 @@ export const Favourties = (props: any) => {
     const [isLoading, setIsLoading] = useState(false);
     const { token, isLoggedIn } = useContext(AuthContext);
     const request = new Repository(token);
-
+    // figure how to clear redis cache.
     const manageFavourite = () => {
         (async () => {
             try {
