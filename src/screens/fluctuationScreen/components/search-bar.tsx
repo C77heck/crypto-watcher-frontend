@@ -10,7 +10,7 @@ export const SearchBar = (props: any) => {
         validators: [],
         options: props?.options || [],
         className: '',
-        inputClasses: 'crypto-box py-5',
+        inputClasses: 'sum-values py-5',
         onChange: (value: string) => props.onSearch(value)
     });
 
