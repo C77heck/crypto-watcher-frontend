@@ -23,7 +23,6 @@ export class Repository {
     public async request(path: string, options: RequestInit, method: string, query: any) {
         const abortController = new AbortController();
         try {
-            console.log(this.formatUrl(path, query));
             const request = new Request(this.formatUrl(path, query), this.formatOptions(options, abortController, method));
             const response = await fetch(request);
             const responseData = await response.json();

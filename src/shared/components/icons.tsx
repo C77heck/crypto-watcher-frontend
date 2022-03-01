@@ -31,6 +31,7 @@ export const SpinnerIcon = (props: any) => {
 export const ArrowLeft = (props: any) => {
     return <div
         className={`${props.className}`}
+        onClick={props.onClick}
     >
         <svg fill="currentColor" className={`w-px-${props.width}`} version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 556.424 556.424">
             <path d="M508.094,13.5C511.82,6.043,508.087,0,499.749,0c0,0-205.77,0-205.773,0c-19.045,0.006-44.079,38.363-56.512,52.262
@@ -44,6 +45,7 @@ export const ArrowLeft = (props: any) => {
 export const ArrowRight = (props: any) => {
     return <div
         className={`${props.className}`}
+        onClick={props.onClick}
     >
         <svg fill="currentColor" className={`w-px-${props.width}`} version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 490 490">
             <polygon points="240.112,0 481.861,245.004 240.112,490 8.139,490 250.29,245.004 8.139,0"/>

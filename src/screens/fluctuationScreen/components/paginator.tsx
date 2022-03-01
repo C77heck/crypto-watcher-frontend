@@ -4,22 +4,19 @@ import { getClasses, numArray } from '../../../shared/libs/helpers';
 export const Paginator = (props: any) => {
     const { total, currentPage, fetchPage } = props;
     const { startDot, startDotRef, start, endDot, endDotRef, end, middle } = getPaginationMap(total, currentPage);
-    console.log(getPaginationMap(total, currentPage));
-    // finish these too.
-    const shouldPrevBeDisabled = currentPage > 0 ? 'hover-primary' : 'color--black-3';
-    const shouldNextBeDisabled = currentPage < total - 1 && total !== 1 ? 'hover-primary' : 'color--black-3';
-
+    const shouldPrevBeDisabled = currentPage > 0 ? 'hover-primary' : 'color-custom--disabled';
+    const shouldNextBeDisabled = currentPage < total - 1 && total !== 1 ? 'hover-primary' : 'color-custom--disabled';
     const prevHref = () => currentPage > 0 && fetchPage(currentPage - 1);
     const nextHref = () => currentPage < total && total !== 1 && fetchPage(currentPage + 1);
 
     return <div className={'position-center py-60'}>
-        <ArrowLeft width={20} className={'px-10 cursor-pointer hover-opacity'} onClick={prevHref}/>
+        <ArrowLeft width={20} className={`${shouldPrevBeDisabled} px-10 cursor-pointer`} onClick={prevHref}/>
         <Option {...props} item={start}/>
         {startDot && <Option {...props} isDot={true} item={startDotRef}/>}
         {(middle || []).map(item => <Option {...props} item={item}/>)}
         {endDot && <Option {...props} isDot={true} item={endDotRef}/>}
         <Option {...props} item={end}/>
-        <ArrowRight width={20} className={'px-10 cursor-pointer hover-opacity'} onClick={nextHref}/>
+        <ArrowRight width={20} className={`${shouldNextBeDisabled} px-10 cursor-pointer`} onClick={nextHref}/>
 
     </div>;
 };
@@ -27,7 +24,7 @@ export const Paginator = (props: any) => {
 const Option = ({ fetchPage, item, currentPage, isDot }: any) => {
     const classes = getClasses(currentPage === item, 'color-custom--1 border-radius-px-4');
     return <a
-        className={`fs-34 fw--700 px-12 cursor-pointer hover-opacity ${classes}`}
+        className={`fs-34 fw--700 px-12 cursor-pointer hover-primary ${classes}`}
         onClick={() => fetchPage(item)}
     >
         {!isDot ? item : '...'}

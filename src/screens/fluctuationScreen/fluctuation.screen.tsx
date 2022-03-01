@@ -9,7 +9,7 @@ import { Paginator } from './components/paginator';
 export const FluctuationScreen = (props: any) => {
     const [watched, setWatched] = useState([]);
     const [total, setTotal] = useState(0);
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
     const [shouldRefetch, setShouldRefetch] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { token, isLoggedIn } = useContext(AuthContext);
@@ -24,8 +24,6 @@ export const FluctuationScreen = (props: any) => {
                     const response = await request.get('/crypto/get_changes_in_value', {}, { page });
                     setTotal(response?.total || 0);
                     setWatched(response?.items || []);
-                    console.log('GOT FIRED', response?.items || []);
-
                     setIsLoading(false);
                 } catch (e) {
                     setIsLoading(false);
@@ -33,6 +31,7 @@ export const FluctuationScreen = (props: any) => {
             })();
         }
     }, [isLoggedIn, shouldRefetch, page]);
+
     const paginate = (page: number) => {
         setPage(page);
     };
