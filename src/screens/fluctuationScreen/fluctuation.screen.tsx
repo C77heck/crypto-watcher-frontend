@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import { debounceTime, distinctUntilChanged, Subject, tap } from 'rxjs';
 import { AuthContext } from '../../shared/context/auth.context';
 import { Repository } from '../../shared/libs/repository';
 import { Header } from '../components/header';
@@ -12,14 +13,14 @@ export const FluctuationScreen = (props: any) => {
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState('');
-    const [shouldRefetch, setShouldRefetch] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { token, isLoggedIn } = useContext(AuthContext);
 
     const request = new Repository(token);
 
     useEffect(() => {
-        if (isLoggedIn || !!shouldRefetch || page || search) {
+        if (isLoggedIn || page || search) {
+            console.log('HEY');
             (async () => {
                 try {
                     setIsLoading(true);
@@ -32,19 +33,32 @@ export const FluctuationScreen = (props: any) => {
                 }
             })();
         }
-    }, [isLoggedIn, shouldRefetch, page, search]);
+    }, [isLoggedIn, page, search]);
 
     const paginate = (page: number) => {
         setPage(page);
     };
 
-    const onSearchHandler = (value: string) => {
-        setSearch(value);
+    const [onSearch$] = useState(() => new Subject());
+    useEffect(() => {
+        const subscription = onSearch$.pipe(
+            debounceTime(1000),
+            distinctUntilChanged(),
+            tap(a => console.log(a))
+        ).subscribe(setSearch as any);
+
+        return () => subscription.unsubscribe();
+    }, []);
+
+    const onChangeHandler = (value: string) => {
+        onSearch$.next(value);
     };
+
+    console.log('RENDER');
 
     return <div>
         <div className={'max-width-vw-80 margin-auto display-flex justify-content-end'}>
-            <SearchBar onSearch={onSearchHandler}/>
+            <SearchBar onSearch={onChangeHandler}/>
         </div>
         <Header>
             <h2 className={'header--2'}>Crypto fluctuation</h2>

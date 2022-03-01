@@ -7,7 +7,7 @@ import { Repository } from '../libs/repository';
 import { LoginButton } from './login.button';
 
 const getColor = (link: string) => {
-    return window.location.pathname === link ? 'text-color--active uppercase fs-17' : 'fs-17 uppercase';
+    return window.location.pathname === link ? 'text-color--active uppercase fs-17 white-space-nowrap' : 'fs-17 uppercase white-space-nowrap';
 };
 
 export const NavBar = (props: any) => {

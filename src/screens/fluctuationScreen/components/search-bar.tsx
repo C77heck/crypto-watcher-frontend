@@ -8,7 +8,6 @@ export const SearchBar = (props: any) => {
         placeholder: 'Start typing...',
         value: '',
         validators: [],
-        options: props?.options || [],
         className: '',
         inputClasses: 'sum-values py-5',
         onChange: (value: string) => props.onSearch(value)

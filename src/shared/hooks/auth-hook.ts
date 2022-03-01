@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { useEffect, useState } from 'react';
+import { redirect } from '../libs/helpers';
 import { Storage } from '../libs/storage';
 
 export interface UserProps {
@@ -34,6 +35,7 @@ export const useAuth = () => {
         setIsLoggedIn(false);
         setToken('');
         setUserId('');
+        redirect('/');
     };
 
     // TODO -> Will need an expiry ddate. make sure to use my own date manager.
