@@ -20,9 +20,9 @@ function App() {
         <Router>
             <Routes>
                 <Route path={home} element={<BaseLayout><Home/></BaseLayout>}/>
+                <Route path={changesInValue} element={<BaseLayout><FluctuationScreen/></BaseLayout>}/>
                 <Route path={watchlist} element={<Auth><BaseLayout><WatchlistScreen/></BaseLayout></Auth>}/>
                 <Route path={newPurchase} element={<Auth><BaseLayout><NewCryptoScreen/></BaseLayout></Auth>}/>
-                <Route path={changesInValue} element={<BaseLayout><FluctuationScreen/></BaseLayout>}/>
             </Routes>
         </Router>
     );

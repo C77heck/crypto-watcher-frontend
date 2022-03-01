@@ -4,9 +4,9 @@ import { getClasses, numArray } from '../../../shared/libs/helpers';
 export const Paginator = (props: any) => {
     const { total, currentPage, fetchPage } = props;
     const { startDot, startDotRef, start, endDot, endDotRef, end, middle } = getPaginationMap(total, currentPage);
-    const shouldPrevBeDisabled = currentPage > 0 ? 'hover-primary' : 'color-custom--disabled';
+    const shouldPrevBeDisabled = currentPage > 1 ? 'hover-primary' : 'color-custom--disabled';
     const shouldNextBeDisabled = currentPage < total - 1 && total !== 1 ? 'hover-primary' : 'color-custom--disabled';
-    const prevHref = () => currentPage > 0 && fetchPage(currentPage - 1);
+    const prevHref = () => currentPage > 1 && fetchPage(currentPage - 1);
     const nextHref = () => currentPage < total && total !== 1 && fetchPage(currentPage + 1);
 
     return <div className={'position-center py-60'}>
