@@ -3,7 +3,7 @@ import { AuthContext } from '../../shared/context/auth.context';
 import { Repository } from '../../shared/libs/repository';
 import { Header } from '../components/header';
 import { WatchedCryptoProps } from '../watchlist/watchlist.screen';
-import { CryptoCard } from './components/crypto-card';
+import { CryptoManager } from './components/crypto-manager';
 import { Paginator } from './components/paginator';
 import { SearchBar } from './components/search-bar';
 
@@ -52,7 +52,7 @@ export const FluctuationScreen = (props: any) => {
         <div className={'position-center mt-50 max-width-vw-80 margin-auto row'}>
             {(watched || []).map((data: WatchedCryptoProps, index: number) => {
                 return <div key={index} className={'col-100 col-md-50 col-mlg-33 col-xl-25 mt-25 cursor-pointer gap-30'}>
-                    <CryptoCard data={data}/>
+                    <CryptoManager data={data}/>
                 </div>;
             })}
         </div>
