@@ -15,19 +15,21 @@ export const Paginator = (props: any) => {
         {startDot && <Option {...props} isDot={true} item={startDotRef}/>}
         {(middle || []).map(item => <Option key={item} {...props} item={item}/>)}
         {endDot && <Option {...props} isDot={true} item={endDotRef}/>}
-        <Option {...props} item={end}/>
+        {end && <Option {...props} item={end}/>}
         <ArrowRight width={20} className={`${shouldNextBeDisabled} px-10 cursor-pointer`} onClick={nextHref}/>
     </div>;
 };
 
 const Option = ({ fetchPage, item, currentPage, isDot }: any) => {
     const classes = getClasses(currentPage === item, 'color-custom--1 border-radius-px-4');
-    return <a
-        className={`fs-34 fw--700 px-12 cursor-pointer hover-primary ${classes}`}
-        onClick={() => fetchPage(item)}
-    >
-        {!isDot ? item : '...'}
-    </a>;
+    return <div>
+        <a
+            className={`fs-34 fw--700 px-12 cursor-pointer hover-primary ${classes}`}
+            onClick={() => fetchPage(item)}
+        >
+            {!isDot ? item : '...'}
+        </a>
+    </div>;
 };
 
 interface PaginationProp {
@@ -42,11 +44,11 @@ interface PaginationProp {
 
 export const getPaginationMap = (total: number, page: number = 1): PaginationProp => {
 
-    if (total === 0) {
+    if (total === 1) {
         return {
             startDot: false,
             startDotRef: false,
-            start: null,
+            start: 1,
             endDot: false,
             endDotRef: false,
             middle: [],
