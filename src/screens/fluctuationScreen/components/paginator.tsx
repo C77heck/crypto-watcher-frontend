@@ -13,11 +13,10 @@ export const Paginator = (props: any) => {
         <ArrowLeft width={20} className={`${shouldPrevBeDisabled} px-10 cursor-pointer`} onClick={prevHref}/>
         <Option {...props} item={start}/>
         {startDot && <Option {...props} isDot={true} item={startDotRef}/>}
-        {(middle || []).map(item => <Option {...props} item={item}/>)}
+        {(middle || []).map(item => <Option key={item} {...props} item={item}/>)}
         {endDot && <Option {...props} isDot={true} item={endDotRef}/>}
         <Option {...props} item={end}/>
         <ArrowRight width={20} className={`${shouldNextBeDisabled} px-10 cursor-pointer`} onClick={nextHref}/>
-
     </div>;
 };
 

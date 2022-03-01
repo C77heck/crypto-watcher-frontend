@@ -5,11 +5,13 @@ import { Header } from '../components/header';
 import { WatchedCryptoProps } from '../watchlist/watchlist.screen';
 import { CryptoCard } from './components/crypto-card';
 import { Paginator } from './components/paginator';
+import { SearchBar } from './components/search-bar';
 
 export const FluctuationScreen = (props: any) => {
     const [watched, setWatched] = useState([]);
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
+    const [searchValue, setSearchValue] = useState('');
     const [shouldRefetch, setShouldRefetch] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { token, isLoggedIn } = useContext(AuthContext);
@@ -17,11 +19,11 @@ export const FluctuationScreen = (props: any) => {
     const request = new Repository(token);
 
     useEffect(() => {
-        if (isLoggedIn || !!shouldRefetch || page) {
+        if (isLoggedIn || !!shouldRefetch || page || searchValue) {
             (async () => {
                 try {
                     setIsLoading(true);
-                    const response = await request.get('/crypto/get_changes_in_value', {}, { page });
+                    const response = await request.get('/crypto/get_changes_in_value', {}, { page, searchValue });
                     setTotal(response?.total || 0);
                     setWatched(response?.items || []);
                     setIsLoading(false);
@@ -30,13 +32,20 @@ export const FluctuationScreen = (props: any) => {
                 }
             })();
         }
-    }, [isLoggedIn, shouldRefetch, page]);
+    }, [isLoggedIn, shouldRefetch, page, searchValue]);
 
     const paginate = (page: number) => {
         setPage(page);
     };
 
+    const onSearchHandler = (value: string) => {
+        setSearchValue(value);
+    };
+
     return <div>
+        <div className={'max-width-vw-80 margin-auto display-flex justify-content-end'}>
+            <SearchBar onSearch={onSearchHandler}/>
+        </div>
         <Header>
             <h2 className={'header--2'}>Crypto fluctuation</h2>
         </Header>

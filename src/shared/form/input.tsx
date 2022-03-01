@@ -22,6 +22,8 @@ export interface FieldProps {
     element?: 'text' | 'dropdown' | 'searchable' | 'searchable_dropdown' | 'textarea';
     isNumberOnly?: boolean;
     value: string | null;
+    onChange?: (value: string) => void;
+    inputClasses?: string;
 }
 
 class Input extends Component<FieldProps, any> {
@@ -63,6 +65,10 @@ class Input extends Component<FieldProps, any> {
             this.setState({ value: this.removeNonNumericValues(value), hasError, errorMessage });
         } else {
             this.setState({ value, hasError, errorMessage });
+        }
+
+        if (this.props.onChange) {
+            this.props.onChange(value);
         }
     }
 
@@ -128,7 +134,7 @@ class Input extends Component<FieldProps, any> {
         >
             {this.props.label && <label className={`input-label error-${hasError ? 'show' : 'hide'}--label`} htmlFor={this.props.name}>{this.props.label}</label>}
             <div
-                className={`input-wrapper error-${hasError ? 'show' : 'hide'}--div`}
+                className={`input-wrapper ${this.props.inputClasses} error-${hasError ? 'show' : 'hide'}--div`}
             >
                 {this.manageInputType(this.props.element || 'text')}
             </div>

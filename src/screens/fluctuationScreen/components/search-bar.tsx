@@ -6,12 +6,14 @@ export const SearchBar = (props: any) => {
         name: 'search',
         label: 'Search',
         placeholder: 'Start typing...',
-        value: props?.data?.name || null,
+        value: '',
         validators: [],
         options: props?.options || [],
-        className: 'col-100'
+        className: '',
+        inputClasses: 'crypto-box py-5',
+        onChange: (value: string) => props.onSearch(value)
     });
-    return <div>
+    return <div className={'min-width-270 mr-23'}>
         <Input {...field}/>
     </div>;
 };

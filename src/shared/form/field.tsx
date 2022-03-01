@@ -19,6 +19,8 @@ export class Field implements FieldProps {
     public options;
     public isNumberOnly;
     public value;
+    public onChange;
+    public inputClasses;
 
     public constructor(attributes: any) {
         this.type = attributes?.type || 'text';
@@ -38,5 +40,7 @@ export class Field implements FieldProps {
         this.options = attributes?.options || [];
         this.isNumberOnly = attributes?.isNumberOnly || false;
         this.value = attributes?.value || null;
+        this.onChange = attributes?.onChange || null;
+        this.inputClasses = attributes?.inputClasses || '';
     }
 }
