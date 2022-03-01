@@ -4,18 +4,18 @@ import { Modal } from '../../../shared/components/modal';
 import { AuthContext } from '../../../shared/context/auth.context';
 import { Form } from '../../../shared/form/form';
 import { Repository } from '../../../shared/libs/repository';
-import { NewCryptoForm } from '../../newCrypto/components/new-crypto.form';
 import { CryptoCard } from './crypto-card';
+import { Favourties } from './favourties';
 
 export const CryptoManager = (props: any) => {
     const { token } = useContext(AuthContext);
     const request = new Repository(token);
-
+    console.log(props);
     // add to favourites
     // tab-1: graph
     // tab-2: tags added by algorithm written from the backend.
     const content = <div>
-        <NewCryptoForm {...props} update={true} onSuccess={() => window.location.reload()}/>
+        <Favourties {...props}/>
         <Form
             onSubmit={() => console.log('hey')}
             form={null}

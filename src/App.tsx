@@ -14,14 +14,14 @@ import { useAuth } from './shared/hooks/auth-hook';
 
 function App() {
 
-    const { links: { home, watchlist, newPurchase, changesInValue } } = staticData;
+    const { links: { home, watchlist, newPurchase, changesInValue, favourites } } = staticData;
     const auth = useAuth();
     const routes = (
         <Router>
             <Routes>
                 <Route path={home} element={<BaseLayout><Home/></BaseLayout>}/>
                 <Route path={changesInValue} element={<BaseLayout><FluctuationScreen/></BaseLayout>}/>
-                <Route path={favourites} element={<BaseLayout><FluctuationScreen/></BaseLayout>}/>
+                <Route path={favourites} element={<Auth><BaseLayout><FluctuationScreen/></BaseLayout></Auth>}/>
                 <Route path={watchlist} element={<Auth><BaseLayout><WatchlistScreen/></BaseLayout></Auth>}/>
                 <Route path={newPurchase} element={<Auth><BaseLayout><NewCryptoScreen/></BaseLayout></Auth>}/>
             </Routes>

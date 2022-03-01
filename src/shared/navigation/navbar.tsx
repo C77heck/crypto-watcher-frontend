@@ -47,23 +47,22 @@ export const NavBar = (props: any) => {
                                 Home
                             </Link>
                         </li>
-
-                        {isLoggedIn && <li className={'col-22'}>
+                        {isLoggedIn && <li className={'col-20'}>
                             <Link className={getColor(watchlist)} to={watchlist}>
                                 watchlist
                             </Link>
                         </li>}
-                        {isLoggedIn && <li className={'col-25'}>
+                        {isLoggedIn && <li className={'col-20'}>
                             <Link className={getColor(newPurchase)} to={newPurchase}>
                                 new purchase
                             </Link>
                         </li>}
-                        <li className={'col-33'}>
+                        <li className={'col-20'}>
                             <Link className={getColor(changesInValue)} to={changesInValue}>
-                                Crypto fluctuation
+                                Fluctuation
                             </Link>
                         </li>
-                        {isLoggedIn && <li className={'col-33'}>
+                        {isLoggedIn && <li className={'col-20'}>
                             <Link className={getColor(favourites)} to={favourites}>
                                 Favourites
                             </Link>
