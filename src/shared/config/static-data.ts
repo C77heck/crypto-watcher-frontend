@@ -4,5 +4,6 @@ export const staticData = {
         watchlist: '/watchlist',
         newPurchase: '/new-purchase',
         changesInValue: '/changes-in-value',
+        favourites: '/favourites',
     },
 };

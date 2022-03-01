@@ -11,7 +11,7 @@ const getColor = (link: string) => {
 };
 
 export const NavBar = (props: any) => {
-    const { links: { watchlist, newPurchase, changesInValue, home } } = staticData;
+    const { links: { watchlist, newPurchase, changesInValue, home, favourites } } = staticData;
 
     const [shouldRefetch, setShouldRefetch] = useState(false);
     const { token, isLoggedIn } = useContext(AuthContext);
@@ -63,6 +63,11 @@ export const NavBar = (props: any) => {
                                 Crypto fluctuation
                             </Link>
                         </li>
+                        {isLoggedIn && <li className={'col-33'}>
+                            <Link className={getColor(favourites)} to={favourites}>
+                                Favourites
+                            </Link>
+                        </li>}
                     </ul>
                 </div>
                 <div className={'col-40 display-flex justify-content-end'}>
