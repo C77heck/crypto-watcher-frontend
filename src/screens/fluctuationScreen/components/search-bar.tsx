@@ -13,6 +13,7 @@ export const SearchBar = (props: any) => {
         inputClasses: 'crypto-box py-5',
         onChange: (value: string) => props.onSearch(value)
     });
+
     return <div className={'min-width-350 mr-13'}>
         <Input {...field}/>
     </div>;
