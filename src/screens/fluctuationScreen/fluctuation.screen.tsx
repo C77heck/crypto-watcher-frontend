@@ -11,7 +11,7 @@ export const FluctuationScreen = (props: any) => {
     const [watched, setWatched] = useState([]);
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
-    const [searchValue, setSearchValue] = useState('');
+    const [search, setSearch] = useState('');
     const [shouldRefetch, setShouldRefetch] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { token, isLoggedIn } = useContext(AuthContext);
@@ -19,11 +19,11 @@ export const FluctuationScreen = (props: any) => {
     const request = new Repository(token);
 
     useEffect(() => {
-        if (isLoggedIn || !!shouldRefetch || page || searchValue) {
+        if (isLoggedIn || !!shouldRefetch || page || search) {
             (async () => {
                 try {
                     setIsLoading(true);
-                    const response = await request.get('/crypto/get_changes_in_value', {}, { page, searchValue });
+                    const response = await request.get('/crypto/get_changes_in_value', {}, { page, search });
                     setTotal(response?.total || 0);
                     setWatched(response?.items || []);
                     setIsLoading(false);
@@ -32,14 +32,14 @@ export const FluctuationScreen = (props: any) => {
                 }
             })();
         }
-    }, [isLoggedIn, shouldRefetch, page, searchValue]);
+    }, [isLoggedIn, shouldRefetch, page, search]);
 
     const paginate = (page: number) => {
         setPage(page);
     };
 
     const onSearchHandler = (value: string) => {
-        setSearchValue(value);
+        setSearch(value);
     };
 
     return <div>
