@@ -47,11 +47,7 @@ export const NavBar = (props: any) => {
                                 Home
                             </Link>
                         </li>
-                        <li className={'col-33'}>
-                            <Link className={getColor(changesInValue)} to={changesInValue}>
-                                Crypto fluctuation
-                            </Link>
-                        </li>
+
                         {isLoggedIn && <li className={'col-22'}>
                             <Link className={getColor(watchlist)} to={watchlist}>
                                 watchlist
@@ -62,6 +58,11 @@ export const NavBar = (props: any) => {
                                 new purchase
                             </Link>
                         </li>}
+                        <li className={'col-33'}>
+                            <Link className={getColor(changesInValue)} to={changesInValue}>
+                                Crypto fluctuation
+                            </Link>
+                        </li>
                     </ul>
                 </div>
                 <div className={'col-40 display-flex justify-content-end'}>
