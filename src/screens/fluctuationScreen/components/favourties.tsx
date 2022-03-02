@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { FavouriteIcon } from '../../../shared/components/icons';
+import { FavouriteIcon, SpinnerIcon } from '../../../shared/components/icons';
 import { AuthContext } from '../../../shared/context/auth.context';
 import { Repository } from '../../../shared/libs/repository';
 
@@ -12,7 +12,8 @@ export const Favourties = (props: any) => {
         (async () => {
             try {
                 setIsLoading(true);
-                const response = await request.post('/crypto/start-following', { body: { cryptoId: props.data?.identifier } as any });
+                const response = await request.post('/crypto/add-to-favourites', { body: { cryptoId: props.data?.identifier } as any });
+                console.log(response);
                 setIsLoading(false);
             } catch (e) {
                 setIsLoading(false);
@@ -20,6 +21,6 @@ export const Favourties = (props: any) => {
         })();
     };
     return <div onClick={manageFavourite} className={'w-100'}>
-        <FavouriteIcon width={30} className={'hover-primary'}/>
+        {isLoading ? <SpinnerIcon width={15}/> : <FavouriteIcon width={30} className={'hover-primary'}/>}
     </div>;
 };

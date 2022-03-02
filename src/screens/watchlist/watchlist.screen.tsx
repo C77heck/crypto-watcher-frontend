@@ -31,6 +31,7 @@ export const WatchlistScreen = () => {
             (async () => {
                 try {
                     setIsLoading(true);
+                    request.get('/crypto/latest_listings', {});
                     const response = await request.get('/crypto/get_purchases', {});
                     setWatched(response?.items || []);
                     setIsLoading(false);

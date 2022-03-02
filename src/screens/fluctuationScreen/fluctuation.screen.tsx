@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { debounceTime, distinctUntilChanged, Subject, tap } from 'rxjs';
+import { Spinner } from '../../shared/components/spinner';
 import { AuthContext } from '../../shared/context/auth.context';
 import { Repository } from '../../shared/libs/repository';
 import { Header } from '../components/header';
@@ -54,9 +55,8 @@ export const FluctuationScreen = (props: any) => {
         onSearch$.next(value);
     };
 
-    console.log('RENDER');
-
     return <div>
+        {isLoading && <Spinner asOverlay/>}
         <div className={'max-width-vw-80 margin-auto display-flex justify-content-end'}>
             <SearchBar onSearch={onChangeHandler}/>
         </div>
