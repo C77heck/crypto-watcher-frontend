@@ -10,7 +10,6 @@ export const Favourties = (props: any) => {
     const request = new Repository(token);
 
     useEffect(() => {
-        console.log('FIRED', props.data?.isFavourite);
         setIsFavourite(props.data?.isFavourite);
     }, [props.data?.isFavourite]);
 
