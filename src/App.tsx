@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom';
 import './App.scss';
 import { BaseLayout } from './screens/components/base.layout';
+import { FavouritesScreen } from './screens/favouritesScreen/favourites.screen';
 import { FluctuationScreen } from './screens/fluctuationScreen/fluctuation.screen';
 import { Home } from './screens/homeScreen/home';
 import { NewCryptoScreen } from './screens/newCrypto/new-crypto.screen';
@@ -21,7 +22,7 @@ function App() {
             <Routes>
                 <Route path={home} element={<BaseLayout><Home/></BaseLayout>}/>
                 <Route path={changesInValue} element={<BaseLayout><FluctuationScreen/></BaseLayout>}/>
-                <Route path={favourites} element={<Auth><BaseLayout><FluctuationScreen/></BaseLayout></Auth>}/>
+                <Route path={favourites} element={<Auth><BaseLayout><FavouritesScreen/></BaseLayout></Auth>}/>
                 <Route path={watchlist} element={<Auth><BaseLayout><WatchlistScreen/></BaseLayout></Auth>}/>
                 <Route path={newPurchase} element={<Auth><BaseLayout><NewCryptoScreen/></BaseLayout></Auth>}/>
             </Routes>
