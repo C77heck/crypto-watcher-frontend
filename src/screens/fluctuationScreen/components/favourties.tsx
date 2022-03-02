@@ -1,26 +1,39 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FavouriteIcon, SpinnerIcon } from '../../../shared/components/icons';
 import { AuthContext } from '../../../shared/context/auth.context';
 import { Repository } from '../../../shared/libs/repository';
 
 export const Favourties = (props: any) => {
     const [isLoading, setIsLoading] = useState(false);
-    const { token, isLoggedIn } = useContext(AuthContext);
+    const [isFavourite, setIsFavourite] = useState(false);
+    const { token } = useContext(AuthContext);
     const request = new Repository(token);
 
-    const manageFavourite = () => {
+    useEffect(() => {
+        console.log('FIRED', props.data?.isFavourite);
+        setIsFavourite(props.data?.isFavourite);
+    }, [props.data?.isFavourite]);
+
+    const isFavouriteClass = isFavourite ? 'color-custom--gold' : 'color-custom--grey';
+
+    const manageOnClick = () => {
         (async () => {
             try {
                 setIsLoading(true);
-                const response = await request.post('/crypto/add-to-favourites', { body: { cryptoId: props.data?.identifier } as any });
-                console.log(response);
+                await manageFavourite(isFavourite ? 'remove-from--favourites' : 'add-to-favourites');
                 setIsLoading(false);
+                setIsFavourite(!isFavourite);
             } catch (e) {
                 setIsLoading(false);
             }
         })();
     };
-    return <div onClick={manageFavourite} className={'w-100'}>
-        {isLoading ? <SpinnerIcon width={15}/> : <FavouriteIcon width={30} className={'hover-primary'}/>}
+
+    const manageFavourite = async (path: string) => {
+        await request.post(`/crypto/${path}`, { body: { cryptoId: props.data?.identifier } as any });
+    };
+
+    return <div onClick={manageOnClick} className={'w-100'}>
+        {isLoading ? <SpinnerIcon width={30}/> : <FavouriteIcon width={30} className={`${isFavouriteClass} hover-opacity`}/>}
     </div>;
 };

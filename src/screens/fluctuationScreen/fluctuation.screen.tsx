@@ -21,7 +21,6 @@ export const FluctuationScreen = (props: any) => {
 
     useEffect(() => {
         if (isLoggedIn || page || search) {
-            console.log('HEY');
             (async () => {
                 try {
                     setIsLoading(true);

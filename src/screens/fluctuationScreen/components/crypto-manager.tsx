@@ -11,15 +11,14 @@ export const CryptoManager = (props: any) => {
     const { token } = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(false);
     const request = new Repository(token);
-    console.log(props);
     // add to favourites
     // tab-1: graph
     // tab-2: tags added by algorithm written from the backend.
 
     const manageFavourites = async () => {
-        const response = await request.post('/crypto/add-to-favourites', { body: { cryptoId: props.data?.identifier } as any });
-        console.log(response);
+        await request.post('/crypto/add-to-favourites', { body: { cryptoId: props.data?.identifier } as any });
     };
+
     const content = <div>
         <Favourties isLoading={isLoading} {...props}/>
         <Form
