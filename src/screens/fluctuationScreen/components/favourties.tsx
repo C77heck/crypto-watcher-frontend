@@ -20,7 +20,7 @@ export const Favourties = (props: any) => {
         (async () => {
             try {
                 setIsLoading(true);
-                await manageFavourite(isFavourite ? 'remove-from--favourites' : 'add-to-favourites');
+                await manageFavourite();
                 setIsLoading(false);
                 setIsFavourite(!isFavourite);
             } catch (e) {
@@ -29,8 +29,10 @@ export const Favourties = (props: any) => {
         })();
     };
 
-    const manageFavourite = async (path: string) => {
-        await request.post(`/crypto/${path}`, { body: { cryptoId: props.data?.identifier } as any });
+    const manageFavourite = async () => {
+        return isFavourite
+            ? await request.put('/crypto/remove-from-favourites', { body: { cryptoId: props.data?.identifier } as any })
+            : await request.post('/crypto/add-to-favourites', { body: { cryptoId: props.data?.identifier } as any });
     };
 
     return <div onClick={manageOnClick} className={'w-100'}>
