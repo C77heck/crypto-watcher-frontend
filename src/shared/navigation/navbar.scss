@@ -1,115 +1,115 @@
 .nav-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: var(--color-primary-transparent);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-primary-transparent);
 
-    &--ul {
-        display: flex;
+  &--ul {
+    display: flex;
 
-        & li {
-            color: var(--color-secondary-3);
-            text-decoration: none;
-            font-size: 2rem;
-            list-style: none;
-            padding: 2rem;
-            cursor: pointer;
-            transition: all 250ms;
+    & li {
+      color: var(--color-secondary-3);
+      text-decoration: none;
+      font-size: 2rem;
+      list-style: none;
+      padding: 2rem;
+      cursor: pointer;
+      transition: all 250ms;
 
-            & a {
-                text-decoration: none;
-                color: inherit;
-            }
+      & a {
+        text-decoration: none;
+        color: inherit;
+      }
 
-            &:hover {
-                opacity: 0.7;
-            }
-        }
+      &:hover {
+        opacity: 0.7;
+      }
     }
+  }
 }
 
 // ********************* MOBILE CSS ************************* //
 
 
 .mobile-header {
-    position: sticky;
-    top: 0;
-    height: 4rem;
-    display: flex;
-    align-items: center;
-    z-index: 1000;
+  position: sticky;
+  top: 0;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
 
-    &__menu {
-        position: absolute;
-        left: 1rem;
+  &__menu {
+    position: absolute;
+    left: 1rem;
 
-        & i {
-            position: relative;
-            top: 5px;
-        }
-
-        & p {
-            padding-left: 0.5rem;
-        }
+    & i {
+      position: relative;
+      top: 5px;
     }
+
+    & p {
+      padding-left: 0.5rem;
+    }
+  }
 }
 
 .mobile-overlay {
 
+  display: flex;
+  height: 100vh;
+  padding: 0 !important;
+  position: fixed;
+  top: 50px;
+  left: 0;
+
+  &__left {
+    flex-basis: 60%;
     display: flex;
-    height: 100vh;
-    padding: 0 !important;
-    position: fixed;
-    top: 50px;
-    left: 0;
+    flex-display: column;
+    padding: 0.8rem 0;
+  }
 
-    &__left {
-        flex-basis: 70%;
-        display: flex;
-        flex-display: column;
-        padding: 0.8rem 0;
-    }
+  &__right {
+    flex-basis: 40%;
+    transition: all 1100ms ease-in;
+  }
 
-    &__right {
-        flex-basis: 30%;
-        transition: all 1100ms ease-in;
-    }
-
-    &__icon {
-        padding-left: 7px;
-        position: relative;
-        font-size: 18px;
-        top: 1px;
-    }
+  &__icon {
+    padding-left: 7px;
+    position: relative;
+    font-size: 18px;
+    top: 1px;
+  }
 
 }
 
 .mobile-navigaton-padding {
-    padding: 8px 12px;
+  padding: 8px 12px;
 }
 
 .mobile-menu {
-    transform: translateX(-100vw);
-    transition: all 300ms ease-in;
+  transform: translateX(-100vw);
+  transition: all 300ms ease-in;
 
-    &.opened {
-        transform: translateX(0vw);
+  &.opened {
+    transform: translateX(0vw);
 
-        .mobile-overlay__right {
-            opacity: 1;
-        }
+    .mobile-overlay__right {
+      opacity: 1;
     }
+  }
 }
 
 .mobile-opacity {
-    opacity: 0;
-    transform: translateX(130vw);
-    transition: transform 300ms ease-in, opacity 300ms 300ms ease-out;
+  opacity: 0;
+  transform: translateX(130vw);
+  transition: transform 300ms ease-in, opacity 300ms 300ms ease-out;
 
-    &.opened {
-        transform: translateX(0vw);
-        opacity: 1;
-    }
+  &.opened {
+    transform: translateX(0vw);
+    opacity: 1;
+  }
 }
 

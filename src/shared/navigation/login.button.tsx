@@ -43,13 +43,6 @@ export const LoginButton = (props: any) => {
         signin({ ...(response?.userData || {}), expiry: moment() });
     };
 
-    const content = <Form
-        onSubmit={(data: any) => submit(data)}
-        form={formData}
-        submitButton={{ className: 'mt-20 col-22 margin-auto', title: 'Login', type: 'submit' }}
-        className={'row margin-auto w-60'}
-    />;
-
     if (isLoggedIn) {
         return <Button
             textColor={'text-color--light-1'}
@@ -58,6 +51,13 @@ export const LoginButton = (props: any) => {
             onClick={() => signout()}
         />;
     }
+
+    const content = <Form
+        onSubmit={(data: any) => submit(data)}
+        form={formData}
+        submitButton={{ className: 'mt-20 col-100 col-md-40 col-lg-22 margin-auto', title: 'Login', type: 'submit' }}
+        className={'row margin-auto w-60'}
+    />;
 
     return <Modal
         level={2}

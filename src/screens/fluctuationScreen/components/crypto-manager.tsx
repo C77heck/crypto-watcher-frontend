@@ -2,10 +2,10 @@ import * as React from 'react';
 import { useContext, useState } from 'react';
 import { Modal } from '../../../shared/components/modal';
 import { AuthContext } from '../../../shared/context/auth.context';
-import { Form } from '../../../shared/form/form';
 import { Repository } from '../../../shared/libs/repository';
 import { CryptoCard } from './crypto-card';
 import { Favourties } from './favourties';
+import { Tabs } from './tabs';
 
 export const CryptoManager = (props: any) => {
     const { token } = useContext(AuthContext);
@@ -15,15 +15,12 @@ export const CryptoManager = (props: any) => {
     // tab-1: graph
     // tab-2: tags added by algorithm written from the backend.
 
-    const content = <div>
+    const header = <h3 className={'fs-24 fw-700 text-align-center position-center'}>
+        <span>{props?.data?.name}</span>
         <Favourties {...props}/>
-        <Form
-            onSubmit={() => console.log('clicked')}
-            form={null}
-            submitButton={{ className: 'mt-20 col-100 col-22', title: 'delete', type: 'submit', buttonStyle: 'delete' }}
-            className={'row w-100 position-center'}
-            onSuccess={() => window.location.reload()}
-        />
+    </h3>;
+    const content = <div>
+        <Tabs {...props} />
     </div>;
 
     return <Modal
@@ -31,7 +28,7 @@ export const CryptoManager = (props: any) => {
         className={'border-radius-px-5 p-15'}
         content={content}
         size={{ sm: 90, md: 60, lg: 50, xl: 40 }}
-        header={<h3 className={'fs-24 fw-700 text-align-center'}>Update details</h3>}
+        header={header}
         trigger={<CryptoCard {...props}/>}
     />;
 };

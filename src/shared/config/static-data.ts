@@ -6,4 +6,9 @@ export const staticData = {
         changesInValue: '/changes-in-value',
         favourites: '/favourites',
     },
+    tabs: {
+        purchaseMeter: 'purchase-meter',
+        graph: 'graph',
+        calculator: 'calculator',
+    }
 };

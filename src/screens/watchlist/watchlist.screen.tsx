@@ -45,7 +45,7 @@ export const WatchlistScreen = () => {
     return <div>
         {isLoading && <Spinner asOverlay/>}
         <Header>
-            <h2 className={'header--2'}>Your current investments</h2>
+            <h2 className={'header--2'}>Current investments</h2>
         </Header>
         <div className={'width-px-710 max-width-810  margin-auto'}>
             <Sum data={watched}/>
