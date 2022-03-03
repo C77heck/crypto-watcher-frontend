@@ -32,6 +32,7 @@ export const NavBar = (props: any) => {
     }, [shouldRefetch]);
 
     return <Portal elementId={'navbar'}>
-        <MobileNavbar isLoggedIn={isLoggedIn}/>
+        <DesktopNavbar className={"display-none display-md-flex"} isLoggedIn={isLoggedIn}/>
+        <MobileNavbar className={"display-flex display-md-none"} isLoggedIn={isLoggedIn}/>
     </Portal>;
 };

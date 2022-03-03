@@ -12,9 +12,9 @@ export const DesktopNavbar = (props: any) => {
 
     const isLoggedIn = props;
 
-    return <nav className="nav-bar position-center">
+    return <nav className={`${props.className} nav-bar justify-content-center align-items-center`}>
         <div className={'row max-width-vw-85'}>
-            <div className={'col-60'}>
+            <div className={'col-80 col-lg-60'}>
                 <ul className="nav-bar--ul row">
                     <li className={'col-20'}>
                         <Link className={getColor(home)} to={home}>
@@ -27,23 +27,25 @@ export const DesktopNavbar = (props: any) => {
                         </Link>
                     </li>}
                     {isLoggedIn && <li className={'col-20'}>
-                        <Link className={getColor(newPurchase)} to={newPurchase}>
-                            new purchase
+                        <Link className={getColor(favourites)} to={favourites}>
+                            Favourites
                         </Link>
                     </li>}
+
                     <li className={'col-20'}>
                         <Link className={getColor(changesInValue)} to={changesInValue}>
                             Fluctuation
                         </Link>
                     </li>
                     {isLoggedIn && <li className={'col-20'}>
-                        <Link className={getColor(favourites)} to={favourites}>
-                            Favourites
+                        <Link className={getColor(newPurchase)} to={newPurchase}>
+                            new purchase
                         </Link>
                     </li>}
+
                 </ul>
             </div>
-            <div className={'col-40 display-flex justify-content-end'}>
+            <div className={'col-20 col-lg-40 display-flex justify-content-end'}>
                 <LoginButton/>
             </div>
         </div>

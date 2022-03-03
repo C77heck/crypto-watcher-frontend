@@ -1,9 +1,28 @@
 @mixin Helpers($lg, $xl, $md, $sm, $mlg) {
 
+    .display-inherit {
+        display: inherit;
+    }
+
     .display-flex {
         display: flex;
     }
 
+    .display-sm-flex {
+        @media (min-width: $sm) {
+            display: flex !important;
+        }
+    }
+    .display-md-flex {
+        @media (min-width: $md) {
+            display: flex !important;
+        }
+    }
+    .display-lg-flex {
+        @media (min-width: $lg) {
+            display: flex !important;
+        }
+    }
     .display-inline {
         display: inline;
     }
@@ -22,6 +41,21 @@
 
     .display-none {
         display: none;
+    }
+    .display-sm-none {
+        @media (min-width: $sm) {
+            display: none !important;
+        }
+    }
+    .display-md-none {
+        @media (min-width: $md) {
+            display: none !important;
+        }
+    }
+    .display-lg-none {
+        @media (min-width: $lg) {
+            display: none !important;
+        }
     }
 
     .text-decoration-none {
@@ -469,6 +503,12 @@
         .#{px- + $i} {
             padding-left: $i + px !important;
             padding-right: $i + px !important;
+        }
+        @media (min-width: $md) {
+            .#{px-md- + $i} {
+                padding-left: $i + px !important;
+                padding-right: $i + px !important;
+            }
         }
         .#{py- + $i} {
             padding-top: $i + px !important;

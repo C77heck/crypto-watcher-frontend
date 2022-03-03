@@ -7,8 +7,8 @@ export const MobileNavbar = (props: any) => {
     const [isActive, setIsActive] = useState(false);
 
     return <Fragment>
-        <nav className="nav-bar position-center">
-            <div className={'row max-width-vw-89 fix-height-50'}>
+        <nav className={`${props.className} nav-bar justify-content-center align-items-center`}>
+            <div className={'row px-20 px-md-80 fix-height-50'}>
                 <div className={'col-60'}>
                     <MobileMenuButton isActive={isActive} onClick={() => setIsActive(!isActive)}/>
                 </div>
