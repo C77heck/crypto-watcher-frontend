@@ -8,7 +8,7 @@ export const Tabs = (props: any) => {
     const [content, setContent] = useState(purchaseMeter);
 
     const getClasses = (tab: string) => {
-        return tab === content ? 'background-color--error-1' : '';
+        return tab === content ? 'background-color--active' : '';
     };
 
     const tabManager = () => {
@@ -23,23 +23,23 @@ export const Tabs = (props: any) => {
                 return <h3>Something went wrong</h3>;
         }
     };
-    
+
     return <div className={'display-flex row'}>
         <Tab
             onClick={() => setContent(purchaseMeter)}
-            className={`col-33 cursor-pointer hover-opacity ${getClasses(purchaseMeter)}`}
+            className={`col-33 golden-box--full border-radius--tl cursor-pointer hover-opacity ${getClasses(purchaseMeter)}`}
             title={'Purchase meter'}
         />
         <Tab
             onClick={() => setContent(graph)}
-            className={`col-33 cursor-pointer hover-opacity ${getClasses(graph)}`}
+            className={`col-33 golden-box--no-sides cursor-pointer hover-opacity ${getClasses(graph)}`}
             title={'Graph'}
         />
         <Tab
             onClick={() => setContent(calculator)}
-            className={`col-33 cursor-pointer hover-opacity ${getClasses(calculator)}`}
+            className={`col-33 golden-box--full border-radius--tr cursor-pointer hover-opacity ${getClasses(calculator)}`}
             title={'Calculator'}
         />
-        <Content className={'col-99'}>{tabManager()}</Content>
+        <Content className={'col-99 golden-box--no-top border-radius--b'}>{tabManager()}</Content>
     </div>;
 };
