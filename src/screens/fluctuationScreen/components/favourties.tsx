@@ -10,8 +10,12 @@ export const Favourties = (props: any) => {
     const request = new Repository(token);
 
     useEffect(() => {
-        setIsFavourite(props.data?.isFavourite);
-    }, [props.data?.isFavourite]);
+        if (props?.isFavouriteScreen) {
+            setIsFavourite(true);
+        } else {
+            setIsFavourite(props.data?.isFavourite);
+        }
+    }, [props.data?.isFavourite, props?.isFavouriteScreen]);
 
     const isFavouriteClass = isFavourite ? 'color-custom--gold' : 'color-custom--grey';
 
@@ -29,9 +33,13 @@ export const Favourties = (props: any) => {
     };
 
     const manageFavourite = async () => {
-        return isFavourite
-            ? await request.put('/crypto/remove-from-favourites', { body: { cryptoId: props.data?.identifier } as any })
+        isFavourite
+            ? await request.delete('/crypto/remove-from-favourites', { body: { cryptoId: props.data?.identifier } as any })
             : await request.post('/crypto/add-to-favourites', { body: { cryptoId: props.data?.identifier } as any });
+
+        if (props?.isFavouriteScreen) {
+            props?.fetchList();
+        }
     };
 
     return <div onClick={manageOnClick} className={'w-100'}>

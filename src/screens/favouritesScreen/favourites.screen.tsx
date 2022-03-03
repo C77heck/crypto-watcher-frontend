@@ -9,12 +9,13 @@ import { WatchedCryptoProps } from '../watchlist/watchlist.screen';
 export const FavouritesScreen = (props: any) => {
     const [watched, setWatched] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [fetchList, setFetchList] = useState(false);
     const { token, isLoggedIn } = useContext(AuthContext);
 
     const request = new Repository(token);
 
     useEffect(() => {
-        if (isLoggedIn) {
+        if (isLoggedIn || fetchList) {
             (async () => {
                 try {
                     setIsLoading(true);
@@ -26,7 +27,7 @@ export const FavouritesScreen = (props: any) => {
                 }
             })();
         }
-    }, [isLoggedIn]);
+    }, [isLoggedIn, fetchList]);
 
     return <div>
         {isLoading && <Spinner asOverlay/>}
@@ -35,8 +36,8 @@ export const FavouritesScreen = (props: any) => {
         </Header>
         <div className={'position-center mt-50 max-width-vw-80 margin-auto row'}>
             {(watched || []).map((data: WatchedCryptoProps, index: number) => {
-                return <div key={index} className={'col-100 col-md-50 col-mlg-33 col-xl-25 mt-25 cursor-pointer gap-30'}>
-                    <CryptoManager data={data}/>
+                return <div key={index} className={'col-100 col-md-50 col-lg-33 col-xl-25 mt-25 cursor-pointer gap-30'}>
+                    <CryptoManager isFavouriteScreen={true} fetchList={() => setFetchList(!fetchList)} data={data}/>
                 </div>;
             })}
         </div>

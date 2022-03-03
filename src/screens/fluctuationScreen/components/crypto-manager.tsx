@@ -15,14 +15,10 @@ export const CryptoManager = (props: any) => {
     // tab-1: graph
     // tab-2: tags added by algorithm written from the backend.
 
-    const manageFavourites = async () => {
-        await request.post('/crypto/add-to-favourites', { body: { cryptoId: props.data?.identifier } as any });
-    };
-
     const content = <div>
-        <Favourties isLoading={isLoading} {...props}/>
+        <Favourties {...props}/>
         <Form
-            onSubmit={() => manageFavourites()}
+            onSubmit={() => console.log('clicked')}
             form={null}
             submitButton={{ className: 'mt-20 col-100 col-22', title: 'delete', type: 'submit', buttonStyle: 'delete' }}
             className={'row w-100 position-center'}
