@@ -47,7 +47,7 @@ export const WatchlistScreen = () => {
         <Header>
             <h2 className={'header--2'}>Your current investments</h2>
         </Header>
-        <div className={'max-width-vw-60 min-width-710 margin-auto'}>
+        <div className={'width-px-710 max-width-810  margin-auto'}>
             <Sum data={watched}/>
         </div>
         <div className={'position-center mt-50 max-width-vw-80 margin-auto row'}>

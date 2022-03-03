@@ -2,7 +2,7 @@ import React from 'react';
 import { priceFormat } from '../../../shared/libs/helpers';
 
 export const Sum = (props: any) => {
-    const containerClasses = 'col-33 py-5 sum-values display-flex flex-column align-items-center background--light';
+    const containerClasses = 'col-100 col-md-33 py-5 sum-values display-flex flex-column align-items-center background--light';
     let priceBoughtFor = 0;
     let currentPrice = 0;
     let potentialProfit = 0;
