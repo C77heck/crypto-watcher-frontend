@@ -9,14 +9,13 @@
         display: flex;
 
         & li {
-            color: var(--text-color-light);
+            color: var(--color-secondary-3);
             text-decoration: none;
             font-size: 2rem;
             list-style: none;
             padding: 2rem;
             cursor: pointer;
             transition: all 250ms;
-            color: hsl(0, 0, 96);
 
             & a {
                 text-decoration: none;

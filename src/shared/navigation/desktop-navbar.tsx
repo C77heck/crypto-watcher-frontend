@@ -7,10 +7,13 @@ export const DesktopNavbar = (props: any) => {
     const { links: { watchlist, newPurchase, changesInValue, home, favourites } } = staticData;
 
     const getColor = useCallback((link: string) => {
-        return window.location.pathname === link ? 'text-color--active uppercase fs-17 white-space-nowrap' : 'fs-17 uppercase white-space-nowrap';
+        const genericClasses = 'text-decoration-none uppercase fs-17 white-space-nowrap py-20 fw--700';
+        return window.location.pathname === link
+            ? `${genericClasses} text-color--active`
+            : `${genericClasses}`;
     }, []);
 
-    const isLoggedIn = props;
+    const { isLoggedIn } = props;
 
     return <nav className={`${props.className} nav-bar justify-content-center align-items-center`}>
         <div className={'row max-width-vw-85'}>

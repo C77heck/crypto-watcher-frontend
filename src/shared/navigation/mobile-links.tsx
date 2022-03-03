@@ -12,7 +12,7 @@ export const MobileLinks = (props: any) => {
             : `${genericClasses}`;
     }, []);
 
-    const isLoggedIn = props;
+    const { isLoggedIn } = props;
 
     const isShow = props.show ? 'opened' : '';
 
