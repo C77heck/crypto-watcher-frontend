@@ -8,7 +8,7 @@ export const MobileNavbar = (props: any) => {
 
     return <Fragment>
         <nav className="nav-bar position-center">
-            <div className={'row max-width-vw-85 fix-height-50'}>
+            <div className={'row max-width-vw-89 fix-height-50'}>
                 <div className={'col-60'}>
                     <MobileMenuButton isActive={isActive} onClick={() => setIsActive(!isActive)}/>
                 </div>

@@ -6,7 +6,10 @@ export const MobileLinks = (props: any) => {
     const { links: { watchlist, newPurchase, changesInValue, home, favourites } } = staticData;
 
     const getColor = useCallback((link: string) => {
-        return window.location.pathname === link ? 'text-color--active uppercase fs-17 white-space-nowrap' : 'fs-17 uppercase white-space-nowrap';
+        const genericClasses = 'text-decoration-none uppercase fs-21 white-space-nowrap py-20 fw--700';
+        return window.location.pathname === link
+            ? `${genericClasses} text-color--active`
+            : `${genericClasses}`;
     }, []);
 
     const isLoggedIn = props;
@@ -14,8 +17,8 @@ export const MobileLinks = (props: any) => {
     const isShow = props.show ? 'opened' : '';
 
     return <div className={`mobile-overlay w-100 mobile-menu ${isShow}`}>
-        <div className={`mobile-overlay__left display-flex background-color--light flex-column align-items-baseline mobile-menu ${isShow}`}>
-            <div className="display-flex align-items-center flex-column">
+        <div className={`mobile-overlay__left pt-50 display-flex background-color--light flex-column align-items-baseline mobile-menu ${isShow}`}>
+            <div className="display-flex align-items-start flex-column pl-20">
                 <Link className={getColor(home)} to={home}>
                     Home
                 </Link>
