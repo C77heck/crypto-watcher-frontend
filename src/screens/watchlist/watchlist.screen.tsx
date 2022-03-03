@@ -31,7 +31,7 @@ export const WatchlistScreen = () => {
             (async () => {
                 try {
                     setIsLoading(true);
-                    request.get('/crypto/latest_listings', {});
+                    // await request.get('/crypto/latest_listings', {});
                     const response = await request.get('/crypto/get_purchases', {});
                     setWatched(response?.items || []);
                     setIsLoading(false);
@@ -47,7 +47,7 @@ export const WatchlistScreen = () => {
         <Header>
             <h2 className={'header--2'}>Your current investments</h2>
         </Header>
-        <div className={'max-width-vw-60 min-width-400 margin-auto'}>
+        <div className={'max-width-vw-60 min-width-710 margin-auto'}>
             <Sum data={watched}/>
         </div>
         <div className={'position-center mt-50 max-width-vw-80 margin-auto row'}>
