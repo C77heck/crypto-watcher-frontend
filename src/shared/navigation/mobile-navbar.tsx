@@ -17,6 +17,6 @@ export const MobileNavbar = (props: any) => {
                 </div>
             </div>
         </nav>
-        {true && <MobileLinks {...props}/>}
+        <MobileLinks onClick={() => setIsActive(false)} {...props} show={isActive}/>
     </Fragment>;
 };

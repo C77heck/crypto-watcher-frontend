@@ -1,126 +1,140 @@
 :root {
-  --text-color: rgb(60, 64, 70);
-  --text-color-light: rgb(140, 143, 150);
-  --text-color-dark: rgb(32, 33, 36);
-  --color-primary-1: #c4af62;
-  --color-primary-2: #e9cf71;
-  --color-primary-3: #C4B88D;
-  --color-primary-4: #e5bd22;
-  --color-primary-transparent: #c4af62cf;
-  --color-secondary-1: #7fac15;
-  --color-secondary-2: #89ab3a;
-  --color-secondary-3: #437678;
-  --color-secondary-4: #0c8b90;
-  --color-dark-1: hsl(27, 41%, 17%);
-  --color-dark-2: #5e573b;
-  --color-dark-3: #7d736a;
-  --color-dark-4: hsl(0, 1%, 48%);
-  --color-error-1: hsl(0, 83%, 56%);
-  --color-error-2: hsl(0, 63%, 46%);
-  --color-error-3: #f97070;
-  --color-error-see-through: hsla(0, 83%, 56%, 0.34);
-  --color-light: rgb(252, 252, 252);
-  --color-shadow: rgb(118, 126, 144);
-  --color-success-1: hsl(85, 69%, 54%);
-  --color-success-2: hsl(114, 69%, 54%);
-  --color-success-3: hsl(111, 81%, 45%);
-  --color-failure-1: #f97070;
-  --color-failure-2: #ea3737;
-  --color-failure-3: #ec1212;
+    --text-color: rgb(60, 64, 70);
+    --text-color-light: rgb(140, 143, 150);
+    --text-color-dark: rgb(32, 33, 36);
+    --color-primary-1: #c4af62;
+    --color-primary-2: #e9cf71;
+    --color-primary-3: #C4B88D;
+    --color-primary-4: #e5bd22;
+    --color-primary-5: #dbd5c0;
+
+    --color-primary-transparent: #c4af62cf;
+    --color-secondary-1: #7fac15;
+    --color-secondary-2: #89ab3a;
+    --color-secondary-3: #437678;
+    --color-secondary-4: #0c8b90;
+    --color-dark-1: hsl(27, 41%, 17%);
+    --color-dark-2: #5e573b;
+    --color-dark-3: #7d736a;
+    --color-dark-4: hsla(0, 4%, 38%, 0.65);
+    --color-error-1: hsl(0, 83%, 56%);
+    --color-error-2: hsl(0, 63%, 46%);
+    --color-error-3: #f97070;
+    --color-error-see-through: hsla(0, 83%, 56%, 0.34);
+    --color-light: rgb(252, 252, 252);
+    --color-shadow: rgb(118, 126, 144);
+    --color-success-1: hsl(85, 69%, 54%);
+    --color-success-2: hsl(114, 69%, 54%);
+    --color-success-3: hsl(111, 81%, 45%);
+    --color-failure-1: #f97070;
+    --color-failure-2: #ea3737;
+    --color-failure-3: #ec1212;
 }
 
 .background-color {
-  &--error-1 {
-    background-color: var(--color-error-1);
-  }
+    &--error-1 {
+        background-color: var(--color-error-1);
+    }
 
-  &--error-2 {
-    background-color: var(--color-error-2);
-  }
+    &--error-2 {
+        background-color: var(--color-error-2);
+    }
 
-  &--error-3 {
-    background-color: var(--color-error-3);
-  }
+    &--error-3 {
+        background-color: var(--color-error-3);
+    }
+
+    &--light {
+        background-color: var(--color-primary-5);
+    }
+
+    &--grey {
+        background-color: var(--color-shadow);
+    }
+
+    &--dark-2 {
+        background-color: var(--color-dark-4);
+    }
 }
 
 .text-color {
-  &--error-1 {
-    color: var(--color-error-1);
-  }
+    &--error-1 {
+        color: var(--color-error-1);
+    }
 
-  &--error-2 {
-    color: var(--color-error-2);
-  }
+    &--error-2 {
+        color: var(--color-error-2);
+    }
 
-  &--light-1 {
-    color: var(--color-light);
-  }
+    &--light-1 {
+        color: var(--color-light);
+    }
 
-  &--light-2 {
-    color: var(--color-dark-3);
-  }
+    &--light-2 {
+        color: var(--color-dark-3);
+    }
 
-  &--active {
-    color: var(--color-dark-3) !important;
-  }
+    &--active {
+        color: var(--color-dark-3) !important;
+    }
 }
 
 
 // these are the indicator colours for the watch cards
 .color-green {
-  &--light {
-    color: var(--color-light);
-    background-color: var(--color-success-1);
-  }
+    &--light {
+        color: var(--color-light);
+        background-color: var(--color-success-1);
+    }
 
-  &--normal {
-    color: var(--color-light);
-    background-color: var(--color-success-2);
-  }
+    &--normal {
+        color: var(--color-light);
+        background-color: var(--color-success-2);
+    }
 
-  &--dark {
-    color: var(--color-light);
-    background-color: var(--color-success-3);
-  }
+    &--dark {
+        color: var(--color-light);
+        background-color: var(--color-success-3);
+    }
 }
 
 .color-red {
-  &--light {
-    color: var(--color-light);
-    background-color: var(--color-failure-1);
-  }
+    &--light {
+        color: var(--color-light);
+        background-color: var(--color-failure-1);
+    }
 
-  &--normal {
-    color: var(--color-light);
-    background-color: var(--color-failure-2);
-  }
+    &--normal {
+        color: var(--color-light);
+        background-color: var(--color-failure-2);
+    }
 
-  &--dark {
-    color: var(--color-light);
-    background-color: var(--color-failure-3);
-  }
+    &--dark {
+        color: var(--color-light);
+        background-color: var(--color-failure-3);
+    }
 }
 
 
 .color-custom {
-  &--1 {
-    color: var(--color-light);
-    background-color: var(--color-secondary-3);
-  }
+    &--1 {
+        color: var(--color-light);
+        background-color: var(--color-secondary-3);
+    }
 
-  &--secondary-3 {
-    color: var(--color-secondary-3);
-  }
+    &--secondary-3 {
+        color: var(--color-secondary-3);
+    }
 
-  &--disabled {
-    color: var(--color-shadow);
-  }
+    &--disabled {
+        color: var(--color-shadow);
+    }
 
-  &--gold {
-    color: var(--color-primary-4);
-  }
+    &--gold {
+        color: var(--color-primary-4);
+    }
 
-  &--grey {
-    color: var(--color-shadow);
-  }
+    &--grey {
+        color: var(--color-shadow);
+    }
 }
