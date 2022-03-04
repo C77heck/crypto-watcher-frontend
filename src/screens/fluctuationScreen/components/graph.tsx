@@ -43,12 +43,6 @@ export const Graph = (props: any) => {
     console.log(paths);
     return <svg viewBox="0 0 100 50">
         {paths.slice(0, 3).map(path => <Path key={path.id} {...path}/>)}
-        {/*<path d="M 0 0 l 24 10" stroke="orangered" fill="none" stroke-width="1"/>*/}
-        {/*<path d="m 24 10 l 24 20" stroke="orangered" fill="none" stroke-width="1"/>*/}
-        {/*<path d="m 48 20 l 24 30" stroke="orangered" fill="none" stroke-width="1"/>*/}
-        {/*<path d="m 70 30 l 22 40" stroke="orangered" fill="none" stroke-width="1"/>*/}
-        {/*<path d="m 85 40 l 15 50" stroke="orangered" fill="none" stroke-width="1"/>*/}
-        {/*<path d="m 93 50 l 8 60" stroke="orangered" fill="none" stroke-width="1"/>*/}
     </svg>;
 };
 
@@ -56,8 +50,8 @@ const formatPathDraw = (itemsToFormat: PathProps[]): PathDrawProps[] => {
     return itemsToFormat.map((item, index) => {
         return {
             id: item.id, l1: item.l1, l2: item.l2,
-            m1: item.prevL1 + item.prevM1,
-            m2: item.prevL2 + item.prevM2,
+            m1: !!index ? item.prevL1 + item.prevM1 : 0,
+            m2: !!index ? item.prevL2 + item.prevM2 : 0,
         };
     });
 };
@@ -76,21 +70,20 @@ const calculatePath = (priceArr: PriceProps[]): PathProps[] => {
     let m2Val = 0;
 
     return firstRound.map(({ l1, l2, id }, index) => {
-        m1Val += l1;
-        m2Val += l2;
+        m1Val = getPrevValues(firstRound, index, 'l1', m1Val);
+        m2Val = getPrevValues(firstRound, index, 'l2', m2Val);
         return {
             l1, l2, id,
-            prevM1: !!index ? getPrevValues(firstRound, index, 'l1', m1Val) : 0,
-            prevM2: !!index ? getPrevValues(firstRound, index, 'l2', m2Val) : 0,
+            prevM1: !!index ? m1Val : 0,
+            prevM2: !!index ? m2Val : 0,
             prevL1: !!index ? getPrevValues(firstRound, index, 'l1') : l1,
             prevL2: !!index ? getPrevValues(firstRound, index, 'l2') : l2,
         };
     });
 };
 
-const getPrevValues = (array: any[], index: number, property: string, secProp = 0): number => {
-    console.log(property, array[index - 1][property], array, secProp);
-    return array[index - 1][property] + secProp;
+const getPrevValues = (array: any[], index: number, property: string, addVal = 0): number => {
+    return (array?.[index - 1]?.[property] || 0) + addVal;
 };
 
 const Path = (props: PathDrawProps) => {
