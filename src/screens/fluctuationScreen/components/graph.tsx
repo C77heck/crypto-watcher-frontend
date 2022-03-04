@@ -40,24 +40,32 @@ export const Graph = (props: any) => {
     const priceArr = [{ from: 13, to: 22, l1: 17 }, { from: 22, to: 32, l1: 17 }, { from: 22, to: 32, l1: 17 }, { from: 16, to: 20, l1: 17 }, { from: 20, to: 36, l1: 17 }, { from: 20, to: 36, l1: 17 }];
 
     const paths: PathDrawProps[] = formatPathDraw(calculatePath(priceArr));
-    console.log(paths);
+    console.log(paths, calculatePath(priceArr));
     return <svg viewBox="0 0 100 50">
-        {paths.slice(0, 3).map(path => <Path key={path.id} {...path}/>)}
+        {paths.slice(0, 4).map(path => <Path key={path.id} {...path}/>)}
     </svg>;
 };
 
 const formatPathDraw = (itemsToFormat: PathProps[]): PathDrawProps[] => {
     return itemsToFormat.map((item, index) => {
         return {
-            id: item.id, l1: item.l1, l2: item.l2,
-            m1: !!index ? item.prevL1 + item.prevM1 : 0,
-            m2: !!index ? item.prevL2 + item.prevM2 : 0,
+            ...item,
+            id: item.id,
+            l1: !!index ? (index === 3 ? item.prevL1 + item.l1 : item.prevL1) : item.l1,
+            l2: item.l2,
+            m2: !!index ? item.prevM2 : 0,
+        };
+    }).map((item, index) => {
+        console.log({ index, prevM1: item.prevM1, prevL1: item.prevL1 });
+
+        return {
+            ...item,
+            m1: index > 0 ? (index === 1 ? item.prevM1 : (index === 2 ? item.prevM1 : item.prevM1 + item.prevL1)) : 0,
         };
     });
 };
 
 const calculatePath = (priceArr: PriceProps[]): PathProps[] => {
-
     const firstRound = priceArr.map(({ from, to, l1 }, index) => {
         const l2 = (from - to) * -1;
 
@@ -72,11 +80,12 @@ const calculatePath = (priceArr: PriceProps[]): PathProps[] => {
     return firstRound.map(({ l1, l2, id }, index) => {
         m1Val = getPrevValues(firstRound, index, 'l1', m1Val);
         m2Val = getPrevValues(firstRound, index, 'l2', m2Val);
+
         return {
             l1, l2, id,
-            prevM1: !!index ? m1Val : 0,
-            prevM2: !!index ? m2Val : 0,
-            prevL1: !!index ? getPrevValues(firstRound, index, 'l1') : l1,
+            prevM1: m1Val,
+            prevM2: m2Val,
+            prevL1: l1 + l1,
             prevL2: !!index ? getPrevValues(firstRound, index, 'l2') : l2,
         };
     });
