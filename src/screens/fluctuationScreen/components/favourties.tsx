@@ -42,7 +42,7 @@ export const Favourties = (props: any) => {
         }
     };
 
-    return <div onClick={manageOnClick} className={'pl-15 pt-6'}>
+    return <div onClick={manageOnClick} className={'pr-15 pt-6'}>
         {isLoading ? <SpinnerIcon width={30}/> : <FavouriteIcon width={30} className={`${isFavouriteClass} hover-opacity`}/>}
     </div>;
 };

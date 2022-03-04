@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { staticData } from '../../../shared/config/static-data';
 import { Content } from './content';
+import { Graph } from './graph';
 import { Tab } from './tab';
 
 export const Tabs = (props: any) => {
@@ -14,7 +15,7 @@ export const Tabs = (props: any) => {
     const tabManager = () => {
         switch (content) {
             case purchaseMeter:
-                return <h3>Purchase meter content</h3>;
+                return <Graph/>;
             case graph:
                 return <h3>Graph content</h3>;
             case calculator:

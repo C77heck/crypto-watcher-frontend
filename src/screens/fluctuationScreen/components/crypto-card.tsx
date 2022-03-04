@@ -23,7 +23,7 @@ export const CryptoCard = (props: any) => {
     const class6 = getClasses(percentChangeLast90Days > 0, 'color-green--light', 'color-red--light');
 
     return <div className={'row w-100 crypto-box mx-20 hover-scale box-shadow background--light'}>
-        <div className={'col-100 data-separator px-10 py-6 position-center'}>
+        <div className={'col-100 white-space-nowrap data-separator px-10 py-6 position-center'}>
             <p className={'fs-24 fw--900'}>{name} </p>
             <p className={'fs-17 fw--700'}>&nbsp;({symbol})</p>
 

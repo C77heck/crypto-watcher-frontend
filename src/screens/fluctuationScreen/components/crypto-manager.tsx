@@ -16,8 +16,8 @@ export const CryptoManager = (props: any) => {
     // tab-2: tags added by algorithm written from the backend.
 
     const header = <h3 className={'fs-24 fw-700 text-align-center position-center'}>
-        <span>{props?.data?.name}</span>
         <Favourties {...props}/>
+        <span>{props?.data?.name}</span>
     </h3>;
     const content = <div>
         <Tabs {...props} />
@@ -27,7 +27,7 @@ export const CryptoManager = (props: any) => {
         level={3}
         className={'border-radius-px-5 p-15'}
         content={content}
-        size={{ sm: 90, md: 60, lg: 50, xl: 40 }}
+        size={{ sm: 95, md: 70, lg: 65, xl: 50 }}
         header={header}
         trigger={<CryptoCard {...props}/>}
     />;
