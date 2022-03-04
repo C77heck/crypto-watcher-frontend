@@ -115,7 +115,7 @@ export class Modal extends React.Component<ModalProps, any> {
                 />
             </div>
             <div className={`${contentClasses} px-20 pt-20 pb-5`}>
-                {content}
+                {show && content}
             </div>
         </div>;
     }

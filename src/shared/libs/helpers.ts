@@ -49,3 +49,7 @@ export const redirect = (location: string, inSite: boolean = true) => {
         window.location.replace(location);
     }
 };
+
+export const getUniqueId = () => {
+    return (Math.random() * 1000).toString(16).replace('.', '');
+};
