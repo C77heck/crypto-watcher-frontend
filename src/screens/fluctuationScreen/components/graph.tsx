@@ -9,34 +9,69 @@ export const Graph = (props: any) => {
     // L2 will yield determine the slope up or down. minus is up the positive is down.
     const startl1 = 24;
     const startl2 = 10;
-    return <svg viewBox="0 0 100 50">
-        <Path prevM1={0} prevM2={0} prevL1={0} prevL2={0} l1={startl1} l2={startl2}/>
-        <Path prevM1={0} prevM2={0} prevL1={0} prevL2={0} l1={24} l2={10}/>
-        <Path prevM1={0} prevM2={0} prevL1={0} prevL2={0} l1={24} l2={10}/>
-        <Path prevM1={0} prevM2={0} prevL1={0} prevL2={0} l1={24} l2={10}/>
-        <Path prevM1={0} prevM2={0} prevL1={0} prevL2={0} l1={24} l2={10}/>
-        <Path prevM1={0} prevM2={0} prevL1={0} prevL2={0} l1={24} l2={10}/>
+    const priceArr = [{ from: 13, to: 22, l1: 17 }, { from: 22, to: 32, l1: 17 }, { from: 32, to: 16, l1: 17 }, { from: 16, to: 20, l1: 17 }, { from: 20, to: 36, l1: 17 }, { from: 20, to: 36, l1: 17 }];
 
-        <path d="M 0 0 l 24 10" stroke="orangered" fill="none" stroke-width="1"/>
-        <path d="m 24 10 l 24 20" stroke="orangered" fill="none" stroke-width="1"/>
-        <path d="m 48 20 l 24 30" stroke="orangered" fill="none" stroke-width="1"/>
-        <path d="m 70 30 l 22 40" stroke="orangered" fill="none" stroke-width="1"/>
-        <path d="m 85 40 l 15 50" stroke="orangered" fill="none" stroke-width="1"/>
-        <path d="m 93 50 l 8 60" stroke="orangered" fill="none" stroke-width="1"/>
+    const paths: PathDrawnProps[] = calculatePath(priceArr, 0, 0);
+    console.log(paths);
+    return <svg viewBox="0 0 100 50">
+        {paths.map(path => <Path {...path}/>)}
+        {/*<path d="M 0 0 l 24 10" stroke="orangered" fill="none" stroke-width="1"/>*/}
+        {/*<path d="m 24 10 l 24 20" stroke="orangered" fill="none" stroke-width="1"/>*/}
+        {/*<path d="m 48 20 l 24 30" stroke="orangered" fill="none" stroke-width="1"/>*/}
+        {/*<path d="m 70 30 l 22 40" stroke="orangered" fill="none" stroke-width="1"/>*/}
+        {/*<path d="m 85 40 l 15 50" stroke="orangered" fill="none" stroke-width="1"/>*/}
+        {/*<path d="m 93 50 l 8 60" stroke="orangered" fill="none" stroke-width="1"/>*/}
     </svg>;
 };
 
 // we need the price from and price to in arrays
-const priceArr = [{ from: 13, to: 22 }, { from: 22, to: 32 }, { from: 32, to: 16 }, { from: 16, to: 20 }, { from: 20, to: 36 }];
-const calculatePath = (): any[] => {
-    return priceArr.map(({ from, to }) => {
-        const l1 = (to - from) * -1;
-        // l2 will be set by us
-        return { l1 };
+interface PriceProps {
+    from: number;
+    to: number;
+    l1: number;
+}
+
+interface PathDrawnProps {
+    prevM1: number;
+    prevM2: number;
+    prevL1: number;
+    prevL2: number;
+    l1: number;
+    l2: number;
+}
+
+// M1 = prevM1 prevL1
+// M2 = prevM2 prevL2
+const calculatePath = (priceArr: PriceProps[], startM1: number, startM2: number): PathDrawnProps[] => {
+    let m1Val = startM1;
+    let m2Val = startM2;
+    priceArr.map((i, index) => {
+        console.log(!!index);
+        return i;
+    });
+    const calcValues = priceArr.map(({ from, to, l1 }, index) => ({
+        l1,
+        m1: !!index ? m1Val += l1 : m1Val,
+        m2: !!index ? m2Val + (from - to) * -1 : m2Val,
+        l2: (from - to) * -1
+    }));
+
+    return calcValues.map(({ l1, l2 }, index) => {
+
+        return {
+            l1, l2,
+            prevM1: !!index ? getPrevValues(calcValues, index, 'm1', 'l1') : 0,
+            prevM2: !!index ? getPrevValues(calcValues, index, 'm2', 'l2') : 0,
+            prevL1: !!index ? getPrevValues(calcValues, index, 'l1') : l1,
+            prevL2: !!index ? getPrevValues(calcValues, index, 'l2') : l2,
+        };
     });
 };
-// M1 = prev m1 and l1
-// M2 = prev m2 and l2
+
+const getPrevValues = (array: any[], index: number, property: string, secProp = ''): number => {
+    return !secProp ? array[index - 1][property] : array[index - 1][property] + array[index - 1][secProp];
+};
+
 interface PathProps {
     prevM1: number;
     prevM2: number;
@@ -60,10 +95,3 @@ const Path = (props: PathProps) => {
 // 7
 // 1
 // 0.04
-//
-// M moves relative to the viewbox while lowercase m means relative to the last point drawn
-// It seems that it just determines the position inside of the view box we outlined.
-//     The first number is on the x-axis the second is on the y-axis.
-//
-//     L is for actually drawing the line
-// The first number is for length the second number is for tilting the line
