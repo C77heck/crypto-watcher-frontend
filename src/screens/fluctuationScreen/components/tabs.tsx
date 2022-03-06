@@ -15,7 +15,7 @@ export const Tabs = (props: any) => {
     const tabManager = () => {
         switch (content) {
             case purchaseMeter:
-                return <Graph/>;
+                return <Graph data={[32, 1, 2, 14, 123, 3]}/>;
             case graph:
                 return <h3>Graph content</h3>;
             case calculator:

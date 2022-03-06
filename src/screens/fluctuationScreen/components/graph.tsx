@@ -1,5 +1,5 @@
 import { CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Title, Tooltip, } from 'chart.js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 
 ChartJS.register(
@@ -18,11 +18,6 @@ interface DatasetsProp {
     borderColor: string,
     backgroundColor: string,
     yAxisID: string;
-}
-
-interface DataProps {
-    label: string[];
-    datasets: DatasetsProp[];
 }
 
 export const options = {
@@ -55,24 +50,35 @@ export const options = {
     },
 };
 
-const baseLabels = ['90 days', '60 days', '30 days', '7 days', '1 day', 'Last hour', 'now'];
-const data = {
-    datasets: [
-        {
-            label: 'Dataset 1',
-            data: [34, 22, 15, 45, 33, 29, 45],
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-            yAxisID: 'y',
-        },
-    ],
-};
+const labels = ['90 days', '60 days', '30 days', '7 days', '1 day', 'Last hour', 'now'];
+const datasets = [{
+    label: 'Dataset 1',
+    data: [1, 23, 213, 123, 432, 23, 4],
+    borderColor: 'rgb(255, 99, 132)',
+    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+    yAxisID: 'y',
+}];
 
-export const Graph = (props: any) => {
-    const [labels, setLabels] = useState<string[]>(baseLabels);
-    const [datasets, setDatasets] = useState<DatasetsProp[]>(data?.datasets);
+const datasets = [{
+    label: 'Dataset 1',
+    data: [1, 2, 3],
+    borderColor: 'rgb(255, 99, 132)',
+    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+    yAxisID: 'y',
+}];
+
+interface GraphProps {
+    data: number[];
+}
+
+export const Graph = (props: GraphProps) => {
+    const [data, setData] = useState<DatasetsProp[]>(datasets);
+
+    useEffect(() => {
+        setData(() => ([{ ...datasets, data: props.data }]));
+    }, [props.data]);
 
     return <div>
-        <Line data={{ datasets, labels }} options={options}/>
+        <Line data={{ datasets: { ...datasets, data }, labels }} options={options}/>
     </div>;
 };
