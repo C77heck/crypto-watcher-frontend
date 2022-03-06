@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { staticData } from '../../../shared/config/static-data';
+import { numArray } from '../../../shared/libs/helpers';
 import { Content } from './content';
 import { Graph } from './graph';
 import { Tab } from './tab';
@@ -7,7 +8,6 @@ import { Tab } from './tab';
 export const Tabs = (props: any) => {
     const { purchaseMeter, graph, calculator } = staticData.tabs;
     const [content, setContent] = useState(purchaseMeter);
-    console.log(props);
     const getClasses = (tab: string) => {
         return tab === content ? 'background-color--active' : '';
     };
@@ -52,25 +52,28 @@ interface AnalysisProps {
 }
 
 const getGraphData = (analysis: any): AnalysisProps => {
-    console.log({
-        price: analysis.price,
-        priceChangeLast60Days: analysis.priceChangeLast60Days,
-        priceChangeLast90Days: analysis.priceChangeLast90Days,
-        priceChangeLastDay: analysis.priceChangeLastDay,
-        priceChangeLastHour: analysis.priceChangeLastHour,
-        priceChangeLastMonth: analysis.priceChangeLastMonth,
-        priceChangeLastWeek: analysis.priceChangeLastWeek,
-    });
+    console.log(numArray(90).length);
     return {
-        labels: [],
+        labels: numArray(90).map(num => (`${num} day`)).reverse(),
         data: [
-            analysis.price,
-            analysis.priceChangeLast60Days,
-            analysis.priceChangeLast90Days,
+            ...stepDown(analysis.priceChangeLast90Days, analysis.priceChangeLast60Days),
+            ...stepDown(analysis.priceChangeLast60Days, analysis.priceChangeLastMonth),
+            ...stepDown(analysis.priceChangeLastMonth, analysis.priceChangeLastWeek),
+            ...stepDown(analysis.priceChangeLastWeek, analysis.priceChangeLastDay, 7),
             analysis.priceChangeLastDay,
             analysis.priceChangeLastHour,
-            analysis.priceChangeLastMonth,
-            analysis.priceChangeLastWeek,
+            analysis.price,
         ]
     };
+};
+
+const stepDown = (price: number, endValue: number, rounds = 30): number[] => {
+    const changeInDay = (price - endValue) / rounds;
+    console.log({ changeInDay, price, endValue, rounds });
+
+    const roundsArray = numArray(rounds);
+
+    return roundsArray.map(item => {
+        return Math.abs(price > endValue ? price - (item * changeInDay) : price + (item * changeInDay));
+    });
 };

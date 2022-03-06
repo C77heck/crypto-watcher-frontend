@@ -62,7 +62,7 @@ const datasets = {
 
 interface GraphProps {
     data: number[];
-    labels: string[];
+    labels?: string[];
 }
 
 export const Graph = (props: GraphProps) => {
