@@ -51,34 +51,27 @@ export const options = {
 };
 
 const labels = ['90 days', '60 days', '30 days', '7 days', '1 day', 'Last hour', 'now'];
-const datasets = [{
-    label: 'Dataset 1',
-    data: [1, 23, 213, 123, 432, 23, 4],
-    borderColor: 'rgb(255, 99, 132)',
-    backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    yAxisID: 'y',
-}];
 
-const datasets = [{
+const datasets = {
     label: 'Dataset 1',
     data: [1, 2, 3],
     borderColor: 'rgb(255, 99, 132)',
     backgroundColor: 'rgba(255, 99, 132, 0.5)',
     yAxisID: 'y',
-}];
+};
 
 interface GraphProps {
     data: number[];
 }
 
 export const Graph = (props: GraphProps) => {
-    const [data, setData] = useState<DatasetsProp[]>(datasets);
+    const [data, setData] = useState<DatasetsProp>(datasets);
 
     useEffect(() => {
-        setData(() => ([{ ...datasets, data: props.data }]));
+        setData(() => ({ ...data, data: props.data }));
     }, [props.data]);
 
     return <div>
-        <Line data={{ datasets: { ...datasets, data }, labels }} options={options}/>
+        <Line data={{ labels, datasets: [data] }} options={options}/>
     </div>;
 };

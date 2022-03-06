@@ -7,7 +7,7 @@ import { Tab } from './tab';
 export const Tabs = (props: any) => {
     const { purchaseMeter, graph, calculator } = staticData.tabs;
     const [content, setContent] = useState(purchaseMeter);
-
+    console.log(props);
     const getClasses = (tab: string) => {
         return tab === content ? 'background-color--active' : '';
     };
@@ -15,11 +15,11 @@ export const Tabs = (props: any) => {
     const tabManager = () => {
         switch (content) {
             case purchaseMeter:
-                return <Graph data={[32, 1, 2, 14, 123, 3]}/>;
+                return <Graph data={getGraphData(props?.data?.analysis)}/>;
             case graph:
-                return <h3>Graph content</h3>;
+                return <Graph data={getGraphData(props?.data?.analysis)}/>;
             case calculator:
-                return <h3>Calculator content</h3>;
+                return <Graph data={getGraphData(props?.data?.analysis)}/>;
             default:
                 return <h3>Something went wrong</h3>;
         }
@@ -43,4 +43,16 @@ export const Tabs = (props: any) => {
         />
         <Content className={'col-99 golden-box--no-top border-radius--b'}>{tabManager()}</Content>
     </div>;
+};
+
+const getGraphData = (analysis: any): number[] => {
+    return [
+        Math.abs(analysis.price),
+        Math.abs(analysis.priceChangeLast60Days),
+        Math.abs(analysis.priceChangeLast90Days),
+        Math.abs(analysis.priceChangeLastDay),
+        Math.abs(analysis.priceChangeLastHour),
+        Math.abs(analysis.priceChangeLastMonth),
+        Math.abs(analysis.priceChangeLastWeek),
+    ];
 };
