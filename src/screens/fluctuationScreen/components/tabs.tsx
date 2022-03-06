@@ -15,11 +15,12 @@ export const Tabs = (props: any) => {
     const tabManager = () => {
         switch (content) {
             case purchaseMeter:
-                return <Graph data={getGraphData(props?.data?.analysis)}/>;
+                return <h3>purchaseMeter</h3>;
             case graph:
-                return <Graph data={getGraphData(props?.data?.analysis)}/>;
+                const { data, labels } = getGraphData(props?.data?.analysis);
+                return <Graph data={data} labels={labels}/>;
             case calculator:
-                return <Graph data={getGraphData(props?.data?.analysis)}/>;
+                return <h3>calculator</h3>;
             default:
                 return <h3>Something went wrong</h3>;
         }
@@ -45,14 +46,31 @@ export const Tabs = (props: any) => {
     </div>;
 };
 
-const getGraphData = (analysis: any): number[] => {
-    return [
-        Math.abs(analysis.price),
-        Math.abs(analysis.priceChangeLast60Days),
-        Math.abs(analysis.priceChangeLast90Days),
-        Math.abs(analysis.priceChangeLastDay),
-        Math.abs(analysis.priceChangeLastHour),
-        Math.abs(analysis.priceChangeLastMonth),
-        Math.abs(analysis.priceChangeLastWeek),
-    ];
+interface AnalysisProps {
+    data: number[];
+    labels: string[];
+}
+
+const getGraphData = (analysis: any): AnalysisProps => {
+    console.log({
+        price: analysis.price,
+        priceChangeLast60Days: analysis.priceChangeLast60Days,
+        priceChangeLast90Days: analysis.priceChangeLast90Days,
+        priceChangeLastDay: analysis.priceChangeLastDay,
+        priceChangeLastHour: analysis.priceChangeLastHour,
+        priceChangeLastMonth: analysis.priceChangeLastMonth,
+        priceChangeLastWeek: analysis.priceChangeLastWeek,
+    });
+    return {
+        labels: [],
+        data: [
+            analysis.price,
+            analysis.priceChangeLast60Days,
+            analysis.priceChangeLast90Days,
+            analysis.priceChangeLastDay,
+            analysis.priceChangeLastHour,
+            analysis.priceChangeLastMonth,
+            analysis.priceChangeLastWeek,
+        ]
+    };
 };

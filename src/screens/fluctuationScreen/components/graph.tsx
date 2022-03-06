@@ -62,6 +62,7 @@ const datasets = {
 
 interface GraphProps {
     data: number[];
+    labels: string[];
 }
 
 export const Graph = (props: GraphProps) => {
@@ -72,6 +73,6 @@ export const Graph = (props: GraphProps) => {
     }, [props.data]);
 
     return <div>
-        <Line data={{ labels, datasets: [data] }} options={options}/>
+        <Line data={{ labels: props.labels, datasets: [data] }} options={options}/>
     </div>;
 };
