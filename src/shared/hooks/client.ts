@@ -9,7 +9,7 @@ export interface ClientProps {
     clearError: () => void;
     successMessage: string;
     clearMessage: () => void;
-    client: (url: string, method: string, options: RequestInit, query?: any) => void;
+    client: (url: string, method: string, options?: any, query?: any) => void;
 }
 
 export const useClient = (): ClientProps => {
@@ -24,7 +24,7 @@ export const useClient = (): ClientProps => {
     const clearMessage = () => {
         setSuccessMessage('');
     };
-    const client = async (url: string, method: string, options: RequestInit, query?: any): Promise<any> => {
+    const client = async (url: string, method: string, options?: any, query?: any): Promise<any> => {
         try {
             setIsLoading(true);
             const response: any = await manageRequest(url, method, options, query);

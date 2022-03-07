@@ -66,23 +66,23 @@ export class Repository {
     }
 
     public async get(url: string, options: RequestInit, query: any = null) {
-        return await this.request(`${this.baseUrl}${url}`, options, 'GET', query);
+        return await this.request(`${this.baseUrl}${url}`, options || {}, 'GET', query);
     }
 
     public async post(url: string, options: RequestInit, query: any = null) {
-        return await this.request(`${this.baseUrl}${url}`, options, 'POST', query);
+        return await this.request(`${this.baseUrl}${url}`, options || {}, 'POST', query);
     }
 
     public async put(url: string, options: RequestInit, query: any = null) {
-        return await this.request(`${this.baseUrl}${url}`, options, 'PUT', query);
+        return await this.request(`${this.baseUrl}${url}`, options || {}, 'PUT', query);
     }
 
     public async patch(url: string, options: RequestInit, query: any = null) {
-        return await this.request(`${this.baseUrl}${url}`, options, 'PATCH', query);
+        return await this.request(`${this.baseUrl}${url}`, options || {}, 'PATCH', query);
     }
 
     public async delete(url: string, options: RequestInit, query: any = null) {
-        return await this.request(`${this.baseUrl}${url}`, options, 'DELETE', query);
+        return await this.request(`${this.baseUrl}${url}`, options || {}, 'DELETE', query);
     }
 
 }
