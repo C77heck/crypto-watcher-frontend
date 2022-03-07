@@ -52,7 +52,6 @@ interface AnalysisProps {
 }
 
 const getGraphData = (analysis: any): AnalysisProps => {
-    console.log(numArray(90).length);
     return {
         labels: numArray(90).map(num => (`${num} day`)).reverse(),
         data: [
@@ -69,11 +68,8 @@ const getGraphData = (analysis: any): AnalysisProps => {
 
 const stepDown = (price: number, endValue: number, rounds = 30): number[] => {
     const changeInDay = (price - endValue) / rounds;
-    console.log({ changeInDay, price, endValue, rounds });
 
-    const roundsArray = numArray(rounds);
-
-    return roundsArray.map(item => {
+    return numArray(rounds).map(item => {
         return Math.abs(price > endValue ? price - (item * changeInDay) : price + (item * changeInDay));
     });
 };

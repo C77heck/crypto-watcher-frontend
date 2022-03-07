@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Spinner } from '../../shared/components/spinner';
 import { AuthContext } from '../../shared/context/auth.context';
+import { useClient } from '../../shared/hooks/client';
 import { Repository } from '../../shared/libs/repository';
 import { Header } from "../components/header";
 import { PurchaseManager } from './components/purchase-manager';
@@ -21,23 +22,16 @@ export interface WatchedCryptoProps {
 
 export const WatchlistScreen = () => {
     const [watched, setWatched] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
     const { token, isLoggedIn } = useContext(AuthContext);
-
+    const { isLoading, error, client } = useClient();
     const request = new Repository(token);
 
     useEffect(() => {
         if (isLoggedIn) {
             (async () => {
-                try {
-                    setIsLoading(true);
-                    //  await request.get('/crypto/latest_listings', {});
-                    const response = await request.get('/crypto/get_purchases', {});
-                    setWatched(response?.items || []);
-                    setIsLoading(false);
-                } catch (e) {
-                    setIsLoading(false);
-                }
+                const response = await client('/crypto/get_purchases', 'get');
+                setWatched(response?.items || []);
             })();
         }
     }, [isLoggedIn]);
