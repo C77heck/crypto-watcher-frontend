@@ -9,11 +9,11 @@ import { Form } from '../form/form';
 import { FormStructure } from '../form/form.structure';
 import { emailValidator } from '../form/validators/email-validator';
 import { requiredValidator } from '../form/validators/required-validator';
-import { Repository } from '../libs/repository';
+import { useClient } from '../hooks/client';
 
 export const LoginButton = (props: any) => {
     const { signout, signin, isLoggedIn } = useContext(AuthContext);
-    const request = new Repository();
+    const client = useClient();
     const formData = new FormStructure([
         new Field({
             name: 'email',
@@ -38,7 +38,7 @@ export const LoginButton = (props: any) => {
             email: "zcsilleri@gmail.com" || data?.email || '',
             password: "Sug@bodyDicHtml32" || data?.password || '',
         };
-        const response = await request.post('/users/login', { body, headers: [] });
+        const response: any = await client.client('/users/login', 'post', { body });
 
         signin({ ...(response?.userData || {}), expiry: moment() });
     };
@@ -53,6 +53,7 @@ export const LoginButton = (props: any) => {
     }
 
     const content = <Form
+        {...client}
         onSubmit={(data: any) => submit(data)}
         form={formData}
         submitButton={{ className: 'mt-20 col-100 col-md-40 col-lg-22 margin-auto', title: 'Login', type: 'submit' }}

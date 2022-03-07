@@ -12,7 +12,7 @@ export const NewCryptoScreen = () => {
     useEffect(() => {
         if (isLoggedIn) {
             (async () => {
-                const response = await request.get('/crypto/get_select_assets', {});
+                const response: any = await request.get('/crypto/get_select_assets', {});
                 setOptions(response?.assets || []);
             })();
         }

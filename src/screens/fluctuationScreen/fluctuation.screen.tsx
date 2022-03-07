@@ -21,7 +21,7 @@ export const FluctuationScreen = (props: any) => {
     useEffect(() => {
         if (isLoggedIn || page || search) {
             (async () => {
-                const response = await client('/crypto/get_changes_in_value', 'get', {}, { page, search });
+                const response: any = await client('/crypto/get_changes_in_value', 'get', {}, { page, search });
                 setTotal(response?.total || 0);
                 setWatched(response?.items || []);
             })();

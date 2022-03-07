@@ -28,7 +28,7 @@ export const WatchlistScreen = () => {
     useEffect(() => {
         if (isLoggedIn) {
             (async () => {
-                const response = await client('/crypto/get_purchases', 'get');
+                const response: any = await client('/crypto/get_purchases', 'get');
                 setWatched(response?.items || []);
             })();
         }

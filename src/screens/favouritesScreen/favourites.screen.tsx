@@ -16,7 +16,7 @@ export const FavouritesScreen = (props: any) => {
     useEffect(() => {
         if (isLoggedIn || fetchList) {
             (async () => {
-                const response = await client('/crypto/favourites', 'get', {}, {});
+                const response: any = await client('/crypto/favourites', 'get', {}, {});
                 setWatched(response?.items || []);
             })();
         }

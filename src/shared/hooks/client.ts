@@ -3,13 +3,13 @@ import { AuthContext } from '../context/auth.context';
 import { parseError } from '../libs/error-parsers';
 import { Repository } from '../libs/repository';
 
-interface ClientProps {
+export interface ClientProps {
     isLoading: boolean;
     error: string;
     clearError: () => void;
     successMessage: string;
     clearMessage: () => void;
-    client: (url: string, method: string, options?: RequestInit, query?: any) => void;
+    client: (url: string, method: string, options: RequestInit, query?: any) => void;
 }
 
 export const useClient = (): ClientProps => {
@@ -24,10 +24,10 @@ export const useClient = (): ClientProps => {
     const clearMessage = () => {
         setSuccessMessage('');
     };
-    const client = async (url: string, method: string, options: RequestInit, query: any = null) => {
+    const client = async (url: string, method: string, options: RequestInit, query?: any): Promise<any> => {
         try {
             setIsLoading(true);
-            const response = await manageRequest(url, method, options, query);
+            const response: any = await manageRequest(url, method, options, query);
             setIsLoading(false);
             setSuccessMessage(response?.message || 'Success');
 

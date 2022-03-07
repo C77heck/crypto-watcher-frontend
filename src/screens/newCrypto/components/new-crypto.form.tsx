@@ -5,12 +5,12 @@ import { Field } from '../../../shared/form/field';
 import { Form } from '../../../shared/form/form';
 import { FormStructure } from '../../../shared/form/form.structure';
 import { requiredValidator } from '../../../shared/form/validators/required-validator';
-import { Repository } from '../../../shared/libs/repository';
+import { useClient } from '../../../shared/hooks/client';
 import { Purchase } from '../helpers/helpers';
 
 export const NewCryptoForm = (props: any) => {
-    const { token, isLoggedIn } = useContext(AuthContext);
-    const request = new Repository(token);
+    const { isLoggedIn } = useContext(AuthContext);
+    const client = useClient();
 
     const { INPUTS: { SEARCHABLE_DROPDOWN } } = CONSTANTS;
     const formData = new FormStructure([
@@ -71,14 +71,14 @@ export const NewCryptoForm = (props: any) => {
         }
 
         const body: any = new Purchase(data, props?.data, props.options || []);
-
         props.update
-            ? await request.patch(`/crypto/update_purchase/${props?.data?._id}`, { body })
-            : await request.post('/crypto/add_new_purchase', { body });
+            ? await client.client(`/crypto/update_purchase/${props?.data?._id}`, 'patch', { body })
+            : await client.client('/crypto/add_new_purchase', 'post', { body });
     };
 
     return <Fragment>
         <Form
+            {...client}
             onSuccess={props.onSuccess}
             onSubmit={(data: any) => submit(data)}
             form={formData}

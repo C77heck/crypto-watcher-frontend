@@ -1,23 +1,21 @@
 import * as React from 'react';
-import { useContext } from 'react';
 import { Modal } from '../../../shared/components/modal';
-import { AuthContext } from '../../../shared/context/auth.context';
 import { Form } from '../../../shared/form/form';
-import { Repository } from '../../../shared/libs/repository';
+import { useClient } from '../../../shared/hooks/client';
 import { NewCryptoForm } from '../../newCrypto/components/new-crypto.form';
 import { WatchedCrypto } from './watched-crypto';
 
 export const PurchaseManager = (props: any) => {
-    const { token } = useContext(AuthContext);
-    const request = new Repository(token);
+    const client = useClient();
 
     const deletePurchase = async () => {
-        await request.delete(`/crypto/delete_purchase/${props?.data?._id}`, {});
+        await client.client(`/crypto/delete_purchase/${props?.data?._id}`, 'delete', {});
     };
 
     const content = <div>
         <NewCryptoForm {...props} update={true} onSuccess={() => window.location.reload()}/>
         <Form
+            {...client}
             onSubmit={deletePurchase}
             form={null}
             submitButton={{ className: 'mt-20 col-100 col-22', title: 'delete', type: 'submit', buttonStyle: 'delete' }}

@@ -24,7 +24,7 @@ export class Repository {
         const abortController = new AbortController();
         try {
             const request = new Request(this.formatUrl(path, query), this.formatOptions(options, abortController, method));
-            const response = await fetch(request);
+            const response: any = await fetch(request);
             const responseData = await response.json();
 
             if (!response.ok) {
