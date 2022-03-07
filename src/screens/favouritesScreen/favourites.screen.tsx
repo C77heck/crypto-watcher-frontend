@@ -7,7 +7,7 @@ import { Header } from '../components/header';
 import { CryptoManager } from '../fluctuationScreen/components/crypto-manager';
 import { WatchedCryptoProps } from '../watchlist/watchlist.screen';
 
-export const FavouritesScreen = (props: any) => {
+export const FavouritesScreen = () => {
     const [watched, setWatched] = useState([]);
     const [fetchList, setFetchList] = useState(false);
     const { isLoggedIn } = useContext(AuthContext);

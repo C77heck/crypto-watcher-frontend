@@ -27,7 +27,7 @@ export const useClient = (): ClientProps => {
     const client = async (url: string, method: string, options?: any, query?: any): Promise<any> => {
         try {
             setIsLoading(true);
-            const response: any = await manageRequest(url, method, options, query);
+            const response: any = await request.fetch(url, method, options, query);
             setIsLoading(false);
             setSuccessMessage(response?.message || 'Success');
 
@@ -39,23 +39,6 @@ export const useClient = (): ClientProps => {
             const error = parseError(e);
             setError(error);
             setIsLoading(false);
-        }
-    };
-
-    const manageRequest = async (url: string, method: string, options: RequestInit, query: any) => {
-        switch (method) {
-            case 'get':
-                return request.get(url, options, query);
-            case 'post':
-                return request.post(url, options, query);
-            case 'put':
-                return request.put(url, options, query);
-            case 'patch':
-                return request.patch(url, options, query);
-            case 'delete':
-                return request.delete(url, options, query);
-            default:
-                return request.get(url, options, query);
         }
     };
 
