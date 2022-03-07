@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import { Spinner } from '../../shared/components/spinner';
 import { AuthContext } from '../../shared/context/auth.context';
+import { ErrorModal } from '../../shared/form/error-modal';
 import { useClient } from '../../shared/hooks/client';
-import { Repository } from '../../shared/libs/repository';
 import { Header } from "../components/header";
 import { PurchaseManager } from './components/purchase-manager';
 import { Sum } from './components/sum';
@@ -22,10 +22,8 @@ export interface WatchedCryptoProps {
 
 export const WatchlistScreen = () => {
     const [watched, setWatched] = useState([]);
-    // const [isLoading, setIsLoading] = useState(false);
-    const { token, isLoggedIn } = useContext(AuthContext);
-    const { isLoading, error, client } = useClient();
-    const request = new Repository(token);
+    const { isLoggedIn } = useContext(AuthContext);
+    const { isLoading, error, clearError, client } = useClient();
 
     useEffect(() => {
         if (isLoggedIn) {
@@ -38,6 +36,11 @@ export const WatchlistScreen = () => {
 
     return <div>
         {isLoading && <Spinner asOverlay/>}
+        <ErrorModal
+            show={!!error}
+            errorMessage={error}
+            onClick={clearError}
+        />
         <Header>
             <h2 className={'header--2'}>Current investments</h2>
         </Header>

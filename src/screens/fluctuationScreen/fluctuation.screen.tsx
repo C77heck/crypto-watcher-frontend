@@ -2,7 +2,8 @@ import { useContext, useEffect, useState } from 'react';
 import { debounceTime, distinctUntilChanged, Subject, tap } from 'rxjs';
 import { Spinner } from '../../shared/components/spinner';
 import { AuthContext } from '../../shared/context/auth.context';
-import { Repository } from '../../shared/libs/repository';
+import { ErrorModal } from '../../shared/form/error-modal';
+import { useClient } from '../../shared/hooks/client';
 import { Header } from '../components/header';
 import { WatchedCryptoProps } from '../watchlist/watchlist.screen';
 import { CryptoManager } from './components/crypto-manager';
@@ -14,23 +15,15 @@ export const FluctuationScreen = (props: any) => {
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    const { token, isLoggedIn } = useContext(AuthContext);
-
-    const request = new Repository(token);
+    const { isLoggedIn } = useContext(AuthContext);
+    const { isLoading, error, clearError, client } = useClient();
 
     useEffect(() => {
         if (isLoggedIn || page || search) {
             (async () => {
-                try {
-                    setIsLoading(true);
-                    const response = await request.get('/crypto/get_changes_in_value', {}, { page, search });
-                    setTotal(response?.total || 0);
-                    setWatched(response?.items || []);
-                    setIsLoading(false);
-                } catch (e) {
-                    setIsLoading(false);
-                }
+                const response = await client('/crypto/get_changes_in_value', 'get', {}, { page, search });
+                setTotal(response?.total || 0);
+                setWatched(response?.items || []);
             })();
         }
     }, [isLoggedIn, page, search]);
@@ -56,6 +49,11 @@ export const FluctuationScreen = (props: any) => {
 
     return <div>
         {isLoading && <Spinner asOverlay/>}
+        <ErrorModal
+            show={!!error}
+            errorMessage={error}
+            onClick={clearError}
+        />
         <div className={'max-width-vw-80 margin-auto display-flex justify-content-end'}>
             <SearchBar onSearch={onChangeHandler}/>
         </div>

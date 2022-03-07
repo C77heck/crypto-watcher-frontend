@@ -7,10 +7,12 @@ export const useClient = () => {
     const { token, signout } = useContext(AuthContext);
     const request: any = new Repository(token);
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState();
+    const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
-
-    const client = async (url: string, method = 'get', options = {}, query = null) => {
+    const clearError = () => {
+        setError('');
+    };
+    const client = async (url: string, method = 'get', options = {}, query: any = null) => {
         try {
             setIsLoading(true);
             const response = await manageRequest(url, method, options, query);
@@ -23,7 +25,7 @@ export const useClient = () => {
                 signout();
             }
             const error = parseError(e);
-            setError(e as any);
+            setError(error);
             setIsLoading(false);
         }
     };
@@ -45,5 +47,5 @@ export const useClient = () => {
         }
     };
 
-    return { client, isLoading, error, successMessage };
+    return { client, isLoading, error, clearError, successMessage };
 };
