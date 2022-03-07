@@ -1,13 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import { FavouriteIcon, SpinnerIcon } from '../../../shared/components/icons';
 import { AuthContext } from '../../../shared/context/auth.context';
+import { useClient } from '../../../shared/hooks/client';
 import { Repository } from '../../../shared/libs/repository';
 
 export const Favourties = (props: any) => {
-    const [isLoading, setIsLoading] = useState(false);
     const [isFavourite, setIsFavourite] = useState(false);
-    const { token } = useContext(AuthContext);
-    const request = new Repository(token);
+    const { client, isLoading } = useClient();
 
     useEffect(() => {
         if (props?.isFavouriteScreen) {

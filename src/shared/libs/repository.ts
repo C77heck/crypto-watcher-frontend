@@ -20,11 +20,11 @@ export class Repository {
         this.headers.push(['Authorization', `Bearer ${token}`]);
     }
 
-    public async request(path: string, options: RequestInit, method: string, query: any) {
+    public async fetch(path: string, method: string, options: RequestInit, query: any) {
         const abortController = new AbortController();
         try {
             const request = new Request(this.formatUrl(path, query), this.formatOptions(options, abortController, method));
-            const response = await fetch(request);
+            const response: any = await fetch(request);
             const responseData = await response.json();
 
             if (!response.ok) {
@@ -54,7 +54,7 @@ export class Repository {
         return `${url}?${queryManager.getQuery()}`;
     }
 
-    public formatOptions(options: any, abortController: AbortController, method: string) {
+    public formatOptions(options: any = {}, abortController: AbortController, method: string) {
         options.signal = abortController.signal;
         options.method = method;
         options.headers = this.headers;
@@ -64,25 +64,4 @@ export class Repository {
 
         return options;
     }
-
-    public async get(url: string, options: RequestInit, query: any = null) {
-        return await this.request(`${this.baseUrl}${url}`, options, 'GET', query);
-    }
-
-    public async post(url: string, options: RequestInit, query: any = null) {
-        return await this.request(`${this.baseUrl}${url}`, options, 'POST', query);
-    }
-
-    public async put(url: string, options: RequestInit, query: any = null) {
-        return await this.request(`${this.baseUrl}${url}`, options, 'PUT', query);
-    }
-
-    public async patch(url: string, options: RequestInit, query: any = null) {
-        return await this.request(`${this.baseUrl}${url}`, options, 'PATCH', query);
-    }
-
-    public async delete(url: string, options: RequestInit, query: any = null) {
-        return await this.request(`${this.baseUrl}${url}`, options, 'DELETE', query);
-    }
-
 }

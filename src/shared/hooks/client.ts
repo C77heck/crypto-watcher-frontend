@@ -27,7 +27,7 @@ export const useClient = (): ClientProps => {
     const client = async (url: string, method: string, options: RequestInit, query?: any) => {
         try {
             setIsLoading(true);
-            const response = await manageRequest(url, method, options, query);
+            const response: any = await request.fetch(url, method, options, query);
             setIsLoading(false);
             setSuccessMessage(response?.message || 'Success');
 
