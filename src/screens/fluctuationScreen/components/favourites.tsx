@@ -1,10 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FavouriteIcon, SpinnerIcon } from '../../../shared/components/icons';
-import { AuthContext } from '../../../shared/context/auth.context';
 import { useClient } from '../../../shared/hooks/client';
-import { Repository } from '../../../shared/libs/repository';
 
-export const Favourties = (props: any) => {
+export const Favourites = (props: any) => {
     const [isFavourite, setIsFavourite] = useState(false);
     const { client, isLoading } = useClient();
 
@@ -21,20 +19,17 @@ export const Favourties = (props: any) => {
     const manageOnClick = () => {
         (async () => {
             try {
-                setIsLoading(true);
                 await manageFavourite();
-                setIsLoading(false);
                 setIsFavourite(!isFavourite);
             } catch (e) {
-                setIsLoading(false);
             }
         })();
     };
 
     const manageFavourite = async () => {
         isFavourite
-            ? await request.delete('/crypto/remove-from-favourites', { body: { cryptoId: props.data?.identifier } as any })
-            : await request.post('/crypto/add-to-favourites', { body: { cryptoId: props.data?.identifier } as any });
+            ? await client('/crypto/remove-from-favourites', 'delete', { body: { cryptoId: props.data?.identifier } as any })
+            : await client('/crypto/add-to-favourites', 'post', { body: { cryptoId: props.data?.identifier } as any });
 
         if (props?.isFavouriteScreen) {
             props?.fetchList();

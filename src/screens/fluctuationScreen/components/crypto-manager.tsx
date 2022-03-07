@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Modal } from '../../../shared/components/modal';
 import { CryptoCard } from './crypto-card';
-import { Favourties } from './favourties';
+import { Favourites } from './favourites';
 import { Tabs } from './tabs';
 
 export const CryptoManager = (props: any) => {
@@ -10,7 +10,7 @@ export const CryptoManager = (props: any) => {
     // tab-2: tags added by algorithm written from the backend.
 
     const header = <h3 className={'fs-24 fw-700 text-align-center position-center'}>
-        <Favourties {...props}/>
+        <Favourites {...props}/>
         <span>{props?.data?.name}</span>
     </h3>;
     const content = <div>

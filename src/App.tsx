@@ -14,9 +14,10 @@ import { AuthContext } from './shared/context/auth.context';
 import { useAuth } from './shared/hooks/auth-hook';
 
 function App() {
-
     const { links: { home, watchlist, newPurchase, changesInValue, favourites } } = staticData;
+
     const auth = useAuth();
+
     const routes = (
         <Router>
             <Routes>
@@ -31,9 +32,7 @@ function App() {
 
     return (
         <main className="center pt-100 background--1">
-            <React.Suspense
-                fallback={<div><Spinner asOverlay/></div>}
-            >
+            <React.Suspense fallback={<div><Spinner asOverlay/></div>}>
                 <AuthContext.Provider value={auth}>
                     {routes}
                 </AuthContext.Provider>

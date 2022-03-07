@@ -3,13 +3,13 @@ import { AuthContext } from '../context/auth.context';
 import { parseError } from '../libs/error-parsers';
 import { Repository } from '../libs/repository';
 
-interface ClientProps {
+export interface ClientProps {
     isLoading: boolean;
     error: string;
     clearError: () => void;
     successMessage: string;
     clearMessage: () => void;
-    client: (url: string, method: string, options: RequestInit, query?: any) => void;
+    client: (url: string, method: string, options?: RequestInit, query?: any) => void;
 }
 
 export const useClient = (): ClientProps => {
@@ -24,7 +24,7 @@ export const useClient = (): ClientProps => {
     const clearMessage = () => {
         setSuccessMessage('');
     };
-    const client = async (url: string, method: string, options: RequestInit, query?: any) => {
+    const client = async (url: string, method: string, options?: RequestInit, query?: any) => {
         try {
             setIsLoading(true);
             const response: any = await request.fetch(url, method, options, query);
