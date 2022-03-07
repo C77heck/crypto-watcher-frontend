@@ -41,7 +41,7 @@ export class Repository {
 
     public formatUrl(url: string, query: any = null): string {
         if (!query) {
-            return url;
+            return `${this.baseUrl}${url}`;
         }
 
         const queryManager = new QueryManager();
