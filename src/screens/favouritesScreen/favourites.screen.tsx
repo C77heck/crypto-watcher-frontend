@@ -1,36 +1,34 @@
 import { useContext, useEffect, useState } from 'react';
 import { Spinner } from '../../shared/components/spinner';
 import { AuthContext } from '../../shared/context/auth.context';
-import { Repository } from '../../shared/libs/repository';
+import { ErrorModal } from '../../shared/form/error-modal';
+import { useClient } from '../../shared/hooks/client';
 import { Header } from '../components/header';
 import { CryptoManager } from '../fluctuationScreen/components/crypto-manager';
 import { WatchedCryptoProps } from '../watchlist/watchlist.screen';
 
 export const FavouritesScreen = (props: any) => {
     const [watched, setWatched] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
     const [fetchList, setFetchList] = useState(false);
-    const { token, isLoggedIn } = useContext(AuthContext);
-
-    const request = new Repository(token);
+    const { isLoggedIn } = useContext(AuthContext);
+    const { isLoading, error, clearError, client } = useClient();
 
     useEffect(() => {
         if (isLoggedIn || fetchList) {
             (async () => {
-                try {
-                    setIsLoading(true);
-                    const response = await request.get('/crypto/favourites', {}, {});
-                    setWatched(response?.items || []);
-                    setIsLoading(false);
-                } catch (e) {
-                    setIsLoading(false);
-                }
+                const response = await client('/crypto/favourites', 'get', {}, {});
+                setWatched(response?.items || []);
             })();
         }
     }, [isLoggedIn, fetchList]);
 
     return <div>
         {isLoading && <Spinner asOverlay/>}
+        <ErrorModal
+            show={!!error}
+            errorMessage={error}
+            onClick={clearError}
+        />
         <Header>
             <h2 className={'header--2'}>Favourites</h2>
         </Header>

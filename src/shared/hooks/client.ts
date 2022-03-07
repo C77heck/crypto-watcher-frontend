@@ -3,7 +3,16 @@ import { AuthContext } from '../context/auth.context';
 import { parseError } from '../libs/error-parsers';
 import { Repository } from '../libs/repository';
 
-export const useClient = () => {
+interface ClientProps {
+    isLoading: boolean;
+    error: string;
+    clearError: () => void;
+    successMessage: string;
+    clearMessage: () => void;
+    client: (url: string, method: string, options?: RequestInit, query?: any) => void;
+}
+
+export const useClient = (): ClientProps => {
     const { token, signout } = useContext(AuthContext);
     const request: any = new Repository(token);
     const [isLoading, setIsLoading] = useState(false);
@@ -12,7 +21,10 @@ export const useClient = () => {
     const clearError = () => {
         setError('');
     };
-    const client = async (url: string, method = 'get', options = {}, query: any = null) => {
+    const clearMessage = () => {
+        setSuccessMessage('');
+    };
+    const client = async (url: string, method: string, options: RequestInit, query: any = null) => {
         try {
             setIsLoading(true);
             const response = await manageRequest(url, method, options, query);
@@ -47,5 +59,5 @@ export const useClient = () => {
         }
     };
 
-    return { client, isLoading, error, clearError, successMessage };
+    return { client, isLoading, error, clearError, successMessage, clearMessage };
 };

@@ -1,7 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Button, ButtonProps } from '../components/button';
 import { SuccessModal } from '../components/success.modal';
-import { parseError } from '../libs/error-parsers';
 import { ErrorModal } from './error-modal';
 import Input from './input';
 
@@ -29,12 +28,9 @@ const getIsFormValid = (form: any) => {
 };
 
 export const Form = (props: FormProps) => {
-    const [showSuccess, setShowSuccess] = useState('');
-    const [error, setError] = useState('');
     const [form, setForm] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-
+    const { isLoading, error, clearError, successMessage, clearMessage } = props;
     useEffect(() => {
         setIsFormValid(getIsFormValid(form));
     }, [getIsFormValid, form]);
@@ -56,16 +52,7 @@ export const Form = (props: FormProps) => {
 
     const submit = async (e: any) => {
         e.preventDefault();
-        try {
-            setIsLoading(true);
-            const response: any = await props.onSubmit(getRestructureForm(form));
-            setIsLoading(false);
-            setShowSuccess(response?.message || 'Success');
-        } catch (e: any) {
-            const error = parseError(e);
-            setIsLoading(false);
-            setError(error);
-        }
+        const response: any = await props.onSubmit(getRestructureForm(form));
     };
 
     const manageSuccessClose = () => {
@@ -73,7 +60,7 @@ export const Form = (props: FormProps) => {
             props.onSuccess();
         }
 
-        setShowSuccess('');
+        clearMessage();
     };
 
     const manageErrorClose = () => {
@@ -81,7 +68,7 @@ export const Form = (props: FormProps) => {
             props.onError();
         }
 
-        setError('');
+        clearError();
     };
 
     return <Fragment>
@@ -110,8 +97,8 @@ export const Form = (props: FormProps) => {
             onClick={manageErrorClose}
         />
         <SuccessModal
-            show={!!showSuccess}
-            successMessage={showSuccess}
+            show={!!successMessage}
+            successMessage={successMessage}
             onClick={manageSuccessClose}
         />
     </Fragment>;
