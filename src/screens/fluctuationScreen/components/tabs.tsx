@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { staticData } from '../../../shared/config/static-data';
 import { numArray } from '../../../shared/libs/helpers';
+import { Calculator } from './calculator';
 import { Content } from './content';
 import { Graph } from './graph';
 import { Tab } from './tab';
@@ -20,7 +21,7 @@ export const Tabs = (props: any) => {
                 const { data, labels } = getGraphData(props?.data?.analysis);
                 return <Graph data={data} labels={labels}/>;
             case calculator:
-                return <h3>calculator</h3>;
+                return <Calculator data={props?.data?.analysis || {}}/>;
             default:
                 return <h3>Something went wrong</h3>;
         }
