@@ -33,6 +33,7 @@ export class Repository {
 
             return responseData;
         } catch (error: any) {
+            console.log(error);
             abortController.abort();
             throw new HttpError(error?.message, error?.code);
         }
@@ -51,17 +52,20 @@ export class Repository {
             }
         }
 
-        return `${url}?${queryManager.getQuery()}`;
+        return `${this.baseUrl}${url}?${queryManager.getQuery()}`;
     }
 
     public formatOptions(options: any = {}, abortController: AbortController, method: string) {
         options.signal = abortController.signal;
         options.method = method;
         options.headers = this.headers;
-        if (method !== 'GET') {
-            options.body = JSON.stringify(options.body || {}, null);
-        }
 
-        return options;
+        switch (method) {
+            case 'get':
+                return options;
+            default:
+                options.body = JSON.stringify(options.body || {}, null);
+                return options;
+        }
     }
 }
