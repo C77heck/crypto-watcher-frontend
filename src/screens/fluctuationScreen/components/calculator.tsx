@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
+import { CONSTANTS } from '../../../shared/constants';
 import { Field } from '../../../shared/form/field';
 import Input from '../../../shared/form/input';
 import { priceFormat } from '../../../shared/libs/helpers';
 
 export const Calculator = (props: any) => {
+    const { INPUTS: { RANGE } } = CONSTANTS;
     // money spent minus its transaction fee. need calculator range input to see on percentage increases how much it would
     // appreciate in value
     const { price } = props.data;
@@ -12,12 +14,13 @@ export const Calculator = (props: any) => {
     const [result, setResult] = useState(0);
     const [quantity, setQuantity] = useState(0);
     const [priceMotion, setPriceMotion] = useState(100);
+    const [range, setRange] = useState(100);
 
     useEffect(() => {
-        console.log('triggered', investment, quantity, fee, priceMotion);
+        console.log({priceMotion});
         const costOfPurchase = investment * (1 + fee) - investment;
         const costOfSale = investment * priceMotion * fee;
-        console.log({ costOfPurchase, costOfSale, result: investment * priceMotion, quantity: price / investment });
+        // console.log({ costOfPurchase, costOfSale, result: investment * priceMotion, quantity: price / investment });
         setResult((investment * priceMotion) - (costOfPurchase + costOfSale));
         setQuantity(price / investment);
     }, [fee, investment, priceMotion]);
@@ -45,8 +48,8 @@ export const Calculator = (props: any) => {
         label: 'Value fluctuation',
         value: priceMotion * 100,
         validators: [],
-        className: 'col-40',
-        isNumberOnly: true,
+        className: 'col-100',
+        element: RANGE,
         getData: ({ value }: any) => setPriceMotion(value / 100)
     });
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { CONSTANTS } from '../constants';
+import { RangeInput } from './range-input';
 import { SearchableDropdown } from './searchable-dropdown';
 import { TextInput } from './text-input';
 import { ValidatorInterface } from './validators/validator-interface';
@@ -88,7 +89,7 @@ class Input extends Component<FieldProps, any> {
     }
 
     public manageInputType(element: string) {
-        const { INPUTS: { TEXTAREA, SEARCHABLE, SEARCHABLE_DROPDOWN, DROPDOWN } } = CONSTANTS;
+        const { INPUTS: { TEXTAREA, SEARCHABLE, SEARCHABLE_DROPDOWN, DROPDOWN, RANGE } } = CONSTANTS;
         switch (element) {
             case DROPDOWN:
                 return <TextInput
@@ -116,6 +117,12 @@ class Input extends Component<FieldProps, any> {
                     handleChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e)}
                     value={this.state.value}
                 />;  // will need the textarea
+            case RANGE:
+                return <RangeInput
+                    {...this.props}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e)}
+                    value={this.state.value}
+                />;
             default:
                 return <TextInput
                     {...this.props}
