@@ -1,46 +1,68 @@
 import { useEffect, useState } from 'react';
 import { Field } from '../../../shared/form/field';
 import Input from '../../../shared/form/input';
+import { priceFormat } from '../../../shared/libs/helpers';
 
 export const Calculator = (props: any) => {
     // money spent minus its transaction fee. need calculator range input to see on percentage increases how much it would
     // appreciate in value
-    const [prediction, setPredicition] = useState({ price: 0, fee: 0 });
+    const { price } = props.data;
+    const [investment, setInvestment] = useState(0);
+    const [fee, setFee] = useState(0);
     const [result, setResult] = useState(0);
-    const onChangeHandler = ({ name, value }: any) => {
-        setPredicition(() => ({ ...prediction, [name]: value }));
-    };
+    const [quantity, setQuantity] = useState(0);
+    const [priceMotion, setPriceMotion] = useState(100);
 
     useEffect(() => {
-        const { price, fee } = prediction;
-        console.log('triggered', prediction, price, fee);
-        setResult(price * fee);
-    }, [prediction]);
+        console.log('triggered', investment, quantity, fee, priceMotion);
+        const costOfPurchase = investment * (1 + fee) - investment;
+        const costOfSale = investment * priceMotion * fee;
+        console.log({ costOfPurchase, costOfSale, result: investment * priceMotion, quantity: price / investment });
+        setResult((investment * priceMotion) - (costOfPurchase + costOfSale));
+        setQuantity(price / investment);
+    }, [fee, investment, priceMotion]);
 
     const priceField = new Field({
         name: 'price',
         label: 'Money to invest',
-        value: 0,
+        value: investment,
         validators: [],
         className: 'col-60',
         isNumberOnly: true,
-        getData: (value: any) => onChangeHandler(value)
+        getData: ({ value }: any) => setInvestment(value)
     });
     const transactionFeeField = new Field({
         name: 'fee',
         label: 'Transaction fee',
-        value: 1.5,
+        value: fee * 100,
         validators: [],
         className: 'col-30',
         isNumberOnly: true,
-        getData: (value: any) => onChangeHandler(value)
+        getData: ({ value }: any) => setFee((value / 100))
+    });
+    const priceFluctuation = new Field({
+        name: 'price-fluctuation',
+        label: 'Value fluctuation',
+        value: priceMotion * 100,
+        validators: [],
+        className: 'col-40',
+        isNumberOnly: true,
+        getData: ({ value }: any) => setPriceMotion(value / 100)
     });
 
     return <div>
-        <div className={'row justify-content-space-between'}>
+        <div className={'row pb-20 justify-content-space-between'}>
             <Input {...priceField}/>
             <Input {...transactionFeeField}/>
+            <Input {...priceFluctuation}/>
         </div>
-        <h3 className={'fs-24 fw--600'}>{result}</h3>
+        <div className={'row pb-20'}>
+            <h3 className={'col-50 fs-20 fw--600'}>{`Calculated ${result > investment ? 'Profit' : 'Loss'}`}:</h3>
+            <h3 className={'col-50 fs-22 fw--600'}>{priceFormat(result)}</h3>
+        </div>
+        <div className={'row pb-20'}>
+            <h3 className={'col-50 fs-20 fw--600'}>Quantity:</h3>
+            <h3 className={'col-50 fs-22 fw--600'}>{quantity}</h3>
+        </div>
     </div>;
 };

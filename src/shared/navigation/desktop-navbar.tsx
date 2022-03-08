@@ -7,7 +7,7 @@ export const DesktopNavbar = (props: any) => {
     const { links: { watchlist, newPurchase, changesInValue, home, favourites } } = staticData;
 
     const getColor = useCallback((link: string) => {
-        const genericClasses = 'text-decoration-none uppercase fs-17 white-space-nowrap py-20 fw--700';
+        const genericClasses = 'text-decoration-none uppercase fs-mlg-17 fs-14 white-space-nowrap py-20 fw--700';
         return window.location.pathname === link
             ? `${genericClasses} text-color--active`
             : `${genericClasses}`;
