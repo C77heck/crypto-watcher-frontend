@@ -21,6 +21,8 @@ export class Field implements FieldProps {
     public value;
     public onChange;
     public inputClasses;
+    public min;
+    public max;
 
     public constructor(attributes: any) {
         this.type = attributes?.type || 'text';
@@ -42,5 +44,9 @@ export class Field implements FieldProps {
         this.value = attributes?.value || null;
         this.onChange = attributes?.onChange || null;
         this.inputClasses = attributes?.inputClasses || '';
+        if (this.element === 'range') {
+            this.min = attributes?.min || 0;
+            this.max = attributes?.max || 100;
+        }
     }
 }

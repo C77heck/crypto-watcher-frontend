@@ -14,10 +14,9 @@ export const Calculator = (props: any) => {
     const [result, setResult] = useState(0);
     const [quantity, setQuantity] = useState(0);
     const [priceMotion, setPriceMotion] = useState(100);
-    const [range, setRange] = useState(100);
 
     useEffect(() => {
-        console.log({priceMotion});
+        console.log({ priceMotion });
         const costOfPurchase = investment * (1 + fee) - investment;
         const costOfSale = investment * priceMotion * fee;
         // console.log({ costOfPurchase, costOfSale, result: investment * priceMotion, quantity: price / investment });
@@ -46,11 +45,14 @@ export const Calculator = (props: any) => {
     const priceFluctuation = new Field({
         name: 'price-fluctuation',
         label: 'Value fluctuation',
-        value: priceMotion * 100,
+        value: priceMotion,
+        min: 0,
+        max: 200,
+        inputClasses: 'border-none',
         validators: [],
         className: 'col-100',
         element: RANGE,
-        getData: ({ value }: any) => setPriceMotion(value / 100)
+        getData: ({ value }: any) => setPriceMotion(value)
     });
 
     return <div>

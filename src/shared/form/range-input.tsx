@@ -14,8 +14,8 @@ export class RangeInput extends Component<any, any> {
             placeholder={this.props.placeholder}
             autoComplete={this.props.autoComplete}
             disabled={this.props.disabled}
-            min={0}
-            max={1000}
+            min={this.props.min}
+            max={this.props.max}
         />;
     }
 }
