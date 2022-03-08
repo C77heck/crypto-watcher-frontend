@@ -35,27 +35,12 @@ export const useClient = (): ClientProps => {
         } catch (e: any) {
             if (e?.code === 401) {
                 signout();
+            } else {
+                const error = parseError(e);
+                setError(error);
             }
-            const error = parseError(e);
-            setError(error);
-            setIsLoading(false);
-        }
-    };
 
-    const manageRequest = async (url: string, method: string, options: any = null, query: any = null) => {
-        switch (method) {
-            case 'get':
-                return request.get(url, options, query);
-            case 'post':
-                return request.post(url, options, query);
-            case 'put':
-                return request.put(url, options, query);
-            case 'patch':
-                return request.patch(url, options, query);
-            case 'delete':
-                return request.delete(url, options, query);
-            default:
-                return request.get(url, options, query);
+            setIsLoading(false);
         }
     };
 
