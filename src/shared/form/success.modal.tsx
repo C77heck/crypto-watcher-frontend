@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import { Button } from '../components/button';
 import { Modal } from '../components/modal';
-import { Button } from './button';
 
 interface SuccessModalProps {
     show: boolean;
@@ -26,6 +26,8 @@ export const SuccessModal = (props: SuccessModalProps) => {
     </div>;
 
     return <Modal
+        zIndex={'z-157'}
+        portal={'status-modal'}
         level={1}
         overlayClick={(show) => props.onClick('')}
         className={'border-radius-px-5 p-15 z-100'}

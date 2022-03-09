@@ -26,11 +26,13 @@ export const ErrorModal = (props: ErrorModalProps) => {
     </div>;
 
     return <Modal
+        zIndex={'z-157'}
+        portal={'status-modal'}
         level={1}
         overlayClick={(show) => props.onClick('')}
-        className={'border-radius-px-5 p-15 z-100'}
+        className={'border-radius-px-5 p-15 z-100 box-shadow'}
         content={content}
-        size={{ sm: 90, md: 72, lg: 60, xl: 40 }}
+        size={{ sm: 80, md: 60, lg: 40, xl: 30 }}
         header={<h2 className={'header--3 text-color--error-2 text-align-center'}>Error</h2>}
         show={show}
     />;

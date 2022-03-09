@@ -20,6 +20,8 @@ interface ModalProps {
     show?: boolean;
     overlayClick?: (show: boolean) => void;
     level?: number;
+    portal?: string;
+    zIndex?:string;
 }
 
 export class Modal extends React.Component<ModalProps, any> {
@@ -81,7 +83,7 @@ export class Modal extends React.Component<ModalProps, any> {
     public renderOverlay() {
         const { show } = this.state;
         return <div
-            className={`overlay overlay--${show ? 'show' : 'hide'}`}
+            className={`overlay overlay--${show ? 'show' : 'hide'} ${this.props.zIndex}`}
             onClick={(e) => this.handleClick(e, false)}
         />;
     }
@@ -125,7 +127,7 @@ export class Modal extends React.Component<ModalProps, any> {
             <div className={'h-100'} onClick={(e: any) => this.handleClick(e, true)}>
                 {!!this.props.trigger && this.props.trigger}
             </div>
-            <Portal elementId={'modals'}>
+            <Portal elementId={this.props.portal || 'modals'}>
                 <div>
                     {this.renderOverlay()}
                     {this.renderModal()}

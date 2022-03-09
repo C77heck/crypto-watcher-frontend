@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Button, ButtonProps } from '../components/button';
-import { SuccessModal } from '../components/success.modal';
+import { SuccessModal } from './success.modal';
 import { ClientProps } from '../hooks/client';
 import { ErrorModal } from './error-modal';
 import Input from './input';

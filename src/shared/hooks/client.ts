@@ -33,14 +33,14 @@ export const useClient = (): ClientProps => {
 
             return response;
         } catch (e: any) {
-            if (e?.code === 401) {
-                signout();
-            } else {
-                const error = parseError(e);
-                setError(error);
-            }
-
+            const error = parseError(e);
+            console.log(error);
+            setError(error);
             setIsLoading(false);
+            if (e?.code === 401) {
+                console.log('error', e);
+                // td signout();
+            }
         }
     };
 
