@@ -18,7 +18,6 @@ export const Calculator = (props: any) => {
         const costOfPurchase = investment * (1 + fee) - investment;
         const costOfSale = investment * priceChange * fee;
         setResult((investment * priceChange) - (costOfPurchase + costOfSale));
-        console.log({price, investment});
         setQuantity(investment / price);
     }, [fee, investment, priceMotion]);
 

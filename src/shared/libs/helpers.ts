@@ -10,20 +10,17 @@ export const objectToArray = (object: any) => {
 };
 
 export const priceFormat = (amount: number, decimal = 1, currency: string = 'hun') => {
-    if (!!amount) {
-        const price = round(amount, decimal);
+    const val = !!amount ? amount : 0;
+    const price = round(val, decimal);
 
-        return Intl
-            .NumberFormat('hu-HU', {
-                style: 'currency', currency: (currency || '')
-                    .toUpperCase()
-            })
-            .format(price)
-            .replace(/\D00(?=\D*$)/, '')
-            .replace(/hun/i, 'Ft');
-    }
-
-    return '';
+    return Intl
+        .NumberFormat('hu-HU', {
+            style: 'currency', currency: (currency || '')
+                .toUpperCase()
+        })
+        .format(price)
+        .replace(/\D00(?=\D*$)/, '')
+        .replace(/hun/i, 'Ft');
 };
 
 export const round = (num: number, decimal = 100) => {
@@ -36,9 +33,9 @@ export const getClasses = (isTrue: boolean, classIfTrue: string, classIfFalse = 
 
 export const numArray = (number: number, value: any = false) => {
     if (!value) {
-        return Array.from({ length: number }, (i, index) => (index + 1));
+        return Array.from({length: number}, (i, index) => (index + 1));
     }
-    return Array.from({ length: number }, (i, index) => value || index);
+    return Array.from({length: number}, (i, index) => value || index);
 };
 
 export const redirect = (location: string, inSite: boolean = true) => {

@@ -49,6 +49,9 @@ export const WatchlistScreen = () => {
             <Sum data={watched}/>
         </div>
         <div className={'position-center mt-50 max-width-vw-80 margin-auto row'}>
+            {!watched || !!watched && !watched.length && <Header>
+                <h2 className={'header--2 text-color--light-3 fs-30'}>No favourites has been added yet</h2>
+            </Header>}
             {(watched || []).map((data: WatchedCryptoProps, index: number) => {
                 return <div key={index} className={'col-100 col-md-50 col-lg-33 col-xl-25 mt-25 cursor-pointer gap-40'}>
                     <PurchaseManager data={data}/>
