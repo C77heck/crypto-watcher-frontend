@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { CONSTANTS } from '../constants';
-import { RangeInput } from './range-input';
-import { SearchableDropdown } from './searchable-dropdown';
-import { TextInput } from './text-input';
-import { ValidatorInterface } from './validators/validator-interface';
+import React, {Component} from "react";
+import {CONSTANTS} from '../constants';
+import {RangeInput} from './range-input';
+import {SearchableDropdown} from './searchable-dropdown';
+import {TextInput} from './text-input';
+import {ValidatorInterface} from './validators/validator-interface';
 
 export interface FieldProps {
     type?: string;
@@ -28,7 +28,7 @@ export interface FieldProps {
 }
 
 class Input extends Component<FieldProps, any> {
-    public state = { value: '', hasError: false, errorMessage: '' };
+    public state = {value: '', hasError: false, errorMessage: ''};
     public prodRef: any;
 
     constructor(props: any) {
@@ -38,13 +38,16 @@ class Input extends Component<FieldProps, any> {
 
     public componentDidMount() {
         if (!!this.props.value) {
-            this.setState({ value: this.props.value });
+            this.setState({value: this.props.value});
         }
     }
 
     public componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
         if (prevState.value !== this.state.value) {
             this.getData();
+        }
+        if (prevProps.value !== this.props.value) {
+            this.setState({value: this.props.value});
         }
     }
 
@@ -54,18 +57,18 @@ class Input extends Component<FieldProps, any> {
             : [];
 
         if (!hasErrors.length) {
-            return { hasError: false, errorMessage: '' };
+            return {hasError: false, errorMessage: ''};
         }
 
         return hasErrors[0];
     }
 
-    public handleChange({ target: { value } }: React.ChangeEvent<HTMLInputElement>) {
-        const { hasError, errorMessage } = this.validate(value);
+    public handleChange({target: {value}}: React.ChangeEvent<HTMLInputElement>) {
+        const {hasError, errorMessage} = this.validate(value);
         if (this.props.isNumberOnly) {
-            this.setState({ value: this.removeNonNumericValues(value), hasError, errorMessage });
+            this.setState({value: this.removeNonNumericValues(value), hasError, errorMessage});
         } else {
-            this.setState({ value, hasError, errorMessage });
+            this.setState({value, hasError, errorMessage});
         }
 
         if (this.props.onChange) {
@@ -80,16 +83,16 @@ class Input extends Component<FieldProps, any> {
 
     public getData() {
         if (this.props.getData) {
-            this.props.getData({ name: this.props.name, value: this.state.value }, !this.state.hasError);
+            this.props.getData({name: this.props.name, value: this.state.value}, !this.state.hasError);
         }
     }
 
     public onClickHandler(isChosen: boolean, option: string) {
-        this.setState({ value: isChosen ? '' : option });
+        this.setState({value: isChosen ? '' : option});
     }
 
     public manageInputType(element: string) {
-        const { INPUTS: { TEXTAREA, SEARCHABLE, SEARCHABLE_DROPDOWN, DROPDOWN, RANGE } } = CONSTANTS;
+        const {INPUTS: {TEXTAREA, SEARCHABLE, SEARCHABLE_DROPDOWN, DROPDOWN, RANGE}} = CONSTANTS;
         switch (element) {
             case DROPDOWN:
                 return <TextInput
@@ -139,7 +142,8 @@ class Input extends Component<FieldProps, any> {
             className={`display-flex flex-column ${this.props.className}`}
             ref={this.prodRef}
         >
-            {this.props.label && <label className={`input-label error-${hasError ? 'show' : 'hide'}--label`} htmlFor={this.props.name}>{this.props.label}</label>}
+            {this.props.label && <label className={`input-label error-${hasError ? 'show' : 'hide'}--label`}
+                                        htmlFor={this.props.name}>{this.props.label}</label>}
             <div
                 className={`input-wrapper ${this.props.inputClasses} error-${hasError ? 'show' : 'hide'}--div`}
             >

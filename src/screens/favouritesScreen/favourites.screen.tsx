@@ -1,17 +1,17 @@
-import { useContext, useEffect, useState } from 'react';
-import { Spinner } from '../../shared/components/spinner';
-import { AuthContext } from '../../shared/context/auth.context';
-import { ErrorModal } from '../../shared/form/error-modal';
-import { useClient } from '../../shared/hooks/client';
-import { Header } from '../components/header';
-import { CryptoManager } from '../fluctuationScreen/components/crypto-manager';
-import { WatchedCryptoProps } from '../watchlist/watchlist.screen';
+import {useContext, useEffect, useState} from 'react';
+import {Spinner} from '../../shared/components/spinner';
+import {AuthContext} from '../../shared/context/auth.context';
+import {ErrorModal} from '../../shared/form/error-modal';
+import {useClient} from '../../shared/hooks/client';
+import {Header} from '../components/header';
+import {CryptoManager} from '../fluctuationScreen/components/crypto-manager';
+import {WatchedCryptoProps} from '../watchlist/watchlist.screen';
 
 export const FavouritesScreen = () => {
     const [watched, setWatched] = useState([]);
     const [fetchList, setFetchList] = useState(false);
-    const { isLoggedIn } = useContext(AuthContext);
-    const { isLoading, error, clearError, client } = useClient();
+    const {isLoggedIn} = useContext(AuthContext);
+    const {isLoading, error, clearError, client} = useClient();
 
     useEffect(() => {
         if (isLoggedIn || fetchList) {
