@@ -1,25 +1,26 @@
-import { useState } from 'react';
-import { staticData } from '../../../shared/config/static-data';
-import { numArray } from '../../../shared/libs/helpers';
-import { Calculator } from './calculator';
-import { Content } from './content';
-import { Graph } from './graph';
-import { Tab } from './tab';
+import {useState} from 'react';
+import {staticData} from '../../../shared/config/static-data';
+import {numArray} from '../../../shared/libs/helpers';
+import {Calculator} from './calculator';
+import {Content} from './content';
+import {Graph} from './graph';
+import {Tab} from './tab';
+import {PurchaseAnalytics} from "./purchase.analytics";
 
 export const Tabs = (props: any) => {
-    const { purchaseMeter, graph, calculator } = staticData.tabs;
-    const [content, setContent] = useState(purchaseMeter);
+    const {purchaseAnalytics, graph, calculator} = staticData.tabs;
+    const [content, setContent] = useState(purchaseAnalytics);
     const getClasses = (tab: string) => {
         return tab === content ? 'background-color--active' : '';
     };
 
     const tabManager = () => {
         switch (content) {
-            case purchaseMeter:
-                return <h3>purchaseMeter</h3>;
+            case purchaseAnalytics:
+                return <PurchaseAnalytics analyticsData={props?.data?.analysis || {}}/>;
             case graph:
-                const { data, labels } = getGraphData(props?.data?.analysis);
-                return <Graph data={data} labels={labels}/>;
+                const {data, labels, cryptoName} = getGraphData(props?.data?.analysis);
+                return <Graph data={data} labels={labels} cryptoName={cryptoName}/>;
             case calculator:
                 return <Calculator data={props?.data?.analysis || {}}/>;
             default:
@@ -29,8 +30,8 @@ export const Tabs = (props: any) => {
 
     return <div className={'display-flex row'}>
         <Tab
-            onClick={() => setContent(purchaseMeter)}
-            className={`col-33 golden-box--full border-radius--tl cursor-pointer hover-opacity ${getClasses(purchaseMeter)}`}
+            onClick={() => setContent(purchaseAnalytics)}
+            className={`col-33 golden-box--full border-radius--tl cursor-pointer hover-opacity ${getClasses(purchaseAnalytics)}`}
             title={'Purchase meter'}
         />
         <Tab
@@ -50,10 +51,13 @@ export const Tabs = (props: any) => {
 interface AnalysisProps {
     data: number[];
     labels: string[];
+    cryptoName: string;
 }
 
 const getGraphData = (analysis: any): AnalysisProps => {
+    console.log(analysis);
     return {
+        cryptoName: analysis?.name,
         labels: numArray(90).map(num => (`${num} day`)).reverse(),
         data: [
             ...stepDown(analysis.priceChangeLast90Days, analysis.priceChangeLast60Days),
@@ -71,6 +75,7 @@ const stepDown = (price: number, endValue: number, rounds = 30): number[] => {
     const changeInDay = (price - endValue) / rounds;
 
     return numArray(rounds).map(item => {
+        // console.log({price, changeInDay, item, endValue, rounds});
         return Math.abs(price > endValue ? price - (item * changeInDay) : price + (item * changeInDay));
     });
 };

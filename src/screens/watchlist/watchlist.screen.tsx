@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from 'react';
-import { Spinner } from '../../shared/components/spinner';
-import { AuthContext } from '../../shared/context/auth.context';
-import { ErrorModal } from '../../shared/form/error-modal';
-import { useClient } from '../../shared/hooks/client';
-import { Header } from "../components/header";
-import { PurchaseManager } from './components/purchase-manager';
-import { Sum } from './components/sum';
+import {useContext, useEffect, useState} from 'react';
+import {Spinner} from '../../shared/components/spinner';
+import {AuthContext} from '../../shared/context/auth.context';
+import {ErrorModal} from '../../shared/form/error-modal';
+import {useClient} from '../../shared/hooks/client';
+import {Header} from "../components/header";
+import {PurchaseManager} from './components/purchase-manager';
+import {Sum} from './components/sum';
 
 export interface WatchedCryptoProps {
     date: Date;
@@ -22,13 +22,13 @@ export interface WatchedCryptoProps {
 
 export const WatchlistScreen = () => {
     const [watched, setWatched] = useState([]);
-    const { isLoggedIn } = useContext(AuthContext);
-    const { isLoading, error, clearError, client } = useClient();
+    const {isLoggedIn} = useContext(AuthContext);
+    const {isLoading, error, clearError, client} = useClient();
 
     useEffect(() => {
         if (isLoggedIn) {
             (async () => {
-                await client('/crypto/latest_listings', 'get');
+                // await client('/crypto/latest_listings', 'get');
                 const response: any = await client('/crypto/get_purchases', 'get');
                 setWatched(response?.items || []);
             })();

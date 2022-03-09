@@ -7,7 +7,7 @@ export const staticData = {
         favourites: '/favourites',
     },
     tabs: {
-        purchaseMeter: 'purchase-meter',
+        purchaseAnalytics: 'purchase-analytics',
         graph: 'graph',
         calculator: 'calculator',
     }

@@ -1,6 +1,15 @@
-import { CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Title, Tooltip, } from 'chart.js';
-import { useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
+import {
+    CategoryScale,
+    Chart as ChartJS,
+    Legend,
+    LinearScale,
+    LineElement,
+    PointElement,
+    Title,
+    Tooltip,
+} from 'chart.js';
+import {useEffect, useState} from 'react';
+import {Line} from 'react-chartjs-2';
 
 ChartJS.register(
     CategoryScale,
@@ -50,8 +59,6 @@ export const options = {
     },
 };
 
-const labels = ['90 days', '60 days', '30 days', '7 days', '1 day', 'Last hour', 'now'];
-
 const datasets = {
     label: 'Dataset 1',
     data: [1, 2, 3],
@@ -63,16 +70,17 @@ const datasets = {
 interface GraphProps {
     data: number[];
     labels?: string[];
+    cryptoName?: string;
 }
 
 export const Graph = (props: GraphProps) => {
     const [data, setData] = useState<DatasetsProp>(datasets);
 
     useEffect(() => {
-        setData(() => ({ ...data, data: props.data }));
+        setData(() => ({...data, data: props.data, label: props.cryptoName || ''}));
     }, [props.data]);
 
     return <div>
-        <Line data={{ labels: props.labels, datasets: [data] }} options={options}/>
+        <Line data={{labels: props.labels, datasets: [data]}} options={options}/>
     </div>;
 };
