@@ -13,7 +13,7 @@ export const LoginButton = (props: any) => {
 
     if (isLoggedIn) {
         return <Button
-            textColor={'text-color--light-1'}
+            textColor={'text-color--light-1 fs-mlg-17 fs-16'}
             buttonStyle={'logout'}
             title={'Logout'}
             onClick={() => signout()}
@@ -28,6 +28,6 @@ export const LoginButton = (props: any) => {
             : <LoginForm onClick={() => setIsRegister(true)}/>}
         size={{sm: 90, md: 72, lg: 60, xl: 40}}
         header={<h2 className={'header--3 text-align-center'}>Sign in</h2>}
-        trigger={<Button textColor={'text-color--light-1'} buttonStyle={'login'} title={'Login'}/>}
+        trigger={<Button textColor={'text-color--light-1 fs-mlg-17 fs-16'} buttonStyle={'login'} title={'Login'}/>}
     />;
 };
