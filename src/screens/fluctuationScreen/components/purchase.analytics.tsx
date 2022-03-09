@@ -1,4 +1,5 @@
 import {useCallback} from "react";
+import {priceFormat} from "../../../shared/libs/helpers";
 
 interface AnalyticsProps {
     identifier: number;
@@ -31,11 +32,11 @@ export const PurchaseAnalytics = ({analyticsData}: PurchaseAnalyticsProps) => {
     return <div>
         <div className={'row pb-10'}>
             <p className={'col-50 fs-14 fw--600'}>Current price</p>
-            <p className={'col-50 fs-14 fw--600'}>{analyticsData.price}</p>
+            <p className={'col-50 fs-14 fw--600'}>{priceFormat(analyticsData.price)}</p>
         </div>
         <div className={'row pb-10'}>
             <p className={'col-50 fs-14 fw--600'}>Median (past three months)</p>
-            <p className={'col-50 fs-14 fw--600'}>{analyticsData.median}</p>
+            <p className={'col-50 fs-14 fw--600'}>{priceFormat(analyticsData.median)}</p>
         </div>
         <div className={'pb-10'}>
             <Tag
