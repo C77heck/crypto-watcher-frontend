@@ -1,3 +1,4 @@
+import moment from 'moment';
 import * as React from "react";
 import { useContext } from "react";
 import { Button } from "../components/button";
@@ -34,16 +35,14 @@ export const LoginForm = (props: any) => {
 
     const submit = async (data: any) => {
         const body: any = {
-            email: "zcsilleri@gmail.com" || data?.email || '',
-            password: "Veronika@001" || data?.password || '',
+            email: "csiller@gmail.com" || data?.email || '',
+            password: "something" || data?.password || '',
         };
-        console.log('fdsagdsa');
         const response: any = await client.client('/users/login', 'post', { body });
-        // TODO -> something is wrong with this logic. we login even if we fail the validation..
-        console.log(client);
-        // if (!client.error) {
-        //     signin({ ...(response?.userData || {}), expiry: moment() });
-        // }
+
+        if (!client.error && !!response) {
+            signin({ ...(response?.userData || {}), expiry: moment() });
+        }
     };
 
     return <div>
@@ -55,7 +54,7 @@ export const LoginForm = (props: any) => {
             className={'row margin-auto w-60'}
         />
         <div className={'position-center py-15'}>
-            <Button title={'register'} buttonStyle={'link'} onClick={props.onClick}/>
+            <Button title={'Register'} buttonStyle={'link'} onClick={props.onClick}/>
         </div>
     </div>;
 };
