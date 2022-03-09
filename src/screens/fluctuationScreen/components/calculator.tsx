@@ -18,7 +18,8 @@ export const Calculator = (props: any) => {
         const costOfPurchase = investment * (1 + fee) - investment;
         const costOfSale = investment * priceChange * fee;
         setResult((investment * priceChange) - (costOfPurchase + costOfSale));
-        setQuantity(price / investment);
+        console.log({price, investment});
+        setQuantity(investment / price);
     }, [fee, investment, priceMotion]);
 
     const priceField = new Field({
@@ -69,19 +70,14 @@ export const Calculator = (props: any) => {
             <div className={'col-20 display-flex align-items-end justify-content-end mb-13'}>
                 <Input {...fluctuation}/>
             </div>
-            {/*<div className={'col-20 display-flex align-items-end justify-content-end mb-13'}>*/}
-            {/*    <div className={'input-wrapper h-px-34 w-px-70 position-center'}>*/}
-            {/*        <h4 className={'fs-16'}>{priceMotion} %</h4>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
         </div>
         <div className={'row pb-20'}>
-            <h3 className={'col-50 fs-20 fw--600'}>{`Calculated ${result > investment ? 'Profit' : 'Loss'}`}:</h3>
-            <h3 className={'col-50 fs-22 fw--600'}>{priceFormat(result)}</h3>
+            <p className={'col-50 fs-20 fw--600'}>{`Calculated ${result > investment ? 'Profit' : 'Loss'}`}:</p>
+            <p className={'col-50 fs-22 fw--600'}>{priceFormat(result)}</p>
         </div>
         <div className={'row pb-20'}>
-            <h3 className={'col-50 fs-20 fw--600'}>Quantity:</h3>
-            <h3 className={'col-50 fs-22 fw--600'}>{quantity}</h3>
+            <p className={'col-50 fs-20 fw--600'}>Quantity:</p>
+            <p className={'col-50 fs-22 fw--600'}>{quantity}</p>
         </div>
     </div>;
 };
