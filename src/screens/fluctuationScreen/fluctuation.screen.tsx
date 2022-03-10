@@ -10,6 +10,7 @@ import {CryptoManager} from './components/crypto-manager';
 import {Paginator} from './components/paginator';
 import {SearchBar} from './components/search-bar';
 import {Filters} from "./components/filters";
+import {objectToArray} from "../../shared/libs/helpers";
 
 export const FluctuationScreen = (props: any) => {
     const [watched, setWatched] = useState([]);
@@ -17,19 +18,24 @@ export const FluctuationScreen = (props: any) => {
     const [page, setPage] = useState(1);
     const [tags, setTags] = useState([]);
     const [search, setSearch] = useState('');
+    const [activeTag, setActiveTag] = useState('');
     const {isLoggedIn} = useContext(AuthContext);
     const {isLoading, error, clearError, client} = useClient();
 
     useEffect(() => {
-        if (isLoggedIn || page || search) {
+        if (isLoggedIn) {
             (async () => {
-                const response: any = await client('/crypto/get_changes_in_value', 'get', {}, {page, search});
+                const response: any = await client('/crypto/get_changes_in_value', 'get', {}, {
+                    page,
+                    search,
+                    activeTag
+                });
                 setTotal(response?.total || 0);
                 setWatched(response?.items || []);
                 setTags(response?.tags || []);
             })();
         }
-    }, [isLoggedIn, page, search]);
+    }, [isLoggedIn, page, search, activeTag]);
 
     const paginate = (page: number) => {
         setPage(page);
@@ -57,15 +63,21 @@ export const FluctuationScreen = (props: any) => {
             errorMessage={error}
             onClick={clearError}
         />
-        <div className={'max-width-vw-80 margin-auto display-flex justify-content-end'}>
-            <div className={'row justify-content-space-between'}>
-                <div className={'col-40 display-flex'}><Filters tags={tags}/></div>
-                <div className={'col-40'}><SearchBar onSearch={onChangeHandler}/></div>
+
+        <div className={'max-width-vw-80 row margin-auto display-flex justify-content-end align-items-end'}>
+            <div className={'col-80 col-md-40'}>
+                <SearchBar onSearch={onChangeHandler}/>
             </div>
         </div>
         <Header>
             <h2 className={'header--2'}>Crypto fluctuation</h2>
         </Header>
+        <div className={'max-width-vw-80 margin-auto display-flexjustify-content-end align-items-end pt-40'}>
+            <div className={'display-flex'}>
+                <Filters onClick={(tag: string) => setActiveTag(tag)} tags={tags} activeTag={activeTag}/>
+            </div>
+        </div>
+
         <div className={'position-center mt-50 max-width-vw-80 margin-auto row'}>
             {(watched || []).map((data: WatchedCryptoProps, index: number) => {
                 return <div key={index} className={'col-100 col-md-50 col-lg-33 col-xl-25 mt-25 cursor-pointer gap-30'}>
