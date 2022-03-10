@@ -26,6 +26,7 @@ interface PurchaseAnalyticsProps {
 }
 
 export const PurchaseAnalytics = ({ analyticsData }: PurchaseAnalyticsProps) => {
+    console.log(analyticsData);
     return <div>
         <div className={'row pb-10'}>
             <p className={'col-50 fs-17 fw--600'}>Current price</p>
