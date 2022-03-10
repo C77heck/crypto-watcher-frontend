@@ -17,7 +17,7 @@ export const MobileLinks = (props: any) => {
     const isShow = props.show ? 'opened' : '';
 
     return <div className={`mobile-overlay w-100 mobile-menu ${isShow}`}>
-        <div className={`mobile-overlay__left pt-50 display-flex background-color--light flex-column align-items-baseline mobile-menu ${isShow}`}>
+        <div className={`mobile-overlay__left pt-50 display-flex background-color--light-2 flex-column align-items-baseline mobile-menu ${isShow}`}>
             <div className="display-flex align-items-start flex-column pl-20">
                 <Link className={getColor(home)} to={home}>
                     Home

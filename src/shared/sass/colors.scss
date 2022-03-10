@@ -46,7 +46,11 @@
     background-color: var(--color-error-3);
   }
 
-  &--light {
+  &--light-1 {
+    background-color: var(--color-light);
+  }
+
+  &--light-2 {
     background-color: var(--color-primary-5);
   }
 

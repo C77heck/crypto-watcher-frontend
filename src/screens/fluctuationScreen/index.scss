@@ -83,3 +83,27 @@
     background-color: hsla(103, 89%, 39%, 0.62);
   }
 }
+
+.filter-button {
+  border-radius: 4px;
+  border: 2px solid var(--color-primary-6);
+  box-sizing: border-box;
+  cursor: pointer;
+  height: 39px;
+
+  &--active {
+    background-color: var(--color-primary-6);
+
+    & p {
+      color: var(--color-light);
+    }
+  }
+
+  &--inactive {
+    background-color: var(--color-light);
+
+    & p {
+      color: var(--color-primary-6);
+    }
+  }
+}

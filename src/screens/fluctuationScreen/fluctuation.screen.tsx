@@ -1,27 +1,28 @@
-import { useContext, useEffect, useState } from 'react';
-import { debounceTime, distinctUntilChanged, Subject, tap } from 'rxjs';
-import { Spinner } from '../../shared/components/spinner';
-import { AuthContext } from '../../shared/context/auth.context';
-import { ErrorModal } from '../../shared/form/error-modal';
-import { useClient } from '../../shared/hooks/client';
-import { Header } from '../components/header';
-import { WatchedCryptoProps } from '../watchlist/watchlist.screen';
-import { CryptoManager } from './components/crypto-manager';
-import { Paginator } from './components/paginator';
-import { SearchBar } from './components/search-bar';
+import {useContext, useEffect, useState} from 'react';
+import {debounceTime, distinctUntilChanged, Subject, tap} from 'rxjs';
+import {Spinner} from '../../shared/components/spinner';
+import {AuthContext} from '../../shared/context/auth.context';
+import {ErrorModal} from '../../shared/form/error-modal';
+import {useClient} from '../../shared/hooks/client';
+import {Header} from '../components/header';
+import {WatchedCryptoProps} from '../watchlist/watchlist.screen';
+import {CryptoManager} from './components/crypto-manager';
+import {Paginator} from './components/paginator';
+import {SearchBar} from './components/search-bar';
+import {Filters} from "./components/filters";
 
 export const FluctuationScreen = (props: any) => {
     const [watched, setWatched] = useState([]);
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState('');
-    const { isLoggedIn } = useContext(AuthContext);
-    const { isLoading, error, clearError, client } = useClient();
+    const {isLoggedIn} = useContext(AuthContext);
+    const {isLoading, error, clearError, client} = useClient();
 
     useEffect(() => {
         if (isLoggedIn || page || search) {
             (async () => {
-                const response: any = await client('/crypto/get_changes_in_value', 'get', {}, { page, search });
+                const response: any = await client('/crypto/get_changes_in_value', 'get', {}, {page, search});
                 setTotal(response?.total || 0);
                 setWatched(response?.items || []);
             })();
@@ -55,7 +56,10 @@ export const FluctuationScreen = (props: any) => {
             onClick={clearError}
         />
         <div className={'max-width-vw-80 margin-auto display-flex justify-content-end'}>
-            <SearchBar onSearch={onChangeHandler}/>
+            <div className={'row justify-content-space-between'}>
+                <div className={'col-40 display-flex'}><Filters/></div>
+                <div className={'col-40'}><SearchBar onSearch={onChangeHandler}/></div>
+            </div>
         </div>
         <Header>
             <h2 className={'header--2'}>Crypto fluctuation</h2>
