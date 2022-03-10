@@ -15,7 +15,7 @@ export const FluctuationScreen = (props: any) => {
     const [watched, setWatched] = useState([]);
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
-    const [tags, setTags] = useState(1);
+    const [tags, setTags] = useState([]);
     const [search, setSearch] = useState('');
     const {isLoggedIn} = useContext(AuthContext);
     const {isLoading, error, clearError, client} = useClient();
