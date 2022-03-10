@@ -15,6 +15,7 @@ export const FluctuationScreen = (props: any) => {
     const [watched, setWatched] = useState([]);
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
+    const [tags, setTags] = useState(1);
     const [search, setSearch] = useState('');
     const {isLoggedIn} = useContext(AuthContext);
     const {isLoading, error, clearError, client} = useClient();
@@ -25,6 +26,7 @@ export const FluctuationScreen = (props: any) => {
                 const response: any = await client('/crypto/get_changes_in_value', 'get', {}, {page, search});
                 setTotal(response?.total || 0);
                 setWatched(response?.items || []);
+                setTags(response?.tags || []);
             })();
         }
     }, [isLoggedIn, page, search]);
@@ -57,7 +59,7 @@ export const FluctuationScreen = (props: any) => {
         />
         <div className={'max-width-vw-80 margin-auto display-flex justify-content-end'}>
             <div className={'row justify-content-space-between'}>
-                <div className={'col-40 display-flex'}><Filters/></div>
+                <div className={'col-40 display-flex'}><Filters tags={tags}/></div>
                 <div className={'col-40'}><SearchBar onSearch={onChangeHandler}/></div>
             </div>
         </div>

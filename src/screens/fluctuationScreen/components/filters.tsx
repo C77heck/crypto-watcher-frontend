@@ -1,8 +1,7 @@
 import {useState} from "react";
 
-const tags = ['something', 'another thing', 'and then a third'];
 
-export const Filters = (props: any) => {
+export const Filters = ({tags}: { tags: any[] }) => {
     const [activeTag, setActiveTag] = useState('');
     return <div className={'display-flex align-items-end justify-content-end'}>
         {(tags || []).map(tag => <Filter activeTag={activeTag} data={tag} onClick={() => setActiveTag(tag)}/>)}
