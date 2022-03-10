@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export class RangeInput extends Component<any, any> {
     public render() {
         return <input
-            className={'input'}
+            className={'range-input'}
             onChange={(e) => this.props.handleChange(e)}
             value={this.props.value}
             type={'range'}
