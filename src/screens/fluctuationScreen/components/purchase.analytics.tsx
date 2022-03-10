@@ -1,10 +1,15 @@
 import {useCallback} from "react";
 import {priceFormat} from "../../../shared/libs/helpers";
 
+
+interface PriceStabilityAnalysis {
+    label: string;
+    grade: number;
+}
+
 interface AnalyticsProps {
     identifier: number;
-    isDecline: true
-    isGoodBuy: true
+    isDecline: boolean
     median: number;
     name: string;
     price: number;
@@ -14,7 +19,7 @@ interface AnalyticsProps {
     priceChangeLastHour: number;
     priceChangeLastMonth: number;
     priceChangeLastWeek: number;
-    stabilityRating: string;
+    stabilityRating: PriceStabilityAnalysis;
     symbol: string;
 }
 
@@ -23,12 +28,6 @@ interface PurchaseAnalyticsProps {
 }
 
 export const PurchaseAnalytics = ({analyticsData}: PurchaseAnalyticsProps) => {
-    console.log(analyticsData);
-    const getColor = useCallback((condition: boolean) => {
-        const genericClasses = '';
-        return condition ? `${genericClasses} text-color--active` : `${genericClasses}`;
-    }, []);
-
     return <div>
         <div className={'row pb-10'}>
             <p className={'col-50 fs-14 fw--600'}>Current price</p>
@@ -40,19 +39,48 @@ export const PurchaseAnalytics = ({analyticsData}: PurchaseAnalyticsProps) => {
         </div>
         <div className={'pb-10'}>
             <Tag
-                className={`mb-10 ${getColor(!!analyticsData.stabilityRating)}`}
-                value={analyticsData.stabilityRating}
+                className={`mb-10 ${getPriceAnalysisClasses(analyticsData.stabilityRating.grade)}`}
+                value={analyticsData.stabilityRating.label}
             />
             <Tag
-                className={`mb-10 ${getColor(analyticsData.isGoodBuy)}`}
-                value={analyticsData.isGoodBuy ? 'Good buy' : 'Not a good buy'}
-            />
-            <Tag
-                className={`mb-10 ${getColor(analyticsData.isDecline)}`}
+                className={`mb-10 ${getPriceAnalysisClasses(analyticsData.isDecline)}`}
                 value={analyticsData.isDecline ? 'Declining state' : 'Inclining state'}
             />
         </div>
     </div>;
+}
+
+
+const getPriceAnalysisClasses = (grade: number | boolean) => {
+    const genericClasses = '';
+    switch (grade) {
+        case true:
+            return `${genericClasses} tag-color--1`;
+        case false:
+            return `${genericClasses} tag-color--5`;
+        case 1:
+            return `${genericClasses} tag-color--1`;
+        case 2:
+            return `${genericClasses} tag-color--2`;
+        case 3:
+            return `${genericClasses} tag-color--3`;
+        case 4:
+            return `${genericClasses} tag-color--4`;
+        case 5:
+            return `${genericClasses} tag-color--5`;
+        case -1:
+            return `${genericClasses} tag-color--1`;
+        case -2:
+            return `${genericClasses} tag-color--2`;
+        case -3:
+            return `${genericClasses} tag-color--3`;
+        case -4:
+            return `${genericClasses} tag-color--4`;
+        case -5:
+            return `${genericClasses} tag-color--5 `;
+        default:
+            return genericClasses;
+    }
 }
 
 interface TagsProps {
@@ -63,6 +91,6 @@ interface TagsProps {
 const Tag = ({value, className}: TagsProps) => {
 
     return <div className={`${className} position-center analytics-tag h-px-18 width-fit-content px-14`}>
-        <p className={'fs-14 fw--700'}>{value}</p>
+        <p className={'fs-14 fw--700 color-inherit'}>{value}</p>
     </div>
 }
