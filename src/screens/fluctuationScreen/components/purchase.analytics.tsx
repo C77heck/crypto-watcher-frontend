@@ -1,6 +1,4 @@
-import {useCallback} from "react";
-import {priceFormat} from "../../../shared/libs/helpers";
-
+import { priceFormat } from "../../../shared/libs/helpers";
 
 interface PriceStabilityAnalysis {
     label: string;
@@ -9,7 +7,7 @@ interface PriceStabilityAnalysis {
 
 interface AnalyticsProps {
     identifier: number;
-    isDecline: boolean
+    isDecline: boolean;
     median: number;
     name: string;
     price: number;
@@ -27,36 +25,21 @@ interface PurchaseAnalyticsProps {
     analyticsData: AnalyticsProps;
 }
 
-// delete this down the line...
-const checkPriceStability = (price: number, median: number) => {
-    const percentageDiff = Math.abs(price / median);
-    if (percentageDiff < 1) {
-        return percentageDiff + 0.1 > 1
-            ? {grade: 1, label: 'weak buy'} : percentageDiff + 0.2 > 1
-                ? {grade: 2, label: 'okay buy'} : percentageDiff + 0.3 > 1
-                    ? {grade: 3, label: 'fairly good buy'} : percentageDiff + 0.4 > 1
-                        ? {grade: 4, label: 'very good buy'} : {grade: 5, label: 'well below its median'};
-    } else {
-        return percentageDiff - 0.1 > 1
-            ? {grade: -1, label: 'steady price'} : percentageDiff - 0.2 > 1
-                ? {grade: -2, label: 'okay sale'} : percentageDiff - 0.3 > 1
-                    ? {grade: -3, label: 'good sale'} : percentageDiff - 0.4 > 1
-                        ? {grade: -4, label: 'very good sale'} : {grade: -5, label: 'excellent sale'};
-    }
-}
-
-export const PurchaseAnalytics = ({analyticsData}: PurchaseAnalyticsProps) => {
-    console.log(checkPriceStability(analyticsData.price, analyticsData.median));
+export const PurchaseAnalytics = ({ analyticsData }: PurchaseAnalyticsProps) => {
     return <div>
         <div className={'row pb-10'}>
-            <p className={'col-50 fs-14 fw--600'}>Current price</p>
-            <p className={'col-50 fs-14 fw--600'}>{priceFormat(analyticsData.price)}</p>
+            <p className={'col-50 fs-17 fw--600'}>Current price</p>
+            <p className={'col-50 fs-17 fw--600'}>{priceFormat(analyticsData.price)}</p>
         </div>
         <div className={'row pb-10'}>
-            <p className={'col-50 fs-14 fw--600'}>Median (past three months)</p>
-            <p className={'col-50 fs-14 fw--600'}>{priceFormat(analyticsData.median)}</p>
+            <p className={'col-50 fs-17 fw--600'}>Median (past three months)</p>
+            <p className={'col-50 fs-17 fw--600'}>{priceFormat(analyticsData.median)}</p>
         </div>
-        <div className={'pb-10'}>
+        <div className={''}>
+            <div className={'row'}>
+                <p className={'col-100 fs-17 fw--600'}>Analytic tags:</p>
+            </div>
+            <div className={'data-separator border-width-2 pb-0 pt-5 mb-10'}/>
             <Tag
                 className={`mb-10 ${getPriceAnalysisClasses(analyticsData.stabilityRating.grade)}`}
                 value={analyticsData.stabilityRating.label}
@@ -67,8 +50,7 @@ export const PurchaseAnalytics = ({analyticsData}: PurchaseAnalyticsProps) => {
             />
         </div>
     </div>;
-}
-
+};
 
 const getPriceAnalysisClasses = (grade: number | boolean) => {
     const genericClasses = '';
@@ -100,16 +82,15 @@ const getPriceAnalysisClasses = (grade: number | boolean) => {
         default:
             return genericClasses;
     }
-}
+};
 
 interface TagsProps {
-    value: string
+    value: string;
     className?: string;
 }
 
-const Tag = ({value, className}: TagsProps) => {
-
-    return <div className={`${className} position-center analytics-tag h-px-18 width-fit-content px-14`}>
+const Tag = ({ value, className }: TagsProps) => {
+    return <div className={`${className} position-center analytics-tag h-px-25 border-none width-fit-content px-14`}>
         <p className={'fs-14 fw--700 color-inherit'}>{value}</p>
-    </div>
-}
+    </div>;
+};
