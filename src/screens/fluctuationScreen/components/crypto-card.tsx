@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { getClasses, priceFormat } from '../../../shared/libs/helpers';
 
 interface WatchedCryptoProps {
@@ -15,6 +16,8 @@ export const CryptoCard = (props: any) => {
         percentChangeLast90Days,
     } = props.data;
 
+    const manageFontSizeByCryptoName = useCallback((name, symbol) => `${name} ${symbol}`.length > 28 ? 'fs-19' : 'fs-24', [name, symbol]);
+
     const class1 = getClasses(percentChangeLastHour > 0, 'color-green--light', 'color-red--light');
     const class2 = getClasses(percentChangeLastDay > 0, 'color-green--light', 'color-red--light');
     const class3 = getClasses(percentChangeLastWeek > 0, 'color-green--light', 'color-red--light');
@@ -24,7 +27,7 @@ export const CryptoCard = (props: any) => {
 
     return <div className={'row w-100 crypto-box mx-20 hover-scale box-shadow background--light'}>
         <div className={'col-100 white-space-nowrap data-separator px-10 py-6 position-center'}>
-            <p className={'fs-24 fw--900'}>{name} </p>
+            <p className={`${manageFontSizeByCryptoName(name, symbol)} fw--900`}>{name} </p>
             <p className={'fs-17 fw--700'}>&nbsp;({symbol})</p>
 
         </div>
