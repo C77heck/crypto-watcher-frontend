@@ -50,3 +50,20 @@ export const redirect = (location: string, inSite: boolean = true) => {
 export const getUniqueId = () => {
     return (Math.random() * 1000).toString(16).replace('.', '');
 };
+
+export const unique = (items: any[], propBy = ''): any[] => {
+    if (!propBy) {
+        return Array.from(new Set(items));
+    }
+
+    const uniqueItems = [];
+    const usedProps: any[] = [];
+    for (const item of items) {
+        if (!usedProps.includes(item[propBy])) {
+            usedProps.push(item[propBy]);
+            uniqueItems.push(item);
+        }
+    }
+
+    return uniqueItems;
+};
