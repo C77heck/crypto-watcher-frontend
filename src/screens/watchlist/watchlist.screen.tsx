@@ -65,7 +65,7 @@ export const WatchlistScreen = () => {
         <div className={'width-px-710 max-width-810  margin-auto'}>
             {!!watched && !!watched.length && <Filters
                 onClick={(tag) => setActiveTag(!activeTag || activeTag !== tag ? tag : '')}
-                tags={tags}
+                tags={[...tags, 'All']}
                 activeTag={activeTag}
             />}
         </div>

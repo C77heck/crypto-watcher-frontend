@@ -18,7 +18,8 @@ export const MobileLinks = (props: any) => {
 
     return <div className={`mobile-overlay w-100 mobile-menu ${isShow}`}>
         <div
-            className={`mobile-overlay__left pt-50 display-flex background-color--light-2 flex-column align-items-baseline mobile-menu ${isShow}`}>
+            className={`mobile-overlay__left pt-50 display-flex background-color--light-2 flex-column align-items-baseline mobile-menu ${isShow}`}
+        >
             <div className="display-flex display-md-none  align-items-start flex-column pl-20">
                 <Link className={getColor(home)} to={home}>
                     Home
