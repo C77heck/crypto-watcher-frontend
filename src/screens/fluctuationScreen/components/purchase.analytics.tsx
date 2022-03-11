@@ -1,4 +1,4 @@
-import { priceFormat } from "../../../shared/libs/helpers";
+import {priceFormat} from "../../../shared/libs/helpers";
 
 interface PriceStabilityAnalysis {
     label: string;
@@ -7,7 +7,7 @@ interface PriceStabilityAnalysis {
 
 interface AnalyticsProps {
     identifier: number;
-    isDecline: boolean;
+    isDecline: string;
     median: number;
     name: string;
     price: number;
@@ -25,8 +25,8 @@ interface PurchaseAnalyticsProps {
     analyticsData: AnalyticsProps;
 }
 
-export const PurchaseAnalytics = ({ analyticsData }: PurchaseAnalyticsProps) => {
-    console.log(analyticsData);
+export const PurchaseAnalytics = ({analyticsData}: PurchaseAnalyticsProps) => {
+
     return <div>
         <div className={'row pb-10'}>
             <p className={'col-50 fs-17 fw--600'}>Current price</p>
@@ -47,18 +47,19 @@ export const PurchaseAnalytics = ({ analyticsData }: PurchaseAnalyticsProps) => 
             />
             <Tag
                 className={`mb-10 ${getPriceAnalysisClasses(analyticsData.isDecline)}`}
-                value={analyticsData.isDecline ? 'Declining state' : 'Inclining state'}
+                value={analyticsData.isDecline}
             />
         </div>
     </div>;
 };
 
-const getPriceAnalysisClasses = (grade: number | boolean) => {
+const getPriceAnalysisClasses = (grade: number | string) => {
     const genericClasses = '';
+
     switch (grade) {
-        case true:
+        case 'Declining state':
             return `${genericClasses} tag-color--1`;
-        case false:
+        case 'Inclining state':
             return `${genericClasses} tag-color--5`;
         case 1:
             return `${genericClasses} tag-color--1`;
@@ -90,7 +91,7 @@ interface TagsProps {
     className?: string;
 }
 
-const Tag = ({ value, className }: TagsProps) => {
+const Tag = ({value, className}: TagsProps) => {
     return <div className={`${className} position-center analytics-tag h-px-25 border-none width-fit-content px-14`}>
         <p className={'fs-14 fw--700 color-inherit'}>{value}</p>
     </div>;

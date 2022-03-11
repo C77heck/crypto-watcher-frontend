@@ -10,7 +10,6 @@ import {CryptoManager} from './components/crypto-manager';
 import {Paginator} from './components/paginator';
 import {SearchBar} from './components/search-bar';
 import {Filters} from "./components/filters";
-import {objectToArray} from "../../shared/libs/helpers";
 
 export const FluctuationScreen = (props: any) => {
     const [watched, setWatched] = useState([]);
@@ -63,7 +62,6 @@ export const FluctuationScreen = (props: any) => {
             errorMessage={error}
             onClick={clearError}
         />
-
         <div className={'max-width-vw-80 row margin-auto display-flex justify-content-end align-items-end'}>
             <div className={'col-80 col-md-40'}>
                 <SearchBar onSearch={onChangeHandler}/>
@@ -77,10 +75,12 @@ export const FluctuationScreen = (props: any) => {
                 <Filters onClick={(tag: string) => setActiveTag(tag)} tags={tags} activeTag={activeTag}/>
             </div>
         </div>
-
         <div className={'position-center mt-30 max-width-vw-80 margin-auto row'}>
             {(watched || []).map((data: WatchedCryptoProps, index: number) => {
-                return <div key={index} className={'col-100 col-md-50 col-lg-33 col-xl-25 mt-25 cursor-pointer gap-30'}>
+                return <div
+                    key={index}
+                    className={'col-100 col-md-50 col-mlg-33 col-xl-25 mt-25 cursor-pointer gap-30'}
+                >
                     <CryptoManager data={data}/>
                 </div>;
             })}
