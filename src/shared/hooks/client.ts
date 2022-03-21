@@ -1,7 +1,7 @@
-import {useContext, useState} from 'react';
-import {AuthContext} from '../context/auth.context';
-import {parseError} from '../libs/error-parsers';
-import {Repository} from '../libs/repository';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../context/auth.context';
+import { parseError } from '../libs/error-parsers';
+import { Repository } from '../libs/repository';
 
 export interface ClientProps {
     isLoading: boolean;
@@ -13,7 +13,7 @@ export interface ClientProps {
 }
 
 export const useClient = (): ClientProps => {
-    const {token, signout, isLoggedIn} = useContext(AuthContext);
+    const { token, signout, isLoggedIn } = useContext(AuthContext);
     const request: any = new Repository(token);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
@@ -38,11 +38,10 @@ export const useClient = (): ClientProps => {
             setError(error);
             setIsLoading(false);
             if (e?.code === 401 && isLoggedIn) {
-                console.log('error', e);
                 signout();
             }
         }
     };
 
-    return {client, isLoading, error, clearError, successMessage, clearMessage};
+    return { client, isLoading, error, clearError, successMessage, clearMessage };
 };

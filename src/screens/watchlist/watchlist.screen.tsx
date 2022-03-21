@@ -1,13 +1,13 @@
-import {useContext, useEffect, useState} from 'react';
-import {Spinner} from '../../shared/components/spinner';
-import {AuthContext} from '../../shared/context/auth.context';
-import {ErrorModal} from '../../shared/form/error-modal';
-import {useClient} from '../../shared/hooks/client';
-import {Header} from "../components/header";
-import {PurchaseManager} from './components/purchase-manager';
-import {Sum} from './components/sum';
-import {Filters} from "../fluctuationScreen/components/filters";
-import {unique} from "../../shared/libs/helpers";
+import { useContext, useEffect, useState } from 'react';
+import { Spinner } from '../../shared/components/spinner';
+import { AuthContext } from '../../shared/context/auth.context';
+import { ErrorModal } from '../../shared/form/error-modal';
+import { useClient } from '../../shared/hooks/client';
+import { Header } from "../components/header";
+import { PurchaseManager } from './components/purchase-manager';
+import { Sum } from './components/sum';
+import { Filters } from "../fluctuationScreen/components/filters";
+import { unique } from "../../shared/libs/helpers";
 
 export interface WatchedCryptoProps {
     date: Date;
@@ -25,10 +25,10 @@ export interface WatchedCryptoProps {
 export const WatchlistScreen = () => {
     const [allWatched, setAllWatched] = useState([]);
     const [watched, setWatched] = useState([]);
-    const [activeTag, setActiveTag] = useState('');
+    const [activeTag, setActiveTag] = useState('All');
     const [tags, setTags] = useState<any[]>([]);
-    const {isLoggedIn} = useContext(AuthContext);
-    const {isLoading, error, clearError, client} = useClient();
+    const { isLoggedIn } = useContext(AuthContext);
+    const { isLoading, error, clearError, client } = useClient();
 
     useEffect(() => {
         if (isLoggedIn) {
@@ -42,12 +42,12 @@ export const WatchlistScreen = () => {
     }, [isLoggedIn]);
 
     useEffect(() => {
-        const watched = !activeTag
+        const watched = activeTag === 'All'
             ? allWatched
-            : (allWatched || []).filter(({name, symbol}: any) => name === activeTag || symbol === activeTag);
+            : (allWatched || []).filter(({ name, symbol }: any) => name === activeTag || symbol === activeTag);
 
         setWatched(watched);
-    }, [allWatched, activeTag])
+    }, [allWatched, activeTag]);
 
     return <div>
         {isLoading && <Spinner asOverlay/>}
@@ -64,7 +64,7 @@ export const WatchlistScreen = () => {
         </div>
         <div className={'width-px-710 max-width-810  margin-auto'}>
             {!!watched && !!watched.length && <Filters
-                onClick={(tag) => setActiveTag(!activeTag || activeTag !== tag ? tag : '')}
+                onClick={(tag) => setActiveTag(tag)}
                 tags={[...tags, 'All']}
                 activeTag={activeTag}
             />}
