@@ -1,4 +1,5 @@
-import {SpinnerIcon} from './icons';
+import React from 'react';
+import { SpinnerIcon } from './icons';
 
 export interface ButtonProps {
     type?: "button" | "submit" | "reset" | undefined;
@@ -8,7 +9,7 @@ export interface ButtonProps {
     id?: string;
     disabled?: boolean;
     onClick?: (e: any) => void;
-    title: string;
+    title: string | JSX.Element;
     isLoading?: boolean;
     textColor?: string;
 }
@@ -40,6 +41,10 @@ const getButtonType = (type: string) => {
             return 'button button--login';
         case 'logout':
             return 'button button--logout';
+        case 'login--mobile':
+            return 'button button--login--mobile';
+        case 'logout--mobile':
+            return 'button button--logout--mobile';
         case 'success':
             return 'button button--success';
         case 'error':

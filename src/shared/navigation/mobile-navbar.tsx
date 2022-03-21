@@ -12,8 +12,8 @@ export const MobileNavbar = (props: any) => {
                 <div className={'col-60'}>
                     <MobileMenuButton isActive={isActive} onClick={() => setIsActive(!isActive)}/>
                 </div>
-                <div className={'col-40 display-flex justify-content-end'}>
-                    <LoginButton/>
+                <div className={'col-40 display-flex justify-content-end align-items-center'}>
+                    <LoginButton isMobile={true}/>
                 </div>
             </div>
         </nav>

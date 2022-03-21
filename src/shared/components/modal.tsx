@@ -21,7 +21,8 @@ interface ModalProps {
     overlayClick?: (show: boolean) => void;
     level?: number;
     portal?: string;
-    zIndex?:string;
+    zIndex?: string;
+    wrapperClass?: string;
 }
 
 export class Modal extends React.Component<ModalProps, any> {
@@ -123,7 +124,7 @@ export class Modal extends React.Component<ModalProps, any> {
     }
 
     public render() {
-        return <div>
+        return <div className={this.props.wrapperClass}>
             <div className={'h-100'} onClick={(e: any) => this.handleClick(e, true)}>
                 {!!this.props.trigger && this.props.trigger}
             </div>
