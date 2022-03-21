@@ -2,7 +2,7 @@ import moment from 'moment';
 import * as React from 'react';
 import { useContext, useState } from 'react';
 import { Button } from '../components/button';
-import { UserIcon } from '../components/icons';
+import { LoginIcon, LogoutIcon } from '../components/icons';
 import { Modal } from '../components/modal';
 import { AuthContext } from '../context/auth.context';
 import { LoginForm } from "./login.form";
@@ -16,7 +16,7 @@ export const LoginButton = ({ isMobile }: any) => {
         return <Button
             textColor={'text-color--light-1 fs-mlg-17 fs-16'}
             buttonStyle={isMobile ? 'logout--mobile' : 'logout'}
-            title={isMobile ? <UserIcon width={27} className={'text-color--light-1 pt-3'}/> : 'Logout'}
+            title={isMobile ? <LogoutIcon width={30} className={'text-color--light-1 pt-9 pl-8'}/> : 'Logout'}
             onClick={() => signout()}
         />;
     }
@@ -33,7 +33,7 @@ export const LoginButton = ({ isMobile }: any) => {
         trigger={<Button
             textColor={'text-color--light-1 fs-mlg-17 fs-16'}
             buttonStyle={isMobile ? 'login--mobile' : 'login'}
-            title={isMobile ? <UserIcon width={27} className={'text-color--light-1 pt-3'}/> : 'Login'}
+            title={isMobile ? <LoginIcon width={27} className={'text-color--light-1 pt-3'}/> : 'Login'}
         />}
     />;
 };
