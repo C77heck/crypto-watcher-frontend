@@ -33,9 +33,9 @@ export const getClasses = (isTrue: boolean, classIfTrue: string, classIfFalse = 
 
 export const numArray = (number: number, value: any = false) => {
     if (!value) {
-        return Array.from({length: number}, (i, index) => (index + 1));
+        return Array.from({ length: number }, (i, index) => (index + 1));
     }
-    return Array.from({length: number}, (i, index) => value || index);
+    return Array.from({ length: number }, (i, index) => value || index);
 };
 
 export const redirect = (location: string, inSite: boolean = true) => {
@@ -66,4 +66,11 @@ export const unique = (items: any[], propBy = ''): any[] => {
     }
 
     return uniqueItems;
+};
+
+export const sort = (collection: any[], direction: 'asc' | 'desc' = 'asc', by = ''): any[] => {
+    if (!by) {
+        return collection.sort((a, b) => a - b);
+    }
+    return collection.sort((a, b) => a[by].localeCompare(b[by]));
 };

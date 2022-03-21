@@ -1,3 +1,4 @@
+import { sortBy } from 'lodash';
 import { useContext, useEffect, useState } from 'react';
 import { Spinner } from '../../shared/components/spinner';
 import { AuthContext } from '../../shared/context/auth.context';
@@ -7,7 +8,7 @@ import { Header } from "../components/header";
 import { PurchaseManager } from './components/purchase-manager';
 import { Sum } from './components/sum';
 import { Filters } from "../fluctuationScreen/components/filters";
-import { unique } from "../../shared/libs/helpers";
+import { sort, unique } from "../../shared/libs/helpers";
 
 export interface WatchedCryptoProps {
     date: Date;
@@ -35,7 +36,8 @@ export const WatchlistScreen = () => {
             (async () => {
                 // await client('/crypto/latest_listings', 'get');
                 const response: any = await client('/crypto/get_purchases', 'get');
-                setAllWatched(response?.items || []);
+                console.log(response.items, sort(response?.items || [], 'asc', 'name'));
+                setAllWatched(sort(response?.items || [], 'asc', 'name') as any);
                 setTags(unique((response?.items || []).map((item: any) => item.name.length < 20 ? item.name : item.symbol)));
             })();
         }
