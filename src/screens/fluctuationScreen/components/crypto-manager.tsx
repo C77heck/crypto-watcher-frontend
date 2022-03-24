@@ -5,17 +5,12 @@ import { Favourites } from './favourites';
 import { Tabs } from './tabs';
 
 export const CryptoManager = (props: any) => {
-    // add to favourites
-    // tab-1: graph
-    // tab-2: tags added by algorithm written from the backend.
-
     const header = <h3 className={'fs-24 fw-700 text-align-center position-center'}>
         <Favourites {...props}/>
         <span>{props?.data?.name}</span>
     </h3>;
-    const content = <div>
-        <Tabs {...props} />
-    </div>;
+
+    const content = <div><Tabs {...props} /></div>;
 
     return <Modal
         level={3}

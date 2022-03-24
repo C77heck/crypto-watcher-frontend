@@ -28,7 +28,7 @@ export const LoginButton = ({ isMobile }: any) => {
             : <LoginForm onClick={() => setIsRegister(true)}/>}
         size={{ sm: 90, md: 72, lg: 60, xl: 40 }}
         header={<h2 className={'header--3 text-align-center'}>Sign in</h2>}
-        wrapperClass={'align-self-center'}
+        wrapperClass={isMobile ? 'align-self-center' : ''}
         trigger={<Button
             textColor={'text-color--light-1 fs-mlg-17 fs-16'}
             buttonStyle={isMobile ? 'login--mobile' : 'login'}

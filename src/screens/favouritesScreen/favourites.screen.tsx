@@ -1,17 +1,17 @@
-import {useContext, useEffect, useState} from 'react';
-import {Spinner} from '../../shared/components/spinner';
-import {AuthContext} from '../../shared/context/auth.context';
-import {ErrorModal} from '../../shared/form/error-modal';
-import {useClient} from '../../shared/hooks/client';
-import {Header} from '../components/header';
-import {CryptoManager} from '../fluctuationScreen/components/crypto-manager';
-import {WatchedCryptoProps} from '../watchlist/watchlist.screen';
+import { useContext, useEffect, useState } from 'react';
+import { Spinner } from '../../shared/components/spinner';
+import { AuthContext } from '../../shared/context/auth.context';
+import { ErrorModal } from '../../shared/form/error-modal';
+import { useClient } from '../../shared/hooks/client';
+import { Header } from '../components/header';
+import { CryptoManager } from '../fluctuationScreen/components/crypto-manager';
+import { WatchedCryptoProps } from '../watchlist/watchlist.screen';
 
 export const FavouritesScreen = () => {
     const [watched, setWatched] = useState([]);
     const [fetchList, setFetchList] = useState(false);
-    const {isLoggedIn} = useContext(AuthContext);
-    const {isLoading, error, clearError, client} = useClient();
+    const { isLoggedIn } = useContext(AuthContext);
+    const { isLoading, error, clearError, client } = useClient();
 
     useEffect(() => {
         if (isLoggedIn || fetchList) {
@@ -36,8 +36,8 @@ export const FavouritesScreen = () => {
             {!watched || !!watched && !watched.length && <Header>
                 <h2 className={'header--2 text-color--light-3 fs-30'}>No favourites has been added yet</h2>
             </Header>}
-            {(watched || []).map((data: WatchedCryptoProps, index: number) => {
-                return <div key={index} className={'col-100 col-md-50 col-lg-33 col-xl-25 mt-25 cursor-pointer gap-30'}>
+            {(watched || []).map((data: WatchedCryptoProps) => {
+                return <div key={data.name} className={'col-100 col-md-50 col-lg-33 col-xl-25 mt-25 cursor-pointer gap-30'}>
                     <CryptoManager isFavouriteScreen={true} fetchList={() => setFetchList(!fetchList)} data={data}/>
                 </div>;
             })}

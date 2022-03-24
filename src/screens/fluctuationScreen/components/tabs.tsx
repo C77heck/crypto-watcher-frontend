@@ -1,14 +1,14 @@
-import {useState} from 'react';
-import {staticData} from '../../../shared/config/static-data';
-import {numArray} from '../../../shared/libs/helpers';
-import {Calculator} from './calculator';
-import {Content} from './content';
-import {Graph} from './graph';
-import {Tab} from './tab';
-import {PurchaseAnalytics} from "./purchase.analytics";
+import { useState } from 'react';
+import { staticData } from '../../../shared/config/static-data';
+import { numArray } from '../../../shared/libs/helpers';
+import { Calculator } from './calculator';
+import { Content } from './content';
+import { Graph } from './graph';
+import { Tab } from './tab';
+import { PurchaseAnalytics } from "./purchase.analytics";
 
 export const Tabs = (props: any) => {
-    const {purchaseAnalytics, graph, calculator} = staticData.tabs;
+    const { purchaseAnalytics, graph, calculator } = staticData.tabs;
     const [content, setContent] = useState(purchaseAnalytics);
     const getClasses = (tab: string) => {
         return tab === content ? 'background-color--active' : '';
@@ -19,7 +19,7 @@ export const Tabs = (props: any) => {
             case purchaseAnalytics:
                 return <PurchaseAnalytics analyticsData={props?.data?.analysis || {}}/>;
             case graph:
-                const {data, labels, cryptoName} = getGraphData(props?.data?.analysis);
+                const { data, labels, cryptoName } = getGraphData(props?.data?.analysis);
                 return <Graph data={data} labels={labels} cryptoName={cryptoName}/>;
             case calculator:
                 return <Calculator data={props?.data?.analysis || {}}/>;
@@ -55,7 +55,6 @@ interface AnalysisProps {
 }
 
 const getGraphData = (analysis: any): AnalysisProps => {
-    console.log(analysis);
     return {
         cryptoName: analysis?.name,
         labels: numArray(90).map(num => (`${num} day`)).reverse(),
@@ -74,8 +73,5 @@ const getGraphData = (analysis: any): AnalysisProps => {
 const stepDown = (price: number, endValue: number, rounds = 30): number[] => {
     const changeInDay = (price - endValue) / rounds;
 
-    return numArray(rounds).map(item => {
-        // console.log({price, changeInDay, item, endValue, rounds});
-        return Math.abs(price > endValue ? price - (item * changeInDay) : price + (item * changeInDay));
-    });
+    return numArray(rounds).map(item => Math.abs(price > endValue ? price - (item * changeInDay) : price + (item * changeInDay)));
 };
