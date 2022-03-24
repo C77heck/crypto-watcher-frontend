@@ -21,11 +21,11 @@ function App() {
     const routes = (
         <Router>
             <Routes>
-                <Route path={home} element={<BaseLayout><Home/></BaseLayout>}/>
-                <Route path={changesInValue} element={<BaseLayout><FluctuationScreen/></BaseLayout>}/>
-                <Route path={favourites} element={<BaseLayout><FavouritesScreen/></BaseLayout>}/>
-                <Route path={watchlist} element={<BaseLayout><WatchlistScreen/></BaseLayout>}/>
-                <Route path={newPurchase} element={<BaseLayout><NewCryptoScreen/></BaseLayout>}/>
+                <Route path={home} element={<BaseLayout auth={false}><Home/></BaseLayout>}/>
+                <Route path={changesInValue} element={<BaseLayout auth={false}><FluctuationScreen/></BaseLayout>}/>
+                <Route path={favourites} element={<BaseLayout auth={true}><FavouritesScreen/></BaseLayout>}/>
+                <Route path={watchlist} element={<BaseLayout auth={true}><WatchlistScreen/></BaseLayout>}/>
+                <Route path={newPurchase} element={<BaseLayout auth={true}><NewCryptoScreen/></BaseLayout>}/>
             </Routes>
         </Router>
     );
