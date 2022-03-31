@@ -16,21 +16,17 @@
 }
 
 .error-show {
+    color: var(--color-error-1);
+
     &--div {
-        color: var(--color-error);
+        color: var(--color-error-1);
         background-color: var(--color-error-see-through);
-        border-color: var(--color-error);
+        border-color: var(--color-error-1);
     }
 
     &--label {
-        color: var(--color-error) !important;
+        color: var(--color-error-1) !important;
     }
-}
-
-.error-show {
-    color: var(--color-error);
-    background-color: var(--color-error-see-through);
-    border-color: var(--color-error);
 }
 
 .input-label {
